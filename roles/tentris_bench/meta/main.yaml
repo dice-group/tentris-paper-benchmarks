@@ -3,3 +3,4 @@ dependencies:
   - { role: dataset_swdf }
   - { role: fuseki }
   - { role: virtuoso }
+  - { role: iguana }

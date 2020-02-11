@@ -1,0 +1,28 @@
+- name: Install dependencies
+  apt:
+    package:
+    - apt-transport-https
+
+- name: Add APT signing key
+  apt_key:
+    id: 6B73A36E6026DFCA
+    url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
+
+- name: Add RabbitMQ Erlang Repo
+  apt_repository:
+    repo: deb https://dl.bintray.com/rabbitmq-erlang/debian {{ ansible_lsb.codename }} erlang
+
+- name: Add RabbitMQ Repo
+  apt_repository:
+    repo: deb https://dl.bintray.com/rabbitmq/debian {{ ansible_lsb.codename }} main
+
+- name: Install RabbitMQ
+  apt:
+    package: rabbitmq-server
+    state: present
+
+- name: Start and enable RabbitMQ
+  systemd:
+    name: rabbitmq-server.service
+    state: started
+    enabled: yes

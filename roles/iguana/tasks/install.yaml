@@ -1,0 +1,50 @@
+- name: Create Iguana Directory
+  file:
+    path: /opt/iguana-{{ iguana_version.version_number }}
+    state: directory
+
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: iguana
+  register: tempdir
+
+- name: Download Iguana Release
+  get_url:
+    url: https://github.com/dice-group/IGUANA/releases/download/{{ iguana_version.version_tag }}/Iguana_Release.zip
+    dest: "{{ tempdir.path }}/Iguana_Release.zip"
+
+- name: Unzip Iguana Release
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/Iguana_Release.zip"
+    dest: "{{ tempdir.path }}"
+
+- name: Copy the Iguana Corecontroller JAR
+  copy:
+    src: "{{ tempdir.path }}/iguana.corecontroller-2.1.2.jar"
+    remote_src: yes
+    dest: /opt/iguana-{{ iguana_version.version_number }}/corecontroller.jar
+
+- name: Copy the Iguana Corecontroller properties file
+  copy:
+    src: "{{ tempdir.path }}/core.properties"
+    remote_src: yes
+    dest: /opt/iguana-{{ iguana_version.version_number }}/core.properties
+
+- name: Copy the Iguana Resultprocessor JAR
+  copy:
+    src: "{{ tempdir.path }}/iguana.resultprocessor-2.1.2.jar"
+    remote_src: yes
+    dest: /opt/iguana-{{ iguana_version.version_number }}/resultprocessor.jar
+
+- name: Copy the Iguana Resultprocessor properties file
+  copy:
+    src: "{{ tempdir.path }}/rp.properties"
+    remote_src: yes
+    dest: /opt/iguana-{{ iguana_version.version_number }}/rp.properties
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

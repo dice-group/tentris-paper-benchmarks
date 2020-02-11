@@ -1,0 +1,12 @@
+[Unit]
+Description=The Iguana Resultprocessor
+BindsTo=rabbitmq-server.service
+After=rabbitmq-server.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/java -cp /opt/iguana-{{ iguana_version.version_number }}/resultprocessor.jar org.aksw.iguana.rp.controller.MainController /opt/iguana-{{ iguana_version.version_number }}/rp.properties
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
