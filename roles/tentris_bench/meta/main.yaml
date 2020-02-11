@@ -1,0 +1,5 @@
+dependencies:
+  - { role: dataset_lubm }
+  - { role: dataset_swdf }
+  - { role: fuseki }
+  - { role: virtuoso }

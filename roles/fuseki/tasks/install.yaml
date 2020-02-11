@@ -1,0 +1,37 @@
+- name: Ensure Fuseki Directory is present
+  file:
+    path: /opt/fuseki
+    state: directory
+
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: fuseki
+  register: tempdir
+
+- name: Download Fuseki Checksum
+  get_url:
+    url: https://www.apache.org/dist/jena/binaries/apache-jena-fuseki-{{ fuseki_version }}.tar.gz.sha512
+    dest: "{{ tempdir.path }}/apache-jena-fuseki-{{ fuseki_version }}.tar.gz.sha512"
+
+- name: Slurp Fuseki Checksum
+  slurp:
+    path: "{{ tempdir.path }}/apache-jena-fuseki-{{ fuseki_version }}.tar.gz.sha512"
+  register: checksum
+
+- name: Download Fuseki
+  get_url:
+    url: http://www.apache.org/dist/jena/binaries/apache-jena-fuseki-{{ fuseki_version }}.tar.gz
+    checksum: "sha512:{{ (checksum.content | b64decode).split(' ')[0] }}"
+    dest: "{{ tempdir.path }}/apache-jena-fuseki-{{ fuseki_version }}.tar.gz"
+
+- name: Unzip Fuseki
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/apache-jena-fuseki-{{ fuseki_version }}.tar.gz"
+    dest: /opt/fuseki/
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

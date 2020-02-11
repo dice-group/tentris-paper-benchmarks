@@ -1,0 +1,33 @@
+- name: Create the dataset directory
+  file:
+    path: /opt/datasets/swdf
+    state: directory
+
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: swdf
+  register: tempdir
+
+- name: Download SWDF dataset
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/swdf.zip
+    checksum: sha1:ec3cfe8e0315d077519001d610e46e99918745dc
+    dest: "{{ tempdir.path }}/swdf.zip"
+
+- name: Unzip SWDF dataset
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/swdf.zip"
+    dest: /opt/datasets/swdf/
+
+- name: Download SWDF queries
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/swdf.txt
+    checksum: sha1:bac9bbfdbad478c5d569a7ac11ac28e5d6f83e28
+    dest: /opt/datasets/swdf/swdf.txt
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

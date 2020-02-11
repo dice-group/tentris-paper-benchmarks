@@ -1,0 +1,39 @@
+- name: Create the generator directory
+  file:
+    path: /opt/datasets/lubm/generator
+    state: directory
+
+- name: Create temporary directory
+  tempfile:
+    state: directory
+    suffix: lubm
+  register: tempdir
+
+- name: Download improved Generator source
+  get_url:
+    url: https://github.com/rvesse/lubm-uba/archive/improved.zip
+    dest: "{{ tempdir.path }}/improved.zip"
+
+- name: Unzip Generator
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/improved.zip"
+    dest: "{{ tempdir.path }}/"
+
+- name: Build Generator
+  command:
+    chdir: "{{ tempdir.path }}/lubm-uba-improved"
+    argv:
+      - mvn
+      - package
+
+- name: Copy the build jar
+  copy:
+    src: "{{ tempdir.path }}/lubm-uba-improved/target/lubm-uba.jar"
+    remote_src: yes
+    dest: /opt/datasets/lubm/generator/lubm-uba.jar
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

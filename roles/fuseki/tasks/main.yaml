@@ -1,0 +1,12 @@
+- name: Check for Fuseki
+  stat:
+    path: /opt/fuseki/apache-jena-fuseki-{{ fuseki_version }}/
+  register: fuseki_dir
+
+- include: install.yaml
+  when: fuseki_dir.stat.exists == false
+
+- name: Ensure Fuseki is executable
+  file:
+    path: /opt/fuseki/apache-jena-fuseki-{{ fuseki_version }}/fuseki-server
+    mode: 0755

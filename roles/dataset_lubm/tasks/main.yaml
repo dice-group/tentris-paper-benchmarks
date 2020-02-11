@@ -1,0 +1,15 @@
+- name: Check for the LUBM Generator
+  stat:
+    path: /opt/datasets/lubm/generator/lubm-uba.jar
+  register: generator
+
+- include: install-generator.yaml
+  when: generator.stat.exists == false
+
+- include: run-generator.yaml
+
+- name: Download Query File
+  get_url:
+    url: http://swat.cse.lehigh.edu/projects/lubm/queries-sparql.txt
+    checksum: sha512:4661d5ca884a5ef9da70972bfa8bef2dfce2b7010b6f0f06a3ab1f109a202ee0639d4ee5a7bcc4b479c77487c8718b9180893b9ce6fb8f667111dca687eab738
+    dest: /opt/datasets/lubm/queries-sparql.txt

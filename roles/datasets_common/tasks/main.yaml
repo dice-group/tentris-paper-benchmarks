@@ -1,0 +1,4 @@
+- name: Ensure Datasets directory is present
+  file:
+    path: /opt/datasets
+    state: directory

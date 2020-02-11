@@ -1,0 +1,30 @@
+- name: Ensure Virtuoso directory is present
+  file:
+    path: /opt/virtuoso
+    state: directory
+
+- name: Ensure Virtuoso version directory is present
+  file:
+    path: /opt/virtuoso/{{ virtuoso_version }}
+    state: directory
+
+- name: Create temporary directory
+  tempfile:
+    state: directory
+    suffix: virtuoso
+  register: tempdir
+
+- name: Download Virtuoso
+  get_url:
+    url: https://sourceforge.net/projects/virtuoso/files/virtuoso/{{ virtuoso_version }}/virtuoso-opensource.x86_64-generic_glibc25-linux-gnu.tar.gz/download
+    dest: "{{ tempdir.path }}/virtuoso-{{ virtuoso_version }}.tar.gz"
+
+- name: Extract Virtuoso
+  unarchive:
+    src: "{{ tempdir.path }}/virtuoso-{{ virtuoso_version }}.tar.gz"
+    dest: /opt/virtuoso/{{ virtuoso_version }}
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

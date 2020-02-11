@@ -1,0 +1,16 @@
+- name: Install make & cmake
+  apt:
+    package:
+      - make
+      - cmake
+
+- name: Install C++ Compiler
+  apt:
+    package:
+      - gcc
+      - g++
+
+- name: Install boost
+  apt:
+    package:
+      - libboost-all-dev

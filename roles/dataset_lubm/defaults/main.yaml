@@ -1,0 +1,5 @@
+lubm_datasets:
+  - name: test
+    index: 0
+    seed: 0
+    number: 100
