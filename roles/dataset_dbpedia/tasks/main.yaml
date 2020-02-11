@@ -1,0 +1,7 @@
+- name: Check for the DBpedia dataset
+  stat:
+    path: /opt/datasets/dbpedia
+  register: dataset_dir
+
+- include: download.yaml
+  when: dataset_dir.stat.exists == false
