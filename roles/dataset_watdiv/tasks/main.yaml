@@ -12,3 +12,8 @@
   when: generator.stat.exists == false
 
 - include: run-generator.yaml
+
+- name: Download the query file
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/watdiv.txt
+    dest: /opt/datasets/watdiv/queries.txt

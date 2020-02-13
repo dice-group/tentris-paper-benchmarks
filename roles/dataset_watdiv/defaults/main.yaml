@@ -2,13 +2,3 @@ watdiv_datasets:
 - name: test
   scale_factor: 1
   # model:
-  queries:
-  - name: test-queries
-    query_count: 100
-    recurrence_factor: 1
-  stress_queries:
-  - name: test-stress-queries
-    query_count: 100
-    max_query_size: 5
-    # constant_per_query_count: 1
-    # constant_join_vertex_allowed: "false"
