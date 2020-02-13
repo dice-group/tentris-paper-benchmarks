@@ -1,0 +1,45 @@
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: gstore
+  register: tempdir
+
+- name: Download gStore
+  get_url:
+    url: https://github.com/pkumod/gStore/archive/master.zip
+    dest: "{{ tempdir.path }}/master.zip"
+
+- name: Unzip gStore
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/master.zip"
+    dest: "{{ tempdir.path }}"
+
+- name: Prepare gStore Build
+  command:
+    chdir: "{{ tempdir.path }}/gStore-master"
+    argv:
+    - make
+    - pre
+
+- name: Build gStore
+  command:
+    chdir: "{{ tempdir.path }}/gStore-master"
+    argv:
+    - make
+
+- name: Ensure gStore Directory is present
+  file:
+    path: /opt/gstore
+    state: directory
+
+- name: Copy gStore binaries
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/gStore-master/bin"
+    dest: /opt/gstore
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

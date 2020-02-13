@@ -1,0 +1,9 @@
+- name: Create Blazegraph directory
+  file:
+    path: /opt/blazegraph
+    state: directory
+
+- name: Download Blazegraph JAR
+  get_url:
+    url: http://sourceforge.net/projects/bigdata/files/bigdata/{{ blazegraph_version }}/blazegraph.jar
+    dest: /opt/blazegraph/blazegraph.jar

@@ -15,17 +15,16 @@
     checksum: sha1:114eff94c4eddce06d7abb3e155d34102e107216
     dest: "{{ tempdir.path }}/dbpedia.zip"
 
+- name: Install unzip
+  apt:
+    package: unzip
+    state: present
+
 - name: Unzip DBpedia dataset
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/dbpedia.zip"
     dest: /opt/datasets/dbpedia/
-
-- name: Download DBpedia queries
-  get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/dbpedia.txt
-    checksum: sha1:e6166484b527b941e063eac5bae527db2372c257
-    dest: /opt/datasets/dbpedia/dbpedia.txt
 
 - name: Delete tempdir
   file:

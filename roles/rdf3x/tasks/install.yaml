@@ -1,0 +1,42 @@
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: rdf3x
+  register: tempdir
+
+- name: Download tentris
+  copy:
+    src: rdf-3x-master.zip
+    dest: "{{ tempdir.path }}/master.zip"
+
+- name: Unzip rdf3x
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/master.zip"
+    dest: "{{ tempdir.path }}"
+
+- name: Build rdf3x
+  command:
+    chdir: "{{ tempdir.path }}/rdf-3x-master/"
+    argv:
+      - make
+      - -j{{ ansible_processor_vcpus }}
+
+- name: Create installation directory
+  file:
+    path: /opt/rdf3x
+    state: directory
+
+- name: Install rdf3x
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/rdf-3x-master/bin"
+    dest: /opt/rdf3x
+    mode: preserve
+    owner: root
+    group: root
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

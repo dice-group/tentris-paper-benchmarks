@@ -1,0 +1,7 @@
+- name: Check for tentris
+  stat:
+    path: /opt/rdf3x/
+  register: rdf3x
+
+- include: install.yaml
+  when: rdf3x.stat.exists == false

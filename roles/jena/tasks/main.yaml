@@ -1,0 +1,7 @@
+- name: Check for Jena
+  stat:
+    path: /opt/jena/apache-jena-{{ jena_version }}/
+  register: jena_dir
+
+- include: install.yaml
+  when: jena_dir.stat.exists == false

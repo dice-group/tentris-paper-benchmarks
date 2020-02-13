@@ -1,0 +1,17 @@
+- name: Install serdi
+  apt:
+    package: serdi
+    state: present
+
+- name: Convert Dataset to nt
+  command:
+    chdir: /opt/datasets/dbpedia/
+    argv:
+      - sh
+      - -c
+      - serdi -q -b -o ntriples DBpedia351.ttl > dbpedia.nt
+
+- name: Remove Turtle File
+  file:
+    path: /opt/datasets/dbpedia/DBpedia351.ttl
+    state: absent

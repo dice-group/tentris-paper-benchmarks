@@ -1,0 +1,53 @@
+- name: Create the generator directory
+  file:
+    path: /opt/datasets/watdiv/generator
+    state: directory
+
+- name: Create temporary directory
+  tempfile:
+    state: directory
+    suffix: watdiv
+  register: tempdir
+
+- name: Download Generator source
+  get_url:
+    url: https://dsg.uwaterloo.ca/watdiv/watdiv_v06.tar
+    checksum: sha1:987623c70a2c336a34f5dd89104b9eb3b88580c7
+    dest: "{{ tempdir.path }}/watdiv_v06.tar"
+
+- name: Unzip Generator
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/watdiv_v06.tar"
+    dest: "{{ tempdir.path }}/"
+
+- name: Copy the model file
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/watdiv/model/wsdbm-data-model.txt"
+    dest: /opt/datasets/watdiv/generator/wsdbm-data-model.txt
+
+- name: Build Generator
+  command:
+    chdir: "{{ tempdir.path }}/watdiv"
+    argv:
+      - make
+      - -j{{ ansible_processor_vcpus }}
+
+- name: Copy the generator
+  copy:
+    src: "{{ tempdir.path }}/watdiv/{{ item }}"
+    remote_src: yes
+    dest: /opt/datasets/watdiv/generator/
+    mode: preserve
+    owner: root
+    group: root
+  with_items:
+  - bin
+  - files
+  - model
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

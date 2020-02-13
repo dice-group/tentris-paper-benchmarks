@@ -10,7 +10,18 @@
       - gcc
       - g++
 
+- name: Install git
+  apt:
+    package: git
+
 - name: Install boost
   apt:
-    package:
-      - libboost-all-dev
+    package: libboost-all-dev
+
+- name: Install readline
+  apt:
+    package: libreadline-dev
+
+- name: Install libcurl
+  apt:
+    package: libcurl4-openssl-dev

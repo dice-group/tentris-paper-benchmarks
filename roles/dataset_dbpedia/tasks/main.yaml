@@ -1,7 +1,23 @@
 - name: Check for the DBpedia dataset
   stat:
-    path: /opt/datasets/dbpedia
-  register: dataset_dir
+    path: /opt/datasets/dbpedia/dbpedia.nt
+    get_checksum: no
+  register: dataset_nt
+
+- name: Check for the DBpedia dataset (Turtle File)
+  stat:
+    path: /opt/datasets/dbpedia/DBpedia351.ttl
+    get_checksum: no
+  register: dataset_ttl
 
 - include: download.yaml
-  when: dataset_dir.stat.exists == false
+  when: dataset_nt.stat.exists == false and dataset_ttl.stat.exists == false
+
+- include: convert.yaml
+  when: dataset_nt.stat.exists == false
+
+- name: Download DBpedia queries
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/dbpedia.txt
+    checksum: sha1:e6166484b527b941e063eac5bae527db2372c257
+    dest: /opt/datasets/dbpedia/dbpedia.txt

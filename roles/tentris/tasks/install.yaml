@@ -1,0 +1,81 @@
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: tentris
+  register: tempdir
+
+- name: Download tentris
+  get_url:
+    url: https://github.com/dice-group/tentris/archive/master.zip
+    dest: "{{ tempdir.path }}/master.zip"
+
+- name: Unzip tentris
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/master.zip"
+    dest: "{{ tempdir.path }}"
+
+- name: Create build directory
+  file:
+    path: "{{ tempdir.path }}/tentris-master/build"
+    state: directory
+
+- name: Add conan Repositories
+  command:
+    argv:
+      - sh
+      - -c
+      - conan remote add -f tsl https://api.bintray.com/conan/tessil/tsl && conan remote add -f public-conan https://api.bintray.com/conan/bincrafters/public-conan && conan remote add -f stiffstream https://api.bintray.com/conan/stiffstream/public && conan remote add -f dice-group https://api.bintray.com/conan/dice-group/tentris
+
+- name: Build conan Dependencies
+  command:
+    chdir: "{{ tempdir.path }}/tentris-master/build"
+    argv:
+      - sh
+      - -c
+      - conan install .. --build=missing --settings compiler.libcxx="libstdc++11"
+
+- name: Configure tentris Build
+  command:
+    chdir: "{{ tempdir.path }}/tentris-master/build"
+    argv:
+      - sh
+      - -c
+      - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+
+- name: Build tentris
+  command:
+    chdir: "{{ tempdir.path }}/tentris-master/build"
+    argv:
+      - make
+      - -j{{ ansible_processor_vcpus }}
+      - tentris_server
+      - tentris_terminal
+
+- name: Create installation directory
+  file:
+    path: /opt/tentris
+    state: directory
+
+- name: Install tentris_terminal
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/tentris-master/build/tentris_terminal"
+    dest: /opt/tentris/tentris_terminal
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Install tentris_server
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/tentris-master/build/tentris_server"
+    dest: /opt/tentris/tentris_server
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

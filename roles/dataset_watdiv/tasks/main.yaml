@@ -1,0 +1,14 @@
+#- name: Install wordlist
+#  apt:
+#    package: wbritish-insane # It's only 1.3 MB
+#    state: present
+
+- name: Check for the WatDiv Generator
+  stat:
+    path: /opt/datasets/watdiv/generator/bin/Release/watdiv
+  register: generator
+
+- include: install-generator.yaml
+  when: generator.stat.exists == false
+
+- include: run-generator.yaml

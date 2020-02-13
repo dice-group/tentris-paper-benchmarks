@@ -1,0 +1,7 @@
+- name: Check for gStore
+  stat:
+    path: /opt/gstore/
+  register: gstore_dir
+
+- include: install.yaml
+  when: gstore_dir.stat.exists == false

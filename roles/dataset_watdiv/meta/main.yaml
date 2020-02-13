@@ -1,3 +1,3 @@
 dependencies:
   - { role: datasets_common }
-  - { role: jena }
+  - { role: build_common }
