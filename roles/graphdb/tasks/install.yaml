@@ -1,0 +1,26 @@
+- name: Ensure GraphDB Directory is present
+  file:
+    path: /opt/graphdb
+    state: directory
+
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: graphdb
+  register: tempdir
+
+- name: Download GraphDB
+  get_url:
+    url: https://maven.ontotext.com/repository/owlim-releases/com/ontotext/graphdb/graphdb-se/{{ graphdb_version }}/graphdb-se-{{ graphdb_version }}-dist.zip
+    dest: "{{ tempdir.path }}/graphdb-se-{{ graphdb_version }}-dist.zip"
+
+- name: Unzip GraphDB
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/graphdb-se-{{ graphdb_version }}-dist.zip"
+    dest: /opt/graphdb/
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
