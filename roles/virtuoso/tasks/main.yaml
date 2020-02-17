@@ -4,4 +4,9 @@
   register: virtuoso_dir
 
 - include: install.yaml
-  when: virtuoso_dir.stat.exists is not defined
+  when: not virtuoso_dir.stat.exists
+
+- name: Template copy rdfloader sql query
+  template:
+    src: rdfloader.sql
+    dest: /opt/virtuoso/rdfloader.sql

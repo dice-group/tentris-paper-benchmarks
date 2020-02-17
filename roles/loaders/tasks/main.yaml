@@ -1,0 +1,24 @@
+- name: Install curl (to talk to http endpoints)
+  apt:
+    package: curl
+
+- name: Create loader directory
+  file:
+    path: /opt/loaders
+    state: directory
+
+- name: Template copy loader scripts
+  template:
+    src: "{{ item[0] }}-load.sh"
+    dest: /opt/loaders/{{ item[0] }}-load-{{ item[1].name }}.sh
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ triplestores | product(datasets) | list }}"
+
+- name: Template copy virtuoso configurations
+  template:
+    src: virtuoso.ini
+    dest: /opt/virtuoso/virtuoso-{{ item.name }}.ini
+  loop: "{{ datasets }}"
+  when: virtuoso in triplestores

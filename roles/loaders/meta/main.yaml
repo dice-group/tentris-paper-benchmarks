@@ -1,0 +1,9 @@
+dependencies:
+  - { role: tentris }
+  - { role: fuseki }
+  - { role: gstore }
+  - { role: virtuoso }
+  - { role: graphdb }
+  - { role: blazegraph }
+  - { role: triplebit }
+  - { role: rdf3x }

@@ -1,0 +1,21 @@
+database_base_dir: /var/db
+
+datasets:
+  - name: lubm
+    path: /opt/datasets/lubm/test/test.nt
+  - name: swdf
+    path: /opt/datasets/swdf/swdf.nt
+  - name: watdiv
+    path: /opt/datasets/watdiv/test/data.nt
+  - name: dbpedia
+    path: /opt/datasets/dbpedia/dbpedia.nt
+
+triplestores:
+  - tentris
+  - fuseki
+  - gstore
+  - virtuoso
+  - graphdb
+  - blazegraph
+  - triplebit
+  - rdf3x

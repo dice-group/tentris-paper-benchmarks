@@ -13,3 +13,8 @@
     url: https://github.com/blazegraph/database/releases/download/BLAZEGRAPH_2_1_6_RC/blazegraph.jar
     dest: /opt/blazegraph/blazegraph.jar
   when: blazegraph.stat.exists == false
+
+- name: Template copy application properties
+  template:
+    src: application.properties
+    dest: /opt/blazegraph/application.properties

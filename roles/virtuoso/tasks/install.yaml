@@ -21,6 +21,7 @@
 
 - name: Extract Virtuoso
   unarchive:
+    remote_src: yes
     src: "{{ tempdir.path }}/virtuoso-{{ virtuoso_version }}.tar.gz"
     dest: /opt/virtuoso/{{ virtuoso_version }}
 
