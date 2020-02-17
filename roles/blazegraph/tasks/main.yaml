@@ -3,7 +3,13 @@
     path: /opt/blazegraph
     state: directory
 
+- name: Check for Blazegraph
+  stat:
+    path: /opt/blazegraph/blazegraph.jar
+  register: blazegraph
+
 - name: Download Blazegraph JAR
   get_url:
     url: http://sourceforge.net/projects/bigdata/files/bigdata/{{ blazegraph_version }}/blazegraph.jar
     dest: /opt/blazegraph/blazegraph.jar
+  when: blazegraph.stat.exists == false
