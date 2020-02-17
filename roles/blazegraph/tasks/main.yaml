@@ -10,6 +10,6 @@
 
 - name: Download Blazegraph JAR
   get_url:
-    url: http://sourceforge.net/projects/bigdata/files/bigdata/{{ blazegraph_version }}/blazegraph.jar
+    url: https://github.com/blazegraph/database/releases/download/BLAZEGRAPH_2_1_6_RC/blazegraph.jar
     dest: /opt/blazegraph/blazegraph.jar
   when: blazegraph.stat.exists == false
