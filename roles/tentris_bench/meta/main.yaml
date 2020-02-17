@@ -7,7 +7,9 @@ dependencies:
   - { role: fuseki }
   - { role: gstore }
   - { role: virtuoso }
+  - { role: graphdb }
   - { role: blazegraph }
   - { role: triplebit }
   - { role: rdf3x }
+  - { role: loaders }
   - { role: iguana }

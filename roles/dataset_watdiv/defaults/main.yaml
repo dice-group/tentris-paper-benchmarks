@@ -1,4 +1,4 @@
 watdiv_datasets:
-- name: test
-  scale_factor: 1
-  # model:
+  - name: test
+    scale_factor: 1
+    # model:

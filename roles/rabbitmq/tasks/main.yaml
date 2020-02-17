@@ -1,7 +1,7 @@
 - name: Install dependencies
   apt:
     package:
-    - apt-transport-https
+      - apt-transport-https
 
 - name: Add APT signing key
   apt_key:

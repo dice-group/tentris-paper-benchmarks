@@ -19,14 +19,14 @@
   command:
     chdir: "{{ tempdir.path }}/gStore-master"
     argv:
-    - make
-    - pre
+      - make
+      - pre
 
 - name: Build gStore
   command:
     chdir: "{{ tempdir.path }}/gStore-master"
     argv:
-    - make
+      - make
 
 - name: Ensure gStore Directory is present
   file:

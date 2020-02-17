@@ -43,9 +43,9 @@
     owner: root
     group: root
   with_items:
-  - bin
-  - files
-  - model
+    - bin
+    - files
+    - model
 
 - name: Delete tempdir
   file:
