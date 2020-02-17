@@ -8,5 +8,6 @@ dependencies:
   - { role: gstore }
   - { role: virtuoso }
   - { role: blazegraph }
+  - { role: triplebit }
   - { role: rdf3x }
   - { role: iguana }

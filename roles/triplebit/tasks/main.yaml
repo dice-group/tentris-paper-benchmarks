@@ -1,0 +1,18 @@
+- name: Create Triplebit directory
+  file:
+    path: /opt/triplebit
+    state: directory
+
+- name: Download Triplebit binaries
+  get_url:
+    url: https://github.com/dice-group/TripleBit/releases/download/2020-02-16/{{ item.name }}
+    dest: /opt/triplebit/{{ item.name }}
+    checksum: "{{ item.checksum }}"
+    mode: 0755
+    owner: root
+    group: root
+  loop:
+    - name: buildTripleBitFromN3
+      checksum: sha1:31bb300a59554ff5e74b87667e340e160fca7896
+    - name: triplebitQuery
+      checksum: sha1:478b23afabe85597da9cd9a0163c112571d37169
