@@ -1,0 +1,27 @@
+iguana_http_connections:
+- 1
+- 4
+- 8
+- 16
+- 32
+iguana_time_limit: 3600000
+iguana_query_timeout: 180000
+triplestores_http:
+  - name: tentris
+    connection_url: http://localhost:9080/sparql
+  - name: fuseki
+    connection_url: http://localhost:3030/ds/sparql
+  - name: gstore
+    connection_url: http://localhost:9000/
+  - name: virtuoso
+    connection_url: http://localhost:8890/sparql
+  - name: graphdb
+    connection_url: http://localhost:7200/repositories/repo
+  - name: blazegraph
+    connection_url: http://localhost:9999/blazegraph/sparql
+triplestores_cli:
+  - name: tentris
+    command: /opt/tentris/tentris_terminal -f '%p' -s
+    init_finished_string: finished.
+    query_done_string: number of bindings
+    error_string: Key was not valid

@@ -16,6 +16,24 @@
     group: root
   loop: "{{ triplestores | product(datasets) | list }}"
 
+- name: Template copy start scripts
+  template:
+    src: "{{ item[0] }}-start.sh"
+    dest: /opt/loaders/{{ item[0] }}-start-{{ item[1].name }}.sh
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ triplestores | product(datasets) | list }}"
+
+- name: Template copy stop scripts
+  template:
+    src: "{{ item[0] }}-stop.sh"
+    dest: /opt/loaders/{{ item[0] }}-stop-{{ item[1].name }}.sh
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ triplestores | product(datasets) | list }}"
+
 - name: Template copy virtuoso configurations
   template:
     src: virtuoso.ini

@@ -1,0 +1,27 @@
+- name: Create Iguana suite directory
+  file:
+    path: /opt/iguana_suites/
+    state: directory
+
+- name: Create HTTP suite directoy
+  file:
+    path: /opt/iguana_suites/http
+    state: directory
+
+- name: Template copy Iguana HTTP suites
+  template:
+    src: http.suite
+    dest: /opt/iguana_suites/http/{{ item[0].name }}-{{ item[1].name }}.suite
+  loop: "{{ triplestores_http | product(datasets) | list }}"
+
+- name: Create CLI suite directoy
+  file:
+    path: /opt/iguana_suites/cli
+    state: directory
+
+- name: Template copy Iguana CLI suites
+  template:
+    src: cli.suite
+    dest: /opt/iguana_suites/cli/{{ item[0].name }}-{{ item[1].name }}.suite
+  loop: "{{ triplestores_cli | product(datasets) | list }}"
+  

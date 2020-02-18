@@ -1,5 +1,5 @@
 [Unit]
-Description=Starts a Fuseki server with database %I
+Description=Starts a Fuseki server with database %i
 
 [Service]
 Type=simple

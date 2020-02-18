@@ -6,6 +6,7 @@ mkdir -p {{ database_base_dir }}/gstore/{{ item[1].name }}/logs/endpoint
 cd {{ database_base_dir }}/gstore/{{ item[1].name }}
 
 cp -r /opt/gstore/data {{ database_base_dir }}/gstore/{{ item[1].name }}
+cp -r /opt/gstore/Server {{ database_base_dir }}/gstore/{{ item[1].name }}
 
 /opt/gstore/bin/ginit
 

@@ -45,6 +45,12 @@
     src: "{{ tempdir.path }}/gStore-master/data"
     dest: /opt/gstore
 
+- name: Copy gStore server files
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/gStore-master/Server"
+    dest: /opt/gstore
+
 - name: Delete tempdir
   file:
     path: "{{ tempdir.path }}"

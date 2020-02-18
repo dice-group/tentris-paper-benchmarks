@@ -1,12 +1,16 @@
 datasets:
   - name: lubm
     path: /opt/datasets/lubm/test/test.nt
+    queries_path: /opt/datasets/lubm/queries-sparql.txt
   - name: swdf
     path: /opt/datasets/swdf/swdf.nt
+    queries_path: /opt/datasets/swdf/swdf.txt
   - name: watdiv
     path: /opt/datasets/watdiv/test/data.nt
+    queries_path: /opt/datasets/watdiv/queries.txt
   - name: dbpedia
     path: /opt/datasets/dbpedia/dbpedia.nt
+    queries_path: /opt/datasets/dbpedia/dbpedia.txt
 
 triplestores:
   - tentris
