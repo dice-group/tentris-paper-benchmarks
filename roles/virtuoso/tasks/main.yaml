@@ -10,3 +10,8 @@
   template:
     src: rdfloader.sql
     dest: /opt/virtuoso/rdfloader.sql
+
+- name: Template copy virtuoso service
+  template:
+    src: virtuoso@.service
+    dest: /etc/systemd/system/virtuoso@.service

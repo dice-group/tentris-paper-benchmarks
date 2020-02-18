@@ -21,4 +21,11 @@
     src: virtuoso.ini
     dest: /opt/virtuoso/virtuoso-{{ item.name }}.ini
   loop: "{{ datasets }}"
-  when: virtuoso in triplestores
+  when: "'virtuoso' in triplestores"
+
+- name: Template copy GraphDB configurations
+  template:
+    src: graphdb.ttl
+    dest: /opt/graphdb/graphdb-{{ item.name }}.ttl
+  loop: "{{ datasets }}"
+  when: "'graphdb' in triplestores"
