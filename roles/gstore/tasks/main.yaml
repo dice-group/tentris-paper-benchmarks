@@ -5,3 +5,9 @@
 
 - include: install.yaml
   when: gstore_dir.stat.exists == false
+
+- name: Template copy gStore service
+  template:
+    src: gstore@.service
+    dest: /etc/systemd/system/gstore@.service
+  notify: Reload systemd

@@ -1,0 +1,5 @@
+[Unit]
+Description=Tentris server serving dataset %I
+
+[Service]
+ExecStart=/opt/tentris/tentris_server --logstdout -f %I

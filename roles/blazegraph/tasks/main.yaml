@@ -18,3 +18,9 @@
   template:
     src: application.properties
     dest: /opt/blazegraph/application.properties
+
+- name: Template copy Blazegraph service
+  template:
+    src: blazegraph@.service
+    dest: /etc/systemd/system/blazegraph@.service
+  notify: Reload systemd

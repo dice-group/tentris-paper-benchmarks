@@ -10,3 +10,9 @@
   file:
     path: /opt/fuseki/apache-jena-fuseki-{{ fuseki_version }}/fuseki-server
     mode: 0755
+
+- name: Template copy Fuseki service
+  template:
+    src: fuseki@.service
+    dest: /etc/systemd/system/fuseki@.service
+  notify: Reload systemd

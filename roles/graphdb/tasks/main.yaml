@@ -5,3 +5,9 @@
 
 - include: install.yaml
   when: graphdb_dir.stat.exists == false
+
+- name: Template copy GraphDB service
+  template:
+    src: graphdb@.service
+    dest: /etc/systemd/system/graphdb@.service
+  notify: Reload systemd

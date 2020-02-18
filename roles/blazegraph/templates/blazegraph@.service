@@ -1,0 +1,7 @@
+[Unit]
+Description=Starts a Fuseki server with database %I
+
+[Service]
+Type=simple
+WorkingDirectory={{ database_base_dir }}/blazegraph/%i
+ExecStart=/usr/bin/java -jar /opt/blazegraph/blazegraph.jar 9999 %i /opt/blazegraph/application.properties

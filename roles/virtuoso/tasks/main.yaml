@@ -15,3 +15,4 @@
   template:
     src: virtuoso@.service
     dest: /etc/systemd/system/virtuoso@.service
+  notify: Reload systemd

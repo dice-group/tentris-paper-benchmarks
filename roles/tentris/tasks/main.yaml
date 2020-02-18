@@ -11,3 +11,9 @@
 
 - include: install.yaml
   when: tentris.stat.exists == false
+
+- name: Template copy tentris service
+  template:
+    src: tentris@.service
+    dest: /etc/systemd/system/tentris@.service
+  notify: Reload systemd

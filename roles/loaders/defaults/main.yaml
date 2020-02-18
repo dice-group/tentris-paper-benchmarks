@@ -1,5 +1,3 @@
-database_base_dir: /var/db
-
 datasets:
   - name: lubm
     path: /opt/datasets/lubm/test/test.nt
