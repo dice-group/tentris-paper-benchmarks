@@ -1,9 +1,9 @@
 iguana_http_connections:
-- 1
-- 4
-- 8
-- 16
-- 32
+  - 1
+  - 4
+  - 8
+  - 16
+  - 32
 iguana_time_limit: 3600000
 iguana_query_timeout: 180000
 triplestores_http:
@@ -25,3 +25,13 @@ triplestores_cli:
     init_finished_string: finished.
     query_done_string: number of bindings
     error_string: Key was not valid
+  - name: rdf3x
+    command: /opt/rdf3x/rdf3xembedded {{ database_base_dir }}/rdf3x/%n/db
+    init_finished_string: RDF-3X protocol 1
+    query_done_string: \\.
+    error_string: error
+  - name: triplebit
+    command: /opt/triplebit/triplebitQuery {{ database_base_dir }}/triplebit/%n
+    init_finished_string: load complete!
+    query_done_string: QUERY SUCCEEDED
+    error_string: QUERY FAILED
