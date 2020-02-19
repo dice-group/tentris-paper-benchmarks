@@ -1,5 +1,5 @@
 #! /bin/bash
 
-systemctl start graphdb@{{ item[1].name }}.service
+sudo systemctl start graphdb@{{ item[1].name }}.service
 
 sleep 30

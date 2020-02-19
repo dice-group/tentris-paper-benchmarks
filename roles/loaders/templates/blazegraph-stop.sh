@@ -1,3 +1,3 @@
 #! /bin/bash
 
-sudo systemctl start blazegraph@{{ item[1].name }}.service
+sudo systemctl stop blazegraph@{{ item[1].name }}.service
