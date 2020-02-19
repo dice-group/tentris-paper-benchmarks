@@ -3,4 +3,5 @@ Description=Starts a Fuseki server with database %i
 
 [Service]
 Type=simple
+User=fuseki
 ExecStart=/opt/fuseki/apache-jena-fuseki-{{ fuseki_version }}/fuseki-server --loc={{ database_base_dir }}/fuseki/%i

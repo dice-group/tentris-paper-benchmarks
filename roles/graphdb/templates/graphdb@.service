@@ -3,4 +3,5 @@ Description=GraphDB with database directory %I
 
 [Service]
 Type=simple
+User=graphdb
 ExecStart=/opt/graphdb/graphdb-se-{{ graphdb_version }}/bin/graphdb -s -Dgraphdb.home=%I

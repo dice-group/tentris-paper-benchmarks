@@ -1,3 +1,10 @@
+- name: Create tentris user
+  user:
+    name: tentris
+    state: present
+    system: yes
+    create_home: no
+
 - name: Install build dependencies
   apt:
     package:
@@ -17,3 +24,11 @@
     src: tentris@.service
     dest: /etc/systemd/system/tentris@.service
   notify: Reload systemd
+
+- name: Create tentris log directory
+  file:
+    path: /var/log/tentris
+    state: directory
+    mode: 0750
+    owner: tentris
+    group: tentris

@@ -1,3 +1,10 @@
+- name: Create Virtuoso user
+  user:
+    name: virtuoso
+    state: present
+    system: yes
+    create_home: no
+
 - name: Check for Virtuoso
   stat:
     path: /opt/virtuoso/{{ virtuoso_version }}/
@@ -16,3 +23,11 @@
     src: virtuoso@.service
     dest: /etc/systemd/system/virtuoso@.service
   notify: Reload systemd
+
+- name: Create Virtuoso database directory
+  file:
+    path: "{{ database_base_dir }}/virtuoso"
+    state: directory
+    mode: 0750
+    owner: virtuoso
+    group: virtuoso

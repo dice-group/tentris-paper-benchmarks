@@ -1,3 +1,10 @@
+- name: Create gStore user
+  user:
+    name: gstore
+    state: present
+    system: yes
+    create_home: no
+
 - name: Check for gStore
   stat:
     path: /opt/gstore/
@@ -11,3 +18,11 @@
     src: gstore@.service
     dest: /etc/systemd/system/gstore@.service
   notify: Reload systemd
+
+- name: Create gStore database directory
+  file:
+    path: "{{ database_base_dir }}/gstore"
+    state: directory
+    mode: 0750
+    owner: gstore
+    group: gstore

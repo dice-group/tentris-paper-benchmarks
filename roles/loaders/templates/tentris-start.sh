@@ -1,3 +1,5 @@
 #! /bin/bash
 
-systemctl start tentris@{{ item[1].path | replace('/', '-') }}.service
+sudo systemctl start tentris@{{ item[1].path | replace('/', '-') }}.service
+
+sleep 30

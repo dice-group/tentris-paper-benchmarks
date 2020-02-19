@@ -1,3 +1,3 @@
 #! /bin/bash
 
-systemctl stop gstore@{{ item[1].name }}.service
+sudo systemctl stop gstore@{{ item[1].name }}.service

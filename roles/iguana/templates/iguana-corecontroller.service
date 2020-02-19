@@ -5,6 +5,8 @@ After=rabbitmq-server.service
 
 [Service]
 Type=simple
+User=iguana
+WorkingDirectory=/var/lib/iguana
 ExecStart=/usr/bin/java -cp /opt/iguana-{{ iguana_version.version_number }}/corecontroller.jar org.aksw.iguana.cc.controller.MainController /opt/iguana-{{ iguana_version.version_number }}/core.properties
 SuccessExitStatus=143
 

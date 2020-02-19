@@ -1,3 +1,3 @@
 #! /bin/bash
 
-systemctl stop fuseki@{{ item[1].name }}.service
+sudo systemctl stop fuseki@{{ item[1].name }}.service

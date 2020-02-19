@@ -1,3 +1,10 @@
+- name: Create Triplebit user
+  user:
+    name: triplebit
+    state: present
+    system: yes
+    create_home: no
+
 - name: Create Triplebit directory
   file:
     path: /opt/triplebit
@@ -16,3 +23,11 @@
       checksum: sha1:31bb300a59554ff5e74b87667e340e160fca7896
     - name: triplebitQuery
       checksum: sha1:478b23afabe85597da9cd9a0163c112571d37169
+
+- name: Create Triplebit database directory
+  file:
+    path: "{{ database_base_dir }}/triplebit"
+    state: directory
+    mode: 0750
+    owner: triplebit
+    group: triplebit

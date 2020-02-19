@@ -1,3 +1,10 @@
+- name: Create GraphDB user
+  user:
+    name: graphdb
+    state: present
+    system: yes
+    create_home: no
+
 - name: Check for GraphDB
   stat:
     path: /opt/graphdb/graphdb-se-{{ graphdb_version }}/
@@ -11,3 +18,11 @@
     src: graphdb@.service
     dest: /etc/systemd/system/graphdb@.service
   notify: Reload systemd
+
+- name: Create GraphDB database directory
+  file:
+    path: "{{ database_base_dir }}/graphdb"
+    state: directory
+    mode: 0750
+    owner: graphdb
+    group: graphdb

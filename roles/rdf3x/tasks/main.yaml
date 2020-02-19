@@ -1,3 +1,10 @@
+- name: Create rdf3x user
+  user:
+    name: rdf3x
+    state: present
+    system: yes
+    create_home: no
+
 - name: Create RDF-3X Directory
   file:
     path: /opt/rdf3x
@@ -24,3 +31,11 @@
       checksum: sha1:d78d138c5622bebb02758d5ce8472b0e6c2459ad
     - name: rdf3xupdate
       checksum: sha1:2d23f37e88314f79063a554a2bfcb187572f45fd
+
+- name: Create RDF-3X database directory
+  file:
+    path: "{{ database_base_dir }}/rdf3x"
+    state: directory
+    mode: 0750
+    owner: rdf3x
+    group: rdf3x

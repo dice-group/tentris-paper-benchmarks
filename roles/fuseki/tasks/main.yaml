@@ -1,3 +1,10 @@
+- name: Create Fuseki user
+  user:
+    name: fuseki
+    state: present
+    system: yes
+    create_home: no
+
 - name: Check for Fuseki
   stat:
     path: /opt/fuseki/apache-jena-fuseki-{{ fuseki_version }}/
@@ -16,3 +23,11 @@
     src: fuseki@.service
     dest: /etc/systemd/system/fuseki@.service
   notify: Reload systemd
+
+- name: Create Fuseki database directory
+  file:
+    path: "{{ database_base_dir }}/fuseki"
+    state: directory
+    mode: 0750
+    owner: fuseki
+    group: fuseki

@@ -1,3 +1,5 @@
 #! /bin/bash
 
-systemctl start fuseki@{{ item[1].name }}.service
+sudo systemctl start fuseki@{{ item[1].name }}.service
+
+sleep 30

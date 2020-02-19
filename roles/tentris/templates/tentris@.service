@@ -2,4 +2,6 @@
 Description=Tentris server serving dataset %I
 
 [Service]
-ExecStart=/opt/tentris/tentris_server --logstdout -f %I
+Type=simple
+User=tentris
+ExecStart=/opt/tentris/tentris_server --logstdout -f %I --logfiledir /var/log/tentris

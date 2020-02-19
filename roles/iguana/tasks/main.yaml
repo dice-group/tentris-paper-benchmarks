@@ -1,3 +1,11 @@
+- name: Create Iguana user
+  user:
+    name: iguana
+    state: present
+    system: yes
+    create_home: yes
+    home: /var/lib/iguana
+
 - name: Check for Iguana
   stat:
     path: /opt/iguana-{{ iguana_version.version_number }}
@@ -25,3 +33,12 @@
     mode: 0755
     owner: root
     group: root
+
+- name: Template copy iguana sudoers config
+  template:
+    src: iguana
+    dest: /etc/sudoers.d/iguana
+    mode: 0400
+    owner: root
+    group: root
+    validate: visudo -c -s '%s'

@@ -1,3 +1,5 @@
 #! /bin/bash
 
-systemctl start gstore@{{ item[1].name }}.service
+sudo systemctl start gstore@{{ item[1].name }}.service
+
+sleep 30
