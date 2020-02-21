@@ -1,5 +1,17 @@
 lubm_datasets:
-  - name: test
+  - name: lubm8
     index: 0
     seed: 0
-    number: 100
+    number: 8
+  - name: lubm80
+    index: 0
+    seed: 0
+    number: 80
+  - name: lubm800
+    index: 0
+    seed: 0
+    number: 800
+  - name: lubm8000
+    index: 0
+    seed: 0
+    number: 8000
