@@ -7,7 +7,7 @@
 
 - name: Check for GraphDB
   stat:
-    path: /opt/graphdb/graphdb-se-{{ graphdb_version }}/
+    path: /opt/graphdb/graphdb-free-{{ graphdb_version }}/
   register: graphdb_dir
 
 - include: install.yaml

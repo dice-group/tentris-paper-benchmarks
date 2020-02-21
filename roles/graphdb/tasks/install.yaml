@@ -11,13 +11,14 @@
 
 - name: Download GraphDB
   get_url:
-    url: https://maven.ontotext.com/repository/owlim-releases/com/ontotext/graphdb/graphdb-se/{{ graphdb_version }}/graphdb-se-{{ graphdb_version }}-dist.zip
-    dest: "{{ tempdir.path }}/graphdb-se-{{ graphdb_version }}-dist.zip"
+    url: http://download.ontotext.com/owlim/{{ graphdb_download_uuid }}/graphdb-free-9.1.1-dist.zip
+    dest: "{{ tempdir.path }}/graphdb-free-{{ graphdb_version }}-dist.zip"
+    checksum: sha1:ae0fa05bd4b03610e834bf3eaa18a7d33686adea
 
 - name: Unzip GraphDB
   unarchive:
     remote_src: yes
-    src: "{{ tempdir.path }}/graphdb-se-{{ graphdb_version }}-dist.zip"
+    src: "{{ tempdir.path }}/graphdb-free-{{ graphdb_version }}-dist.zip"
     dest: /opt/graphdb/
 
 - name: Delete tempdir
