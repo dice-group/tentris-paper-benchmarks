@@ -6,7 +6,7 @@
 - name: Convert Dataset to nt
   become_user: dataset
   command:
-    chdir: /opt/datasets/dbpedia/
+    chdir: "{{ datasets_dir }}/dbpedia/"
     argv:
       - sh
       - -c
@@ -14,5 +14,5 @@
 
 - name: Remove Turtle File
   file:
-    path: /opt/datasets/dbpedia/DBpedia351.ttl
+    path: "{{ datasets_dir }}/dbpedia/DBpedia351.ttl"
     state: absent

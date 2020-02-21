@@ -1,6 +1,6 @@
 - name: Create dataest directories
   file:
-    path: /opt/datasets/watdiv/{{ item.name }}
+    path: "{{ datasets_dir }}/watdiv/{{ item.name }}"
     state: directory
     mode: 0755
     owner: dataset
@@ -10,10 +10,10 @@
 - name: Generate watdiv datasets
   become_user: dataset
   command:
-    chdir: /opt/datasets/watdiv/generator/bin/Release/
+    chdir: "{{ datasets_dir }}/watdiv/generator/bin/Release/"
     argv:
       - sh
       - -c
-      - ./watdiv -d "{{ item.model | default('/opt/datasets/watdiv/generator/model/wsdbm-data-model.txt', true) }}" {{ item.scale_factor }} > "/opt/datasets/watdiv/{{ item.name }}/data.nt" && mv saved.txt "/opt/datasets/watdiv/{{ item.name }}/saved.txt"
-    creates: /opt/datasets/watdiv/{{ item.name }}/saved.txt
+      - ./watdiv -d "{{ item.model | default('{{ datasets_dir }}/watdiv/generator/model/wsdbm-data-model.txt', true) }}" {{ item.scale_factor }} > "{{ datasets_dir }}/watdiv/{{ item.name }}/data.nt" && mv saved.txt "{{ datasets_dir }}/watdiv/{{ item.name }}/saved.txt"
+    creates: "{{ datasets_dir }}/watdiv/{{ item.name }}/saved.txt"
   loop: "{{ watdiv_datasets }}"

@@ -1,6 +1,6 @@
 - name: Create the generator directory
   file:
-    path: /opt/datasets/lubm/generator
+    path: "{{ datasets_dir }}/lubm/generator"
     state: directory
     mode: 0755
     owner: dataset
@@ -34,7 +34,7 @@
   copy:
     src: "{{ tempdir.path }}/lubm-uba-improved/target/lubm-uba.jar"
     remote_src: yes
-    dest: /opt/datasets/lubm/generator/lubm-uba.jar
+    dest: "{{ datasets_dir }}/lubm/generator/lubm-uba.jar"
     mode: 0644
     owner: dataset
     group: dataset

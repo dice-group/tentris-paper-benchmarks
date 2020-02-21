@@ -1,6 +1,6 @@
 - name: Create dataest directories
   file:
-    path: /opt/datasets/lubm/{{ item.name }}
+    path: "{{ datasets_dir }}/lubm/{{ item.name }}"
     state: directory
     mode: 0755
     owner: dataset
@@ -13,6 +13,6 @@
     argv:
       - sh
       - -c
-      - mkdir /opt/datasets/lubm/{{ item.name }}/shards && java -jar /opt/datasets/lubm/generator/lubm-uba.jar --format NTRIPLES --threads {{ ansible_processor_vcpus }} --index {{ item.index }} --seed {{ item.seed }} --univ {{ item.number }} --ontology "{{ item.ontology | default('http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl', true) }}" --output /opt/datasets/lubm/{{ item.name }}/shards --timing --log /opt/datasets/lubm/{{ item.name }}/log.txt && cat /opt/datasets/lubm/{{ item.name }}/shards/*.nt > /opt/datasets/lubm/{{ item.name }}/{{ item.name }}.nt && rm -r /opt/datasets/lubm/{{ item.name }}/shards
-    creates: /opt/datasets/lubm/{{ item.name }}/log.txt
+      - mkdir {{ datasets_dir }}/lubm/{{ item.name }}/shards && java -jar {{ datasets_dir }}/lubm/generator/lubm-uba.jar --format NTRIPLES --threads {{ ansible_processor_vcpus }} --index {{ item.index }} --seed {{ item.seed }} --univ {{ item.number }} --ontology "{{ item.ontology | default('http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl', true) }}" --output {{ datasets_dir }}/lubm/{{ item.name }}/shards --timing --log {{ datasets_dir }}/lubm/{{ item.name }}/log.txt && cat {{ datasets_dir }}/lubm/{{ item.name }}/shards/*.nt > {{ datasets_dir }}/lubm/{{ item.name }}/{{ item.name }}.nt && rm -r {{ datasets_dir }}/lubm/{{ item.name }}/shards
+    creates: "{{ datasets_dir }}/lubm/{{ item.name }}/log.txt"
   loop: "{{ lubm_datasets }}"

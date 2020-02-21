@@ -1,6 +1,6 @@
 - name: Check for the LUBM Generator
   stat:
-    path: /opt/datasets/lubm/generator/lubm-uba.jar
+    path: "{{ datasets_dir }}/lubm/generator/lubm-uba.jar"
   register: generator
 
 - include: install-generator.yaml
@@ -11,4 +11,4 @@
 - name: Copy Query File
   copy:
     src: queries-sparql.txt
-    dest: /opt/datasets/lubm/queries-sparql.txt
+    dest: "{{ datasets_dir }}/lubm/queries-sparql.txt"

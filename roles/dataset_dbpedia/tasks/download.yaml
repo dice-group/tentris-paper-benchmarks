@@ -1,6 +1,6 @@
 - name: Create the dataset directory
   file:
-    path: /opt/datasets/dbpedia
+    path: "{{ datasets_dir }}/dbpedia"
     state: directory
     mode: 0755
     owner: dataset
@@ -27,7 +27,7 @@
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/dbpedia.zip"
-    dest: /opt/datasets/dbpedia/
+    dest: "{{ datasets_dir }}/dbpedia/"
     mode: 0644
     owner: dataset
     group: dataset

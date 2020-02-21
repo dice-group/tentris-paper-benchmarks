@@ -1,6 +1,6 @@
 - name: Check for the SWDF dataset
   stat:
-    path: /opt/datasets/swdf
+    path: "{{ datasets_dir }}/swdf"
   register: dataset_dir
 
 - include: download.yaml

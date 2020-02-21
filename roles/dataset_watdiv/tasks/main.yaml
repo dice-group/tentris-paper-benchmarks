@@ -5,7 +5,7 @@
 
 - name: Create the WatDiv directory
   file:
-    path: /opt/datasets/watdiv
+    path: "{{ datasets_dir }}/watdiv"
     state: directory
     mode: 0755
     owner: dataset
@@ -13,7 +13,7 @@
 
 - name: Check for the WatDiv Generator
   stat:
-    path: /opt/datasets/watdiv/generator/bin/Release/watdiv
+    path: "{{ datasets_dir }}/watdiv/generator/bin/Release/watdiv"
   register: generator
 
 - include: install-generator.yaml
@@ -24,7 +24,7 @@
 - name: Download the query file
   get_url:
     url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/watdiv.txt
-    dest: /opt/datasets/watdiv/queries.txt
+    dest: "{{ datasets_dir }}/watdiv/queries.txt"
     mode: 0644
     owner: dataset
     group: dataset

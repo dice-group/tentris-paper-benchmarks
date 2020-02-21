@@ -1,34 +1,34 @@
 datasets:
   - name: lubm8
-    path: /opt/datasets/lubm/lubm8/lubm8.nt
-    queries_path: /opt/datasets/lubm/queries-sparql.txt
+    path: "{{ datasets_dir }}/lubm/lubm8/lubm8.nt"
+    queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: lubm80
-    path: /opt/datasets/lubm/lubm80/lubm80.nt
-    queries_path: /opt/datasets/lubm/queries-sparql.txt
+    path: "{{ datasets_dir }}/lubm/lubm80/lubm80.nt"
+    queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: lubm800
-    path: /opt/datasets/lubm/lubm800/lubm800.nt
-    queries_path: /opt/datasets/lubm/queries-sparql.txt
+    path: "{{ datasets_dir }}/lubm/lubm800/lubm800.nt"
+    queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: lubm8000
-    path: /opt/datasets/lubm/lubm8000/lubm8000.nt
-    queries_path: /opt/datasets/lubm/queries-sparql.txt
+    path: "{{ datasets_dir }}/lubm/lubm8000/lubm8000.nt"
+    queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: swdf
-    path: /opt/datasets/swdf/swdf.nt
-    queries_path: /opt/datasets/swdf/swdf.txt
+    path: "{{ datasets_dir }}/swdf/swdf.nt"
+    queries_path: "{{ datasets_dir }}/swdf/swdf.txt"
   - name: watdiv10
-    path: /opt/datasets/watdiv/watdiv10/data.nt
-    queries_path: /opt/datasets/watdiv/queries.txt
+    path: "{{ datasets_dir }}/watdiv/watdiv10/data.nt"
+    queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
   - name: watdiv100
-    path: /opt/datasets/watdiv/watdiv100/data.nt
-    queries_path: /opt/datasets/watdiv/queries.txt
+    path: "{{ datasets_dir }}/watdiv/watdiv100/data.nt"
+    queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
   - name: watdiv1000
-    path: /opt/datasets/watdiv/watdiv1000/data.nt
-    queries_path: /opt/datasets/watdiv/queries.txt
+    path: "{{ datasets_dir }}/watdiv/watdiv1000/data.nt"
+    queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
   - name: watdiv10000
-    path: /opt/datasets/watdiv/watdiv10000/data.nt
-    queries_path: /opt/datasets/watdiv/queries.txt
+    path: "{{ datasets_dir }}/watdiv/watdiv10000/data.nt"
+    queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
   - name: dbpedia
-    path: /opt/datasets/dbpedia/dbpedia.nt
-    queries_path: /opt/datasets/dbpedia/dbpedia.txt
+    path: "{{ datasets_dir }}/dbpedia/dbpedia.nt"
+    queries_path: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
 
 triplestores:
   - tentris

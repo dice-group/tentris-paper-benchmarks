@@ -7,7 +7,7 @@
 
 - name: Ensure Datasets directory is present
   file:
-    path: /opt/datasets
+    path: "{{ datasets_dir }}"
     state: directory
     owner: dataset
     group: dataset
