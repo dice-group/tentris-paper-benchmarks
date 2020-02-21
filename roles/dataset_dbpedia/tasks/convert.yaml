@@ -4,6 +4,7 @@
     state: present
 
 - name: Convert Dataset to nt
+  become_user: dataset
   command:
     chdir: /opt/datasets/dbpedia/
     argv:

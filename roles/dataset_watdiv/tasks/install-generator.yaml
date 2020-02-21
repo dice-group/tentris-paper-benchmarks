@@ -2,6 +2,9 @@
   file:
     path: /opt/datasets/watdiv/generator
     state: directory
+    mode: 0755
+    owner: dataset
+    group: dataset
 
 - name: Create temporary directory
   tempfile:
@@ -26,6 +29,9 @@
     remote_src: yes
     src: "{{ tempdir.path }}/watdiv/model/wsdbm-data-model.txt"
     dest: /opt/datasets/watdiv/generator/wsdbm-data-model.txt
+    mode: 0644
+    owner: dataset
+    group: dataset
 
 - name: Build Generator
   command:
@@ -39,9 +45,9 @@
     src: "{{ tempdir.path }}/watdiv/{{ item }}"
     remote_src: yes
     dest: /opt/datasets/watdiv/generator/
-    mode: preserve
-    owner: root
-    group: root
+    mode: o=rwX,g=rwX,a=rwX
+    owner: dataset
+    group: dataset
   with_items:
     - bin
     - files

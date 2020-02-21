@@ -2,9 +2,13 @@
   file:
     path: /opt/datasets/watdiv/{{ item.name }}
     state: directory
+    mode: 0755
+    owner: dataset
+    group: dataset
   loop: "{{ watdiv_datasets }}"
 
 - name: Generate watdiv datasets
+  become_user: dataset
   command:
     chdir: /opt/datasets/watdiv/generator/bin/Release/
     argv:

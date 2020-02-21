@@ -2,9 +2,13 @@
   file:
     path: /opt/datasets/lubm/{{ item.name }}
     state: directory
+    mode: 0755
+    owner: dataset
+    group: dataset
   loop: "{{ lubm_datasets }}"
 
 - name: Generate lubm datasets
+  become_user: dataset
   command:
     argv:
       - sh

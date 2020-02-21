@@ -1,4 +1,14 @@
+- name: Create dataset user
+  user:
+    name: dataset
+    state: present
+    system: yes
+    create_home: no
+
 - name: Ensure Datasets directory is present
   file:
     path: /opt/datasets
     state: directory
+    owner: dataset
+    group: dataset
+    mode: 0755

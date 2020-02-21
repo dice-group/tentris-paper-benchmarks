@@ -2,6 +2,9 @@
   file:
     path: /opt/datasets/dbpedia
     state: directory
+    mode: 0755
+    owner: dataset
+    group: dataset
 
 - name: Create a tempory download directory
   tempfile:
@@ -25,6 +28,9 @@
     remote_src: yes
     src: "{{ tempdir.path }}/dbpedia.zip"
     dest: /opt/datasets/dbpedia/
+    mode: 0644
+    owner: dataset
+    group: dataset
 
 - name: Delete tempdir
   file:

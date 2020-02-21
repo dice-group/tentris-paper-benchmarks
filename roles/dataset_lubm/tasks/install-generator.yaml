@@ -2,6 +2,9 @@
   file:
     path: /opt/datasets/lubm/generator
     state: directory
+    mode: 0755
+    owner: dataset
+    group: dataset
 
 - name: Create temporary directory
   tempfile:
@@ -32,6 +35,9 @@
     src: "{{ tempdir.path }}/lubm-uba-improved/target/lubm-uba.jar"
     remote_src: yes
     dest: /opt/datasets/lubm/generator/lubm-uba.jar
+    mode: 0644
+    owner: dataset
+    group: dataset
 
 - name: Delete tempdir
   file:
