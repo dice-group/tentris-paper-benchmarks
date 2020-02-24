@@ -9,11 +9,8 @@
 
 - name: Generate watdiv datasets
   become_user: dataset
-  command:
+  shell:
     chdir: "{{ datasets_dir }}/watdiv/generator/bin/Release/"
-    argv:
-      - sh
-      - -c
-      - ./watdiv -d "{{ item.model | default('{{ datasets_dir }}/watdiv/generator/model/wsdbm-data-model.txt', true) }}" {{ item.scale_factor }} > "{{ datasets_dir }}/watdiv/{{ item.name }}/data.nt" && mv saved.txt "{{ datasets_dir }}/watdiv/{{ item.name }}/saved.txt"
+    cmd: ./watdiv -d "{{ item.model | default(datasets_dir + '/watdiv/generator/model/wsdbm-data-model.txt', true) }}" {{ item.scale_factor }} > "{{ datasets_dir }}/watdiv/{{ item.name }}/data.nt" && mv saved.txt "{{ datasets_dir }}/watdiv/{{ item.name }}/saved.txt"
     creates: "{{ datasets_dir }}/watdiv/{{ item.name }}/saved.txt"
   loop: "{{ watdiv_datasets }}"
