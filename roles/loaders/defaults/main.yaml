@@ -1,15 +1,15 @@
 datasets:
   - name: lubm8
-    path: "{{ datasets_dir }}/lubm/lubm8/lubm8.nt"
+    path: "{{ datasets_dir }}/lubm/lubm8/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: lubm80
-    path: "{{ datasets_dir }}/lubm/lubm80/lubm80.nt"
+    path: "{{ datasets_dir }}/lubm/lubm80/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: lubm800
-    path: "{{ datasets_dir }}/lubm/lubm800/lubm800.nt"
+    path: "{{ datasets_dir }}/lubm/lubm800/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: lubm8000
-    path: "{{ datasets_dir }}/lubm/lubm8000/lubm8000.nt"
+    path: "{{ datasets_dir }}/lubm/lubm8000/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
   - name: swdf
     path: "{{ datasets_dir }}/swdf/swdf.nt"
