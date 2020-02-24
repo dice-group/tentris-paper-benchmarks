@@ -31,7 +31,8 @@ datasets:
     queries_path: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
 
 triplestores:
-  - tentris
+  - tentris-1.0.3
+  - tentris-1.0.3-tsl_sparse_set
   - fuseki
   - gstore
   - virtuoso

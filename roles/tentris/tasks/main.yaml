@@ -5,25 +5,16 @@
     system: yes
     create_home: no
 
-- name: Install build dependencies
-  apt:
-    package:
-      - libserd-dev
-      - uuid-dev
+#- name: Install dependencies
+#  apt:
+#    package:
+#      - libstdc++9
 
-- name: Check for tentris
-  stat:
-    path: /opt/tentris/tentris_server
-  register: tentris
-
-- include: install.yaml
-  when: tentris.stat.exists == false
-
-- name: Template copy tentris service
-  template:
-    src: tentris@.service
-    dest: /etc/systemd/system/tentris@.service
-  notify: Reload systemd
+- name: Install tentris versions
+  loop: "{{ tentris_versions }}"
+  loop_control:
+    loop_var: tentris_version
+  include_tasks: check_install.yaml
 
 - name: Create tentris log directory
   file:

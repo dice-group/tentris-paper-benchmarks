@@ -1,0 +1,13 @@
+- name: Check for tentris
+  stat:
+    path: /opt/tentris/{{ tentris_version }}/tentris_server
+  register: tentris
+
+- include: install.yaml
+  when: tentris.stat.exists == false
+
+- name: Template copy tentris service
+  template:
+    src: tentris@.service
+    dest: /etc/systemd/system/tentris-{{ tentris_version }}@.service
+  notify: Reload systemd

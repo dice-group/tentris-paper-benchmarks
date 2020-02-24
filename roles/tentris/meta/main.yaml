@@ -1,4 +1,2 @@
 dependencies:
   - { role: triplestores_common }
-  - { role: build_common }
-  - { role: conan }
