@@ -9,4 +9,5 @@ do
     then
         break
     fi
+    sleep 2
 done
