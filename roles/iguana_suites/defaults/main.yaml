@@ -7,7 +7,9 @@ iguana_http_connections:
 iguana_time_limit: 3600000
 iguana_query_timeout: 180000
 triplestores_http:
-  - name: tentris
+  - name: tentris-1.0.3
+    connection_url: http://localhost:9080/sparql
+  - name: tentris-1.0.3-tsl_sparse_set
     connection_url: http://localhost:9080/sparql
   - name: fuseki
     connection_url: http://localhost:3030/%d/sparql
@@ -20,8 +22,13 @@ triplestores_http:
   - name: blazegraph
     connection_url: http://localhost:9999/blazegraph/sparql
 triplestores_cli:
-  - name: tentris
-    command: sudo -u tentris /opt/tentris/tentris_terminal -f '%p' -s --logfiledir /var/log/tentris
+  - name: tentris-1.0.3
+    command: sudo -u tentris /opt/tentris/1.0.3/tentris_terminal -f '%p' -s --logfiledir /var/log/tentris
+    init_finished_string: finished.
+    query_done_string: number of bindings
+    error_string: Key was not valid
+  - name: tentris-1.0.3-tsl_sparse_set
+    command: sudo -u tentris /opt/tentris/1.0.3-tsl_sparse_set/tentris_terminal -f '%p' -s --logfiledir /var/log/tentris
     init_finished_string: finished.
     query_done_string: number of bindings
     error_string: Key was not valid
