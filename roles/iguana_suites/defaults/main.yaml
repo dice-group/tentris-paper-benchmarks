@@ -10,13 +10,13 @@ triplestores_http:
   - name: tentris
     connection_url: http://localhost:9080/sparql
   - name: fuseki
-    connection_url: http://localhost:3030/ds/sparql
+    connection_url: http://localhost:3030/%d/sparql
   - name: gstore
     connection_url: http://localhost:9000/
   - name: virtuoso
     connection_url: http://localhost:8890/sparql
   - name: graphdb
-    connection_url: http://localhost:7200/repositories/repo
+    connection_url: http://localhost:7200/repositories/%d
   - name: blazegraph
     connection_url: http://localhost:9999/blazegraph/sparql
 triplestores_cli:

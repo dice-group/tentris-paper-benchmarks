@@ -1,6 +1,6 @@
 connection0.name = {{ item[0].name }}
-connection0.service = {{ item[0].connection_url }}
-connection0.update.service = {{ item[0].connection_url }}
+connection0.service = {{ item[0].connection_url | replace('%d', item[1].name) }}
+connection0.update.service = {{ item[0].connection_url | replace('%d', item[1].name) }}
 connection0.user = 
 connection0.password = 
 iguana.cc.connections = connection0
