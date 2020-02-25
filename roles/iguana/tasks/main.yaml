@@ -8,28 +8,16 @@
 
 - name: Check for Iguana
   stat:
-    path: /opt/iguana-{{ iguana_version.version_number }}
+    path: /opt/iguana-{{ iguana_version }}
   register: iguana_dir
 
 - include: install.yaml
   when: iguana_dir.stat.exists == false
 
-- name: Template copy Iguana Corecontroller Service
+- name: Template copy iguana run script
   template:
-    src: iguana-corecontroller.service
-    dest: /etc/systemd/system/iguana-corecontroller.service
-  notify: Reload and restart Iguana Corecontroller
-
-- name: Template copy Iguana Resultprocessor Service
-  template:
-    src: iguana-resultprocessor.service
-    dest: /etc/systemd/system/iguana-resultprocessor.service
-  notify: Reload and restart Iguana Resultprocessor
-
-- name: Template copy send-config script
-  template:
-    src: iguana-send-config.sh
-    dest: /usr/local/bin/iguana-send-config.sh
+    src: iguana-run.sh
+    dest: /usr/local/bin/iguana-run.sh
     mode: 0755
     owner: root
     group: root
