@@ -12,25 +12,48 @@
     suffix: dbpedia
   register: tempdir
 
-- name: Download DBpedia dataset
-  get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/DBpedia351.zip
-    checksum: sha1:114eff94c4eddce06d7abb3e155d34102e107216
-    dest: "{{ tempdir.path }}/dbpedia.zip"
-
 - name: Install unzip
   apt:
     package: unzip
     state: present
 
-- name: Unzip DBpedia dataset
+- name: Download DBpedia351 dataset
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/DBpedia351.zip
+    checksum: sha1:114eff94c4eddce06d7abb3e155d34102e107216
+    dest: "{{ tempdir.path }}/dbpedia351.zip"
+  when: not dataset351_ttl.stat.exists and not dataset351_nt.stat.exists
+
+- name: Unzip DBpedia351 dataset
   unarchive:
     remote_src: yes
-    src: "{{ tempdir.path }}/dbpedia.zip"
+    src: "{{ tempdir.path }}/dbpedia351.zip"
     dest: "{{ datasets_dir }}/dbpedia/"
     mode: 0644
     owner: dataset
     group: dataset
+  when: not dataset351_ttl.stat.exists and not dataset351_nt.stat.exists
+
+- name: Download DBpedia2015 dataset
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/dbpedia_2015-10_en_wo-comments_c.ttl.zst
+    checksum: sha1:cf07c6678e3e111fd9fdb55ba21a38844719f66c
+    dest: "{{ tempdir.path }}/dbpedia_2015-10_en_wo-comments_c.ttl.zst"
+  when: not dataset2015_ttl.stat.exists and not dataset2015_nt.stat.exists
+
+- name: Install zstd
+  apt:
+    package: zstd
+
+- name: Decompress DBpedia2015 dataset
+  command:
+    argv:
+      - zstd
+      - -d
+      - "{{ tempdir.path }}/dbpedia_2015-10_en_wo-comments_c.ttl.zst"
+      - -o
+      - "{{ datasets_dir }}/dbpedia/dbpedia_2015-10_en_wo-comments_c.ttl"
+  when: not dataset2015_ttl.stat.exists and not dataset2015_nt.stat.exists
 
 - name: Delete tempdir
   file:

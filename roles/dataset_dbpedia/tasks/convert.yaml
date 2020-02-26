@@ -3,14 +3,19 @@
     package: serdi
     state: present
 
-- name: Convert Dataset to nt
+- name: Convert DBpedia351 to nt
   become_user: dataset
-  command:
+  shell:
     chdir: "{{ datasets_dir }}/dbpedia/"
-    argv:
-      - sh
-      - -c
-      - serdi -q -b -o ntriples DBpedia351.ttl > dbpedia.nt
+    cmd: serdi -q -b -o ntriples DBpedia351.ttl > dbpedia351.nt
+  when: not dataset351_nt.stat.exists
+
+- name: Convert DBpedia2015 to nt
+  become_user: dataset
+  shell:
+    chdir: "{{ datasets_dir }}/dbpedia/"
+    cmd: serdi -q -b -o ntriples dbpedia_2015-10_en_wo-comments_c.ttl > dbpedia_2015-10_en_wo-comments_c.nt
+  when: not dataset2015_nt.stat.exists
 
 - name: Remove Turtle File
   file:

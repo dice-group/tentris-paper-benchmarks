@@ -26,8 +26,11 @@ datasets:
   - name: watdiv10000
     path: "{{ datasets_dir }}/watdiv/watdiv10000/data.nt"
     queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
-  - name: dbpedia
-    path: "{{ datasets_dir }}/dbpedia/dbpedia.nt"
+  - name: dbpedia351
+    path: "{{ datasets_dir }}/dbpedia/dbpedia351.nt"
+    queries_path: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
+  - name: dbpedia2015
+    path: "{{ datasets_dir }}/dbpedia/dbpedia2015.nt"
     queries_path: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
 
 triplestores:

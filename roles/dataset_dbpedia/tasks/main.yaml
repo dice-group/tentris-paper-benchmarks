@@ -1,20 +1,32 @@
-- name: Check for the DBpedia dataset
-  stat:
-    path: "{{ datasets_dir }}/dbpedia/dbpedia.nt"
-    get_checksum: no
-  register: dataset_nt
-
-- name: Check for the DBpedia dataset (Turtle File)
+- name: Check for the DBpedia351 dataset (Turtle File)
   stat:
     path: "{{ datasets_dir }}/dbpedia/DBpedia351.ttl"
     get_checksum: no
-  register: dataset_ttl
+  register: dataset351_ttl
+
+- name: Check for the DBpedia2015 dataset (Turtle File)
+  stat:
+    path: "{{ datasets_dir }}/dbpedia/dbpedia_2015-10_en_wo-comments_c.ttl"
+    get_checksum: no
+  register: dataset2015_ttl
+
+- name: Check for the DBpedia dataset
+  stat:
+    path: "{{ datasets_dir }}/dbpedia/dbpedia351.nt"
+    get_checksum: no
+  register: dataset351_nt
+
+- name: Check for the DBpedia2015 dataset
+  stat:
+    path: "{{ datasets_dir }}/dbpedia/dbpedia_2015-10_en_wo-comments_c.nt"
+    get_checksum: no
+  register: dataset2015_nt
 
 - include: download.yaml
-  when: dataset_nt.stat.exists == false and dataset_ttl.stat.exists == false
+  when: (not dataset351_nt.stat.exists and not dataset351_ttl.stat.exists) or (not dataset2015_nt.stat.exists and not dataset2015_ttl.stat.exists)
 
 - include: convert.yaml
-  when: dataset_nt.stat.exists == false
+  when: not dataset351_nt.stat.exists or not dataset2015_nt.stat.exists
 
 - name: Download DBpedia queries
   get_url:
