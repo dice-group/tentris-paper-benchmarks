@@ -47,3 +47,30 @@
     dest: /opt/graphdb/graphdb-{{ item.name }}.ttl
   loop: "{{ datasets }}"
   when: "'graphdb' in triplestores"
+
+- name: Template copy tentris loader scripts
+  template:
+    src: "tentris-load.sh"
+    dest: /opt/loaders/tentris-{{ item[0] }}-load-{{ item[1].name }}.sh
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ tentris_versions | product(datasets) | list }}"
+
+- name: Template copy tentris start scripts
+  template:
+    src: "tentris-start.sh"
+    dest: /opt/loaders/tentris-{{ item[0] }}-start-{{ item[1].name }}.sh
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ tentris_versions | product(datasets) | list }}"
+
+- name: Template copy tentris stop scripts
+  template:
+    src: "tentris-stop.sh"
+    dest: /opt/loaders/tentris-{{ item[0] }}-stop-{{ item[1].name }}.sh
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ tentris_versions | product(datasets) | list }}"

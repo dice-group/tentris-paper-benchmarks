@@ -14,6 +14,12 @@
     dest: /opt/iguana_suites/http/{{ item[0].name }}-{{ item[1].name }}.suite
   loop: "{{ triplestores_http | product(datasets) | list }}"
 
+- name: Template copy Tentris Iguana HTTP suites
+  template:
+    src: tentris-http.suite
+    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}-{{ item[1].name }}.suite
+  loop: "{{ tentris_versions | product(datasets) | list }}"
+
 - name: Create CLI suite directoy
   file:
     path: /opt/iguana_suites/cli
@@ -24,4 +30,10 @@
     src: cli.suite
     dest: /opt/iguana_suites/cli/{{ item[0].name }}-{{ item[1].name }}.suite
   loop: "{{ triplestores_cli | product(datasets) | list }}"
+
+- name: Template copy Tentris Iguana CLI suites
+  template:
+    src: tentris-cli.suite
+    dest: /opt/iguana_suites/cli/tentris-{{ item[0] }}-{{ item[1].name }}.suite
+  loop: "{{ tentris_versions | product(datasets) | list }}"
   

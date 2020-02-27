@@ -1,0 +1,26 @@
+connection0.name = tentris-{{ item[0] }}
+connection0.service = http://localhost:9080/sparql
+connection0.update.service = http://localhost:9080/sparql
+connection0.user = 
+connection0.password = 
+iguana.cc.connections = connection0
+
+dataset0.name = {{ item[1].name }}
+iguana.cc.datasets = dataset0
+
+{% for count in iguana_http_connections %}
+task{{ loop.index0 }}.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
+sparql{{ count }} = {{ count }},org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0
+task{{ loop.index0 }}x.timeLimit = {{ iguana_time_limit }}
+task{{ loop.index0 }}x.queryHandler = org.aksw.iguana.tp.query.impl.InstancesQueryHandler
+task{{ loop.index0 }}x.workers = sparql{{ count }}
+task{{ loop.index0 }}x.warmupTime = 0
+task{{ loop.index0 }}x.warmupQueries = {{ item[1].queries_path }}
+task{{ loop.index0 }}.constructorArgs = task{{ loop.index0 }}x.timeLimit,task{{ loop.index0 }}x.queryHandler,task{{ loop.index0 }}x.workers,task{{ loop.index0 }}x.warmupTime,task{{ loop.index0 }}x.warmupQueries,task{{ loop.index0 }}x.warmupUpdates
+
+{% endfor %}
+
+iguana.cc.tasks = {% for count in iguana_http_connections %}{% if not loop.first %},{% endif %}task{{ loop.index0 }}{% endfor %}
+
+script.hook.pre=/opt/loaders/tentris-{{ item[0] }}-start-{{ item[1].name }}.sh
+script.hook.post=/opt/loaders/tentris-{{ item[0] }}-stop-{{ item[1].name }}.sh
