@@ -1,9 +1,9 @@
 iguana_http_connections:
-  - 1
-  - 4
-  - 8
-  - 16
-  - 32
+  - number: 1
+  - number: 4
+  - number: 8
+  - number: 16
+  - number: 32
 iguana_time_limit: 3600000
 iguana_query_timeout: 180000
 triplestores_http:

@@ -8,19 +8,16 @@ iguana.cc.connections = connection0
 dataset0.name = {{ item[1].name }}
 iguana.cc.datasets = dataset0
 
-{% for count in iguana_http_connections %}
-task{{ loop.index0 }}.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
-sparql{{ count }} = {{ count }},org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0
-task{{ loop.index0 }}x.timeLimit = {{ iguana_time_limit }}
-task{{ loop.index0 }}x.queryHandler = org.aksw.iguana.tp.query.impl.InstancesQueryHandler
-task{{ loop.index0 }}x.workers = sparql{{ count }}
-task{{ loop.index0 }}x.warmupTime = 0
-task{{ loop.index0 }}x.warmupQueries = {{ item[1].queries_path }}
-task{{ loop.index0 }}.constructorArgs = task{{ loop.index0 }}x.timeLimit,task{{ loop.index0 }}x.queryHandler,task{{ loop.index0 }}x.workers,task{{ loop.index0 }}x.warmupTime,task{{ loop.index0 }}x.warmupQueries,task{{ loop.index0 }}x.warmupUpdates
+task{{ item[2].number }}.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
+sparql{{ item[2].number }} = {{ item[2].number }},org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0
+task0x.timeLimit = {{ iguana_time_limit }}
+task0x.queryHandler = org.aksw.iguana.tp.query.impl.InstancesQueryHandler
+task0x.workers = sparql{{ item[2].number }}
+task0x.warmupTime = 0
+task0x.warmupQueries = {{ item[1].queries_path }}
+task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers,task0x.warmupTime,task0x.warmupQueries,task0x.warmupUpdates
 
-{% endfor %}
-
-iguana.cc.tasks = {% for count in iguana_http_connections %}{% if not loop.first %},{% endif %}task{{ loop.index0 }}{% endfor %}
+iguana.cc.tasks = task0
 
 script.hook.pre=/opt/loaders/{{ item[0].name }}-start-{{ item[1].name }}.sh
 script.hook.post=/opt/loaders/{{ item[0].name }}-stop-{{ item[1].name }}.sh

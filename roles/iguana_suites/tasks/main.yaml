@@ -3,37 +3,55 @@
     path: /opt/iguana_suites/
     state: directory
 
-- name: Create HTTP suite directoy
+- name: Create HTTP suite directories
   file:
-    path: /opt/iguana_suites/http
+    path: /opt/iguana_suites/http/{{ item[0].name }}/
     state: directory
+  loop: "{{ triplestores_http }}"
+
+- name: Create HTTP suite directories for tentris
+  file:
+    path: /opt/iguana_suites/http/tentris-{{ item[0] }}/
+    state: directory
+  loop: "{{ tentris_versions }}"
+
+- name: Debug
+  debug:
+    msg: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy Iguana HTTP suites
   template:
     src: http.suite
-    dest: /opt/iguana_suites/http/{{ item[0].name }}-{{ item[1].name }}.suite
-  loop: "{{ triplestores_http | product(datasets) | list }}"
+    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}.suite
+  loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy Tentris Iguana HTTP suites
   template:
     src: tentris-http.suite
-    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}-{{ item[1].name }}.suite
-  loop: "{{ tentris_versions | product(datasets) | list }}"
+    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}.suite
+  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
 
-- name: Create CLI suite directoy
+- name: Create CLI suite directories
   file:
-    path: /opt/iguana_suites/cli
+    path: /opt/iguana_suites/cli/{{ item.name }}
     state: directory
+  loop: "{{ triplestores_cli }}"
+
+- name: Create CLI suite directories for tentris
+  file:
+    path: /opt/iguana_suites/cli/tentris-{{ item }}
+    state: directory
+  loop: "{{ tentris_versions }}"
 
 - name: Template copy Iguana CLI suites
   template:
     src: cli.suite
-    dest: /opt/iguana_suites/cli/{{ item[0].name }}-{{ item[1].name }}.suite
+    dest: /opt/iguana_suites/cli/{{ item[0].name }}/{{ item[1].name }}.suite
   loop: "{{ triplestores_cli | product(datasets) | list }}"
 
 - name: Template copy Tentris Iguana CLI suites
   template:
     src: tentris-cli.suite
-    dest: /opt/iguana_suites/cli/tentris-{{ item[0] }}-{{ item[1].name }}.suite
+    dest: /opt/iguana_suites/cli/tentris-{{ item[0] }}/{{ item[1].name }}.suite
   loop: "{{ tentris_versions | product(datasets) | list }}"
   
