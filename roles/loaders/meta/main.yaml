@@ -1,4 +1,5 @@
 dependencies:
+  - role: cgmemtime
   - { role: tentris }
   - { role: fuseki }
   - { role: gstore }

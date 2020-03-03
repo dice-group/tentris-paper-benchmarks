@@ -1,0 +1,36 @@
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: cgmemtime
+  register: tempdir
+
+- name: Download cgmemtime
+  get_url:
+    url: https://github.com/gsauthof/cgmemtime/archive/master.zip
+    dest: "{{ tempdir.path }}/master.zip"
+
+- name: Unzip cgmemtime
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/master.zip"
+    dest: "{{ tempdir.path }}"
+
+- name: Build cgmemtime
+  command:
+    chdir: "{{ tempdir.path }}/cgmemtime-master"
+    argv:
+      - make
+
+- name: Copy cgmemtime binary
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/cgmemtime-master/cgmemtime"
+    dest: /usr/local/bin/cgmemtime
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

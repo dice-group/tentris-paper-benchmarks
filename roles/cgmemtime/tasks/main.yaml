@@ -1,0 +1,19 @@
+- name: Check for cgmemtime
+  stat:
+    path: /usr/local/bin/cgmemtime
+  register: cgmemtime_bin
+
+- name: Check for cgmemtime cgroup
+  stat:
+    path: /sys/fs/cgroup/memory/cgmemtime
+  register: cgmemtime_cgroup
+
+- include: install.yaml
+  when: not cgmemtime_bin.stat.exists
+
+- name: Setup cgroup
+  command:
+    argv:
+      - /usr/local/bin/cgmemtime
+      - --setup
+  when: not cgmemtime_cgroup.stat.exists
