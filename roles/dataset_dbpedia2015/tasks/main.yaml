@@ -1,25 +1,25 @@
-- name: Check for the DBpedia dataset
+- name: Check for the DBpedia2015 dataset
   stat:
-    path: "{{ datasets_dir }}/dbpedia/dbpedia351.nt"
+    path: "{{ datasets_dir }}/dbpedia2015/dbpedia_2015-10_en_wo-comments_c.nt"
     get_checksum: no
-  register: dataset351_nt
+  register: dataset2015_nt
 
 - name: Create dataset directory
   file:
-    path: "{{ datasets_dir }}/dbpedia"
+    path: "{{ datasets_dir }}/dbpedia2015"
     state: directory
     mode: 0755
     owner: dataset
     group: dataset
 
 - include: download.yaml
-  when: not dataset351_nt.stat.exists
+  when: not dataset2015_nt.stat.exists
 
 - name: Download DBpedia queries
   get_url:
     url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/dbpedia.txt
     checksum: sha1:e6166484b527b941e063eac5bae527db2372c257
-    dest: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
+    dest: "{{ datasets_dir }}/dbpedia2015/dbpedia2015.txt"
     mode: 0644
     owner: dataset
     group: dataset

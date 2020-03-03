@@ -30,8 +30,8 @@ datasets:
     path: "{{ datasets_dir }}/dbpedia/dbpedia351.nt"
     queries_path: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
   - name: dbpedia2015
-    path: "{{ datasets_dir }}/dbpedia/dbpedia2015.nt"
-    queries_path: "{{ datasets_dir }}/dbpedia/dbpedia.txt"
+    path: "{{ datasets_dir }}/dbpedia2015/dbpedia_2015-10_en_wo-comments_c.nt"
+    queries_path: "{{ datasets_dir }}/dbpedia2015/dbpedia2015.txt"
 
 triplestores:
   - fuseki

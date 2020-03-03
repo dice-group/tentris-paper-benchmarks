@@ -1,0 +1,37 @@
+- name: Create the dataset directory
+  file:
+    path: "{{ datasets_dir }}/dbpedia2015"
+    state: directory
+    mode: 0755
+    owner: dataset
+    group: dataset
+
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: dbpedia2015
+  register: tempdir
+
+- name: Download DBpedia2015 dataset
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/dbpedia_2015-10_en_wo-comments_c.nt.zst
+    checksum: sha1:93ecd965b950c07fa047f2fc01bb3ed15ab01292
+    dest: "{{ tempdir.path }}/dbpedia_2015-10_en_wo-comments_c.nt.zst"
+
+- name: Install zstd
+  apt:
+    package: zstd
+
+- name: Decompress DBpedia2015 dataset
+  command:
+    argv:
+      - zstd
+      - -d
+      - "{{ tempdir.path }}/dbpedia_2015-10_en_wo-comments_c.nt.zst"
+      - -o
+      - "{{ datasets_dir }}/dbpedia2015/dbpedia_2015-10_en_wo-comments_c.nt"
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
