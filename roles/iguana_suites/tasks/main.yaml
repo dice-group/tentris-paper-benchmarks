@@ -5,13 +5,13 @@
 
 - name: Create HTTP suite directories
   file:
-    path: /opt/iguana_suites/http/{{ item[0].name }}/
+    path: /opt/iguana_suites/http/{{ item.name }}/
     state: directory
   loop: "{{ triplestores_http }}"
 
 - name: Create HTTP suite directories for tentris
   file:
-    path: /opt/iguana_suites/http/tentris-{{ item[0] }}/
+    path: /opt/iguana_suites/http/tentris-{{ item }}/
     state: directory
   loop: "{{ tentris_versions }}"
 
