@@ -15,7 +15,7 @@
 - name: Download DBpedia2015 dataset
   get_url:
     url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/dbpedia_2015-10_en_wo-comments_c.nt.zst
-    checksum: sha1:93ecd965b950c07fa047f2fc01bb3ed15ab01292
+    checksum: sha1:5acb9f9aebdaeac7e5f30803949e1c37091771df
     dest: "{{ tempdir.path }}/dbpedia_2015-10_en_wo-comments_c.nt.zst"
 
 - name: Install zstd

@@ -15,7 +15,7 @@
 - name: Download DBpedia351 dataset
   get_url:
     url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/DBpedia351.nt.zst
-    checksum: sha1:9a477186d119ebad44695b7ada0670eb2cba912e
+    checksum: sha1:dd66cb144ed15718d19026be3169de2460261ef0
     dest: "{{ tempdir.path }}/DBpedia351.nt.zst"
 
 - name: Install zstd
