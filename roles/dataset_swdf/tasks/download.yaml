@@ -27,15 +27,6 @@
     owner: dataset
     group: dataset
 
-- name: Download SWDF queries
-  get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/swdf.txt
-    checksum: sha1:bac9bbfdbad478c5d569a7ac11ac28e5d6f83e28
-    dest: "{{ datasets_dir }}/swdf/swdf.txt"
-    mode: 0644
-    owner: dataset
-    group: dataset
-
 - name: Delete tempdir
   file:
     path: "{{ tempdir.path }}"
