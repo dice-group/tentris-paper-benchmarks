@@ -17,8 +17,8 @@
 
 - name: Download DBpedia queries
   get_url:
-    url: 5fdbed8b1388d35bc77bc6e8cf3e8abfecc39683
-    checksum: sha1:e6166484b527b941e063eac5bae527db2372c257
+    url: https://hobbitdata.informatik.uni-leipzig.de/2020_Tentris/DBpedia_351/DBpedia_351.txt
+    checksum: sha1:5fdbed8b1388d35bc77bc6e8cf3e8abfecc39683
     dest: "{{ datasets_dir }}/dbpedia/queries.txt"
     mode: 0644
     owner: dataset
