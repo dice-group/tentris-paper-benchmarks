@@ -8,7 +8,7 @@ iguana.cc.connections = connection0
 dataset0.name = {{ item[1].name }}
 iguana.cc.datasets = dataset0
 
-sparql1 = 1,org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.CLIInputWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0,finished.,number of bindings,Key was not valid
+sparql1 = 1,org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.CLIInputWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0,finished.,SUCCESSFUL,ERROR: 
 
 task0.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
 task0x.timeLimit = {{ iguana_time_limit }}
