@@ -8,12 +8,12 @@ sudo systemctl start virtuoso@{{ item[1].name }}.service
 
 sleep 30 # Wait for server to come online
 
-time /opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/isql << EOF
+time /opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/isql << EOF 2>&1 | tee virtuoso-load-{{ item[1].name }}.log
 ld_dir ('{{ item[1].path | regex_replace('^(.*)/.*\.nt$', '\\1') }}', '*.nt', 'http://dbpedia.org');
 rdf_loader_run();
 checkpoint;
 checkpoint_interval(60);
 scheduler_interval(10);
-EOF  2>&1 | tee virtuoso-load-{{ item[1].name }}.log
+EOF
 
 sudo systemctl stop virtuoso@{{ item[1].name }}.service
