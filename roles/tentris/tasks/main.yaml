@@ -1,25 +1,5 @@
-- name: Create tentris user
-  user:
-    name: tentris
-    state: present
-    system: yes
-    create_home: no
-
-#- name: Install dependencies
-#  apt:
-#    package:
-#      - libstdc++9
-
 - name: Install tentris versions
   loop: "{{ tentris_versions }}"
   loop_control:
     loop_var: tentris_version
   include_tasks: check_install.yaml
-
-- name: Create tentris log directory
-  file:
-    path: /var/log/tentris
-    state: directory
-    mode: 0750
-    owner: tentris
-    group: tentris

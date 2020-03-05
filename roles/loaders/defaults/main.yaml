@@ -2,36 +2,46 @@ datasets:
   - name: lubm8
     path: "{{ datasets_dir }}/lubm/lubm8/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
+    max_ram: 629072
   - name: lubm80
     path: "{{ datasets_dir }}/lubm/lubm80/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
+    max_ram: 6675712
   - name: lubm800
     path: "{{ datasets_dir }}/lubm/lubm800/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
+    max_ram: 66496528
   - name: lubm8000
     path: "{{ datasets_dir }}/lubm/lubm8000/Universities.nt"
     queries_path: "{{ datasets_dir }}/lubm/queries-sparql.txt"
+    max_ram: 665141256
   - name: swdf
     path: "{{ datasets_dir }}/swdf/swdf.nt"
     queries_path: "{{ datasets_dir }}/swdf/queries.txt"
   - name: watdiv10
     path: "{{ datasets_dir }}/watdiv/watdiv10/data.nt"
     queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
+    max_ram: 448320
   - name: watdiv100
     path: "{{ datasets_dir }}/watdiv/watdiv100/data.nt"
     queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
+    max_ram: 4396440
   - name: watdiv1000
     path: "{{ datasets_dir }}/watdiv/watdiv1000/data.nt"
     queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
+    max_ram: 43721372
   - name: watdiv10000
     path: "{{ datasets_dir }}/watdiv/watdiv10000/data.nt"
     queries_path: "{{ datasets_dir }}/watdiv/queries.txt"
+    max_ram: 432727316
   - name: dbpedia351
     path: "{{ datasets_dir }}/dbpedia/dbpedia351.nt"
     queries_path: "{{ datasets_dir }}/dbpedia/queries.txt"
+    max_ram: 144570240
   - name: dbpedia2015
     path: "{{ datasets_dir }}/dbpedia2015/dbpedia_2015-10_en_wo-comments_c.nt"
     queries_path: "{{ datasets_dir }}/dbpedia2015/queries.txt"
+    max_ram: 398475132
 
 triplestores:
   - fuseki

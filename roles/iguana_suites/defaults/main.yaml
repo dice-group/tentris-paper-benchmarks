@@ -1,9 +1,14 @@
 iguana_http_connections:
   - number: 1
+    cpu_mask: 0x00000001
   - number: 4
+    cpu_mask: 0x0000000f
   - number: 8
+    cpu_mask: 0x000000ff
   - number: 16
+    cpu_mask: 0x0000ffff
   - number: 32
+    cpu_mask: 0xffffffff
 iguana_time_limit: 3600000
 iguana_query_timeout: 180000
 triplestores_http:

@@ -1,10 +1,3 @@
-- name: Create Blazegraph user
-  user:
-    name: blazegraph
-    state: present
-    system: yes
-    create_home: no
-
 - name: Create Blazegraph directory
   file:
     path: /opt/blazegraph
@@ -25,17 +18,3 @@
   template:
     src: application.properties
     dest: /opt/blazegraph/application.properties
-
-- name: Template copy Blazegraph service
-  template:
-    src: blazegraph@.service
-    dest: /etc/systemd/system/blazegraph@.service
-  notify: Reload systemd
-
-- name: Create Blazegraph database directory
-  file:
-    path: "{{ database_base_dir }}/blazegraph"
-    state: directory
-    mode: 0750
-    owner: blazegraph
-    group: blazegraph

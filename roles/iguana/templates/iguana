@@ -1,9 +1,0 @@
-# Let IGUANA start and stop system services
-# Required to be able to start and stop triplestores
-
-iguana ALL=(root) NOPASSWD: /usr/bin/systemctl
-{% for version in tentris_versions %}
-iguana ALL=(tentris) NOPASSWD: /opt/tentris/{{ version }}/tentris_terminal
-{% endfor %}
-iguana ALL=(rdf3x) NOPASSWD: /opt/rdf3x/rdf3xembedded
-iguana ALL=(triplebit) NOPASSWD: /opt/triplebit/triplebitQuery

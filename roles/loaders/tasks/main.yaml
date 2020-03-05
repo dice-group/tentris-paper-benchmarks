@@ -16,28 +16,10 @@
     group: root
   loop: "{{ triplestores | product(datasets) | list }}"
 
-- name: Template copy start scripts
-  template:
-    src: "{{ item[0] }}-start.sh"
-    dest: /opt/loaders/{{ item[0] }}-start-{{ item[1].name }}.sh
-    mode: 0755
-    owner: root
-    group: root
-  loop: "{{ triplestores | product(datasets) | list }}"
-
-- name: Template copy stop scripts
-  template:
-    src: "{{ item[0] }}-stop.sh"
-    dest: /opt/loaders/{{ item[0] }}-stop-{{ item[1].name }}.sh
-    mode: 0755
-    owner: root
-    group: root
-  loop: "{{ triplestores | product(datasets) | list }}"
-
 - name: Template copy virtuoso configurations
   template:
-    src: virtuoso.ini
-    dest: /opt/virtuoso/virtuoso-{{ item.name }}.ini
+    src: virtuoso-load.ini
+    dest: /opt/virtuoso/virtuoso-load-{{ item.name }}.ini
   loop: "{{ datasets }}"
   when: "'virtuoso' in triplestores"
 
@@ -52,24 +34,6 @@
   template:
     src: "tentris-load.sh"
     dest: /opt/loaders/tentris-{{ item[0] }}-load-{{ item[1].name }}.sh
-    mode: 0755
-    owner: root
-    group: root
-  loop: "{{ tentris_versions | product(datasets) | list }}"
-
-- name: Template copy tentris start scripts
-  template:
-    src: "tentris-start.sh"
-    dest: /opt/loaders/tentris-{{ item[0] }}-start-{{ item[1].name }}.sh
-    mode: 0755
-    owner: root
-    group: root
-  loop: "{{ tentris_versions | product(datasets) | list }}"
-
-- name: Template copy tentris stop scripts
-  template:
-    src: "tentris-stop.sh"
-    dest: /opt/loaders/tentris-{{ item[0] }}-stop-{{ item[1].name }}.sh
     mode: 0755
     owner: root
     group: root

@@ -1,4 +1,3 @@
 dependencies:
   - { role: openjdk }
   - { role: jena }
-  - { role: datasets_common }

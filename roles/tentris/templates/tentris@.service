@@ -1,7 +1,0 @@
-[Unit]
-Description=Tentris server version {{ tentris_version }} serving dataset %I
-
-[Service]
-Type=simple
-User=tentris
-ExecStart=/opt/tentris/{{ tentris_version }}/tentris_server --logstdout -f %I --logfiledir /var/log/tentris

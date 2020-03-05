@@ -1,7 +1,0 @@
-- name: Create Database Base Directory
-  file:
-    path: "{{ database_base_dir }}"
-    state: directory
-    mode: 0755
-    owner: root
-    group: root
