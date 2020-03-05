@@ -4,7 +4,7 @@ mkdir -p databases/virtuoso/{{ item[1].name }}/database
 mkdir -p databases/virtuoso/{{ item[1].name }}/vad
 mkdir -p databases/virtuoso/{{ item[1].name }}/vsp
 
-cgmemtime /opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c /opt/virtuoso/virtuoso-load-{{ item[1].name }}.ini +foreground &
+cgmemtime /opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c /opt/virtuoso/virtuoso-load-{{ item[1].name }}.ini +foreground & disown
 
 while :
 do
@@ -23,12 +23,4 @@ checkpoint;
 shutdown;
 EOF
 
-while :
-do
-    curl -s 127.0.0.1:8890
-    if [ $? -eq 1 ]
-    then
-        break
-    fi
-    sleep 1
-done
+sleep 5
