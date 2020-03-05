@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -n blazegraph.pid ]]
+if [[ ! -f blazegraph.pid ]]
 then
     echo $(date --iso-8601) - Blazegraph is not running
     exit 1

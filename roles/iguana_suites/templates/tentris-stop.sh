@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -n tentris.pid ]]
+if [[ ! -f tentris.pid ]]
 then
     echo $(date --iso-8601) - Tentris is not running
     exit 1

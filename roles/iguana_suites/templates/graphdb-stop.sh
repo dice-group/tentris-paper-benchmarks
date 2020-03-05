@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -n graphdb.pid ]]
+if [[ ! -f graphdb.pid ]]
 then
     echo $(date --iso-8601) - GraphDB is not running
     exit 1

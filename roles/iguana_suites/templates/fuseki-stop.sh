@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -n fuseki.pid ]]
+if [[ ! -f fuseki.pid ]]
 then
     echo $(date --iso-8601) - Fuseki is not running
     exit 1

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -n virtuoso.pid ]]
+if [[ ! -f virtuoso.pid ]]
 then
     echo $(date --iso-8601) - Virtuoso is not running
     exit 1
