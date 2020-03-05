@@ -1,8 +1,0 @@
-[Unit]
-Description=gStore with database %i
-
-[Service]
-Type=simple
-User=gstore
-WorkingDirectory={{ database_base_dir }}/gstore/%i
-ExecStart=/opt/gstore/bin/ghttp %i

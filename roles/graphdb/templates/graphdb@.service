@@ -1,7 +1,0 @@
-[Unit]
-Description=GraphDB with database directory %I
-
-[Service]
-Type=simple
-User=graphdb
-ExecStart=/opt/graphdb/graphdb-free-{{ graphdb_version }}/bin/graphdb -s -Dgraphdb.home={{ database_base_dir }}/graphdb/%I

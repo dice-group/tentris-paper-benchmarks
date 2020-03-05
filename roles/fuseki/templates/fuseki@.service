@@ -1,9 +1,0 @@
-[Unit]
-Description=Starts a Fuseki server with database %i
-
-[Service]
-Type=simple
-User=fuseki
-WorkingDirectory={{ database_base_dir }}/fuseki/%i
-ExecStart=/opt/fuseki/apache-jena-fuseki-{{ fuseki_version }}/fuseki-server --tdb2 --loc={{ database_base_dir }}/fuseki/%i /%i
-SuccessExitStatus=143

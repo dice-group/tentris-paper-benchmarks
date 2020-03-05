@@ -4,7 +4,7 @@ mkdir -p databases/virtuoso/{{ item[1].name }}/database
 mkdir -p databases/virtuoso/{{ item[1].name }}/vad
 mkdir -p databases/virtuoso/{{ item[1].name }}/vsp
 
-cgmemtime /opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c /opt/virtuoso/virtuoso-load{{ item[1].name }}.ini +foreground &
+cgmemtime /opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c /opt/virtuoso/virtuoso-load-{{ item[1].name }}.ini +foreground &
 
 while :
 do

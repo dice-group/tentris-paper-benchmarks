@@ -1,14 +1,9 @@
 iguana_http_connections:
   - number: 1
-    cpu_mask: 0x00000001
   - number: 4
-    cpu_mask: 0x0000000f
   - number: 8
-    cpu_mask: 0x000000ff
   - number: 16
-    cpu_mask: 0x0000ffff
   - number: 32
-    cpu_mask: 0xffffffff
 iguana_time_limit: 3600000
 iguana_query_timeout: 180000
 triplestores_http:
@@ -24,12 +19,12 @@ triplestores_http:
     connection_url: http://localhost:9999/blazegraph/sparql
 triplestores_cli:
   - name: rdf3x
-    command: sudo -u rdf3x /opt/rdf3x/rdf3xembedded {{ database_base_dir }}/rdf3x/%n/db
+    command: sudo -u rdf3x /opt/rdf3x/rdf3xembedded databases/rdf3x/%n/db
     init_finished_string: RDF-3X protocol 1
     query_done_string: \\.
     error_string: error
   - name: triplebit
-    command: sudo -u triplebit /opt/triplebit/triplebitQuery {{ database_base_dir }}/triplebit/%n
+    command: sudo -u triplebit /opt/triplebit/triplebitQuery databases/triplebit/%n
     init_finished_string: load complete!
     query_done_string: QUERY SUCCEEDED
     error_string: QUERY FAILED

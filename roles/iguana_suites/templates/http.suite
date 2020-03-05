@@ -19,5 +19,5 @@ task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers,task
 
 iguana.cc.tasks = task0
 
-script.hook.pre=/opt/loaders/{{ item[0].name }}-start-{{ item[1].name }}.sh
-script.hook.post=/opt/loaders/{{ item[0].name }}-stop-{{ item[1].name }}.sh
+script.hook.pre=/opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
+script.hook.post=/opt/iguana_suites/http/{{ item[0].name }}/stop.sh

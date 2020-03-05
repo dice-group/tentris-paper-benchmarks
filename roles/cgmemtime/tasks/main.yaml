@@ -18,4 +18,6 @@
       - --setup
       - -g
       - user # The user that will execute the loading benchmarks must be in this group
+      - --perm
+      - "770"
   when: not cgmemtime_cgroup.stat.exists

@@ -1,7 +1,0 @@
-[Unit]
-Description=A Virtuoso Database server using config %i
-
-[Service]
-Type=simple
-User=virtuoso
-ExecStart=/opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c /opt/virtuoso/virtuoso-%i.ini +foreground

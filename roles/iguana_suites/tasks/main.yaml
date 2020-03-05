@@ -15,52 +15,59 @@
     state: directory
   loop: "{{ tentris_versions | product(datasets) | list }}"
 
+- name: Template copy virtuoso config
+  template:
+    src: virtuoso-run.ini
+    dest: /opt/virtuoso/virtuoso-run-{{ item[0].name }}.ini
+  loop: "{{ datasets | product(iguana_http_connections) | list }}"
+  when: "'virtuoso' in triplestores_http"
+
 - name: Template copy start scripts
   template:
-    src: "{{ item[0] }}-start.sh"
-    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2] }}-start.sh
+    src: "{{ item[0].name }}-start.sh"
+    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
     mode: 0755
     owner: root
     group: root
-  loop: "{{ triplestores | product(datasets, iguana_http_connections) | list }}"
+  loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy stop scripts
   template:
-    src: "{{ item[0] }}-stop.sh"
-    dest: /opt/loaders/{{ item[0] }}-stop-{{ item[1].name }}-{{ item[2].number }}.sh
+    src: "{{ item.name }}-stop.sh"
+    dest: /opt/iguana_suites/http/{{ item.name }}/stop.sh
     mode: 0755
     owner: root
     group: root
-  loop: "{{ triplestores | product(datasets, iguana_http_connections) | list }}"
+  loop: "{{ triplestores_http }}"
 
 - name: Template copy Iguana HTTP suites
   template:
     src: http.suite
-    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2] }}.suite
+    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}.suite
   loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy tentris start scripts
   template:
     src: tentris-start.sh
-    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2] }}-start.sh
+    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
     mode: 0755
     owner: root
     group: root
-  loop: "{{ tentris_versions | product(datasets) | list }}"
+  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy tentris stop scripts
   template:
     src: tentris-stop.sh
-    dest: /opt/loaders/tentris-{{ item[0] }}-stop-{{ item[1].name }}.sh
+    dest: /opt/iguana_suites/http/tentris-{{ item }}/stop.sh
     mode: 0755
     owner: root
     group: root
-  loop: "{{ tentris_versions | product(datasets) | list }}"
+  loop: "{{ tentris_versions }}"
 
 - name: Template copy Tentris Iguana HTTP suites
   template:
     src: tentris-http.suite
-    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2] }}.suite
+    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}.suite
   loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
 
 - name: Create CLI suite directories

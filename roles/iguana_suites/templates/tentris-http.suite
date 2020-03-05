@@ -19,5 +19,5 @@ task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers,task
 
 iguana.cc.tasks = task0
 
-script.hook.pre=/opt/loaders/tentris-{{ item[0] }}-start-{{ item[1].name }}.sh
-script.hook.post=/opt/loaders/tentris-{{ item[0] }}-stop-{{ item[1].name }}.sh
+script.hook.pre=/opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
+script.hook.post=/opt/iguana_suites/http/tentris-{{ item[0] }}/stop.sh

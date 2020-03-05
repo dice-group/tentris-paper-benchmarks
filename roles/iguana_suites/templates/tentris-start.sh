@@ -9,7 +9,7 @@ fi
 
 echo $(date --iso-8601) - Starting Tentris
 
-taskset {{ item[2].cpu_mask }} /opt/tentris/{{ item[0] }}/tentris_server -f {{ item[1].path }} & disown
+/opt/tentris/{{ item[0] }}/tentris_server -c {{ item[2].number }} -f {{ item[1].path }} & disown
 pid=$!
 
 echo $pid > tentris.pid
@@ -27,4 +27,3 @@ do
 done
 
 echo $(date --iso-8601) - Tentris started and accepting connections
-pplication.properties {{ item[1].path }}" 2>&1 | tee blazegraph-load-{{ item[1].name }}.log
