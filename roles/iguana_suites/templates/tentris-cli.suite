@@ -1,5 +1,5 @@
 connection0.name = tentris-{{ item[0] }}
-connection0.service = sudo -u tentris /opt/tentris/{{ item[0] }}/tentris_terminal -f '{{ item[1].path }}' -s --logfiledir /var/log/tentris
+connection0.service = tentris /opt/tentris/{{ item[0] }}/tentris_terminal -f '{{ item[1].path }}' -s --logfiledir /var/log/tentris
 connection0.update.service = 
 connection0.user = 
 connection0.password = 
