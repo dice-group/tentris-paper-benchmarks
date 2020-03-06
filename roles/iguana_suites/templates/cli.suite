@@ -8,7 +8,7 @@ iguana.cc.connections = connection0
 dataset0.name = {{ item[1].name }}
 iguana.cc.datasets = dataset0
 
-sparql1 = 1,org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.CLIInputWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0,{{ item[0].init_finished_string }},{{ item[0].query_done_string }},{{ item[0].error_string }}
+sparql1 = 1,org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.MultipleCLIInputWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0,{{ item[0].init_finished_string }},{{ item[0].query_done_string }},{{ item[0].error_string }}
 
 task0.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
 task0x.timeLimit = {{ iguana_time_limit }}
