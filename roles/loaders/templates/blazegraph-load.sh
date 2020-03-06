@@ -4,6 +4,6 @@ mkdir -p databases/blazegraph/{{ item[1].name }}
 dir=$(pwd)
 cd databases/blazegraph/{{ item[1].name }}
 
-cgmemtime java -cp /opt/blazegraph/blazegraph.jar -Djava.io.tmpdir=./ com.bigdata.rdf.store.DataLoader /opt/blazegraph/application.properties {{ item[1].path }} 2>&1 | tee blazegraph-load-{{ item[1].name }}.log
+cgmemtime sudo -u $USER java -Xmx512G -cp /opt/blazegraph/blazegraph.jar -Djava.io.tmpdir=./ com.bigdata.rdf.store.DataLoader /opt/blazegraph/application.properties {{ item[1].path }} 2>&1 | tee {{ target_dir }}/logs/blazegraph-load-{{ item[1].name }}.log
 
 cd $pwd

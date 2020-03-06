@@ -13,6 +13,6 @@ cd databases/gstore/{{ item[1].name }}
 
 /opt/gstore/bin/ginit
 
-cgmemtime /opt/gstore/bin/gbuild {{ item[1].name }} {{ item[1].path }} 2>&1 | tee $dir/gstore-load-{{ item[1].name }}.log
+cgmemtime sudo -u $USER /opt/gstore/bin/gbuild {{ item[1].name }} {{ item[1].path }} 2>&1 | tee {{ target_dir }}/logs/gstore-load-{{ item[1].name }}.log
 
 cd $dir
