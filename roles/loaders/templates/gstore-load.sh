@@ -13,6 +13,6 @@ cd databases/gstore/{{ item[1].name }}
 
 {{ target_dir }}/triplestores/gstore/bin/ginit
 
-cgmemtime  {{ target_dir }}/triplestores/gstore/bin/gbuild {{ item[1].name }} {{ item[1].path }} 2>&1 | tee {{ ansible_user_dir }}/logs/gstore-load-{{ item[1].name }}.log
+cgmemtime  {{ target_dir }}/triplestores/gstore/bin/gbuild {{ item[1].name }} {{ item[1].path }} 2>&1 | tee {{ target_dir }}/logs/gstore-load-{{ item[1].name }}.log
 
 cd $dir
