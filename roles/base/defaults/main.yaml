@@ -1,0 +1,1 @@
+target_dir: "{{ ansible_user_dir }}/triplestore-benchmark"

@@ -9,7 +9,7 @@ fi
 
 echo $(date --iso-8601) - Starting Tentris
 
-/opt/tentris/{{ item[0] }}/tentris_server -c {{ item[2].number }} -f {{ item[1].path }} & disown
+{{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_server -c {{ item[2].number }} -f {{ item[1].path }} & disown
 pid=$!
 
 echo $pid > tentris.pid

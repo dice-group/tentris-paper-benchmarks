@@ -1,40 +1,35 @@
 - name: Install curl (to talk to http endpoints)
+  become: yes
   apt:
     package: curl
 
 - name: Create loader directory
   file:
-    path: /opt/loaders
+    path: "{{ target_dir }}/loaders"
     state: directory
 
 - name: Template copy loader scripts
   template:
     src: "{{ item[0] }}-load.sh"
-    dest: /opt/loaders/{{ item[0] }}-load-{{ item[1].name }}.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/loaders/{{ item[0] }}-load-{{ item[1].name }}.sh"
   loop: "{{ triplestores | product(datasets) | list }}"
 
 - name: Template copy virtuoso configurations
   template:
     src: virtuoso-load.ini
-    dest: /opt/virtuoso/virtuoso-load-{{ item.name }}.ini
+    dest: "{{ target_dir }}/triplestores/virtuoso/virtuoso-load-{{ item.name }}.ini"
   loop: "{{ datasets }}"
   when: "'virtuoso' in triplestores"
 
 - name: Template copy GraphDB configurations
   template:
     src: graphdb.ttl
-    dest: /opt/graphdb/graphdb-{{ item.name }}.ttl
+    dest: "{{ target_dir }}/triplestores/graphdb/graphdb-{{ item.name }}.ttl"
   loop: "{{ datasets }}"
   when: "'graphdb' in triplestores"
 
 - name: Template copy tentris loader scripts
   template:
     src: "tentris-load.sh"
-    dest: /opt/loaders/tentris-{{ item[0] }}-load-{{ item[1].name }}.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/loaders/tentris-{{ item[0] }}-load-{{ item[1].name }}.sh"
   loop: "{{ tentris_versions | product(datasets) | list }}"

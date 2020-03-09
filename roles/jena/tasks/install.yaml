@@ -1,6 +1,6 @@
 - name: Ensure Jena Directory is present
   file:
-    path: /opt/jena
+    path: "{{ target_dir }}/triplestores/jena"
     state: directory
 
 - name: Create a tempory download directory
@@ -29,7 +29,7 @@
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/apache-jena-{{ jena_version }}.tar.gz"
-    dest: /opt/jena/
+    dest: "{{ target_dir }}/triplestores/jena/"
 
 - name: Delete tempdir
   file:

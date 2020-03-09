@@ -1,5 +1,5 @@
 connection0.name = tentris-{{ item[0] }}
-connection0.service = tentris /opt/tentris/{{ item[0] }}/tentris_terminal -f '{{ item[1].path }}' -s --logfiledir /var/log/tentris -t 178
+connection0.service = {{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_terminal -f '{{ item[1].path }}' -s -t 178
 connection0.update.service = 
 connection0.user = 
 connection0.password = 
@@ -8,15 +8,20 @@ iguana.cc.connections = connection0
 dataset0.name = {{ item[1].name }}
 iguana.cc.datasets = dataset0
 
-sparql1 = 1,org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.CLIInputWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0,finished.,SUCCESSFUL,ERROR: 
+sparql1.numberOfWorkers: 1
+sparql1.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.CLIInputWorker
+sparql1.timeout: {{ iguana_query_timeout }}
+sparql1.queryFile: {{ item[1].queries_path }}
+sparql1.fixedLatency: 0
+sparql1.gaussianLatency: 0
+sparql1.initFinished: finished.
+sparql1.queryFinished: SUCCESSFUL
+sparql1.queryError: ERROR:
 
 task0.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
 task0x.timeLimit = {{ iguana_time_limit }}
 task0x.queryHandler = org.aksw.iguana.tp.query.impl.InstancesQueryHandler
 task0x.workers = sparql1
-task0x.warmupTime = 0
-task0x.warmupQueries = {{ item[1].queries_path }}
-task0x.warmupUpdates = 
-task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers,task0x.warmupTime,task0x.warmupQueries,task0x.warmupUpdates
+task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers
 
 iguana.cc.tasks = task0

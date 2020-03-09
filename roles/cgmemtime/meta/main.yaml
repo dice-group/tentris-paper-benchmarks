@@ -1,2 +1,2 @@
 dependencies:
-- role: build_common
+  - role: build_common

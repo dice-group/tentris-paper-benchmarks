@@ -30,26 +30,26 @@
 
 - name: Ensure gStore Directory is present
   file:
-    path: /opt/gstore
+    path: "{{ target_dir }}/triplestores/gstore"
     state: directory
 
 - name: Copy gStore binaries
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/gStore-master/bin"
-    dest: /opt/gstore
+    dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore data
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/gStore-master/data"
-    dest: /opt/gstore
+    dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore server files
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/gStore-master/Server"
-    dest: /opt/gstore
+    dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Delete tempdir
   file:

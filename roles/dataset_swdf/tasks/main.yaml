@@ -1,16 +1,13 @@
 - name: Check for the SWDF dataset
   stat:
-    path: "{{ datasets_dir }}/swdf"
+    path: "{{ target_dir }}/datasets/swdf"
   register: dataset_dir
 
 - include: download.yaml
-  when: dataset_dir.stat.exists == false
+  when: not dataset_dir.stat.exists
 
 - name: Download SWDF queries
   get_url:
     url: https://hobbitdata.informatik.uni-leipzig.de/2020_Tentris/SWDF/swdf.txt
     checksum: sha1:37114a91eb94dd8ad99078a05a6dfe3a8dd9b917
-    dest: "{{ datasets_dir }}/swdf/queries.txt"
-    mode: 0644
-    owner: dataset
-    group: dataset
+    dest: "{{ target_dir }}/datasets/swdf/queries.txt"

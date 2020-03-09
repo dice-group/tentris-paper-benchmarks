@@ -22,6 +22,7 @@
       - make
 
 - name: Copy cgmemtime binary
+  become: yes
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/cgmemtime-master/cgmemtime"

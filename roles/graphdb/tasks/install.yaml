@@ -1,6 +1,6 @@
 - name: Ensure GraphDB Directory is present
   file:
-    path: /opt/graphdb
+    path: "{{ target_dir }}/triplestores/graphdb"
     state: directory
 
 - name: Create a tempory download directory
@@ -19,7 +19,7 @@
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/graphdb-free-{{ graphdb_version }}-dist.zip"
-    dest: /opt/graphdb/
+    dest: "{{ target_dir }}/triplestores/graphdb/"
 
 - name: Delete tempdir
   file:

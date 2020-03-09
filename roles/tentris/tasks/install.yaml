@@ -17,26 +17,20 @@
 
 - name: Create installation directory
   file:
-    path: /opt/tentris/{{ tentris_version }}
+    path: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}"
     state: directory
 
 - name: Install tentris_terminal
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/tentris_terminal"
-    dest: /opt/tentris/{{ tentris_version }}/tentris_terminal
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_terminal"
 
 - name: Install tentris_server
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/tentris_server"
-    dest: /opt/tentris/{{ tentris_version }}/tentris_server
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_server"
 
 - name: Delete tempdir
   file:

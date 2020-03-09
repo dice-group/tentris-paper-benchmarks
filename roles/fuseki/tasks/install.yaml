@@ -1,6 +1,6 @@
 - name: Ensure Fuseki Directory is present
   file:
-    path: /opt/fuseki
+    path: "{{ target_dir }}/triplestores/fuseki"
     state: directory
 
 - name: Create a tempory download directory
@@ -29,7 +29,7 @@
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/apache-jena-fuseki-{{ fuseki_version }}.tar.gz"
-    dest: /opt/fuseki/
+    dest: "{{ target_dir }}/triplestores/fuseki"
 
 - name: Delete tempdir
   file:

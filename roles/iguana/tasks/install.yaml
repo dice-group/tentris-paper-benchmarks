@@ -1,6 +1,6 @@
 - name: Create Iguana Directory
   file:
-    path: /opt/iguana-{{ iguana_version }}
+    path: "{{ target_dir }}/iguana-{{ iguana_version }}"
     state: directory
 
 - name: Create a tempory download directory
@@ -33,7 +33,7 @@
   copy:
     src: "{{ tempdir.path }}/IGUANA-{{ iguana_version }}/iguana.corecontroller/target/iguana.corecontroller-2.1.2.jar"
     remote_src: yes
-    dest: /opt/iguana-{{ iguana_version }}/corecontroller.jar
+    dest: "{{ target_dir }}/iguana-{{ iguana_version }}/corecontroller.jar"
 
 - name: Delete tempdir
   file:

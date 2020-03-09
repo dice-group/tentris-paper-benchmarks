@@ -1,3 +1,4 @@
 dependencies:
-  - {role: iguana}
-  - {role: loaders}
+  - role: base
+  - role: iguana
+  - role: loaders

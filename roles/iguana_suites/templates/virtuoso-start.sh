@@ -9,7 +9,7 @@ fi
 
 echo $(date --iso-8601) - Starting Virtuoso
 
-/opt/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c /opt/virtuoso/virtuoso-run-{{ item[1].name }}.ini +foreground & disown
+{{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c {{ target_dir }}/triplestores/virtuoso/virtuoso-run-{{ item[1].name }}.ini +foreground & disown
 pid=$!
 
 echo $pid > virtuoso.pid

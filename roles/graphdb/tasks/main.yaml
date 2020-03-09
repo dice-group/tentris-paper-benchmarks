@@ -1,7 +1,7 @@
 - name: Check for GraphDB
   stat:
-    path: /opt/graphdb/graphdb-free-{{ graphdb_version }}/
+    path: "{{ target_dir }}/triplestores/graphdb/graphdb-free-{{ graphdb_version }}/"
   register: graphdb_dir
 
 - include: install.yaml
-  when: graphdb_dir.stat.exists == false
+  when: not graphdb_dir.stat.exists

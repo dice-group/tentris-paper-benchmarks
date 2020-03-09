@@ -1,10 +1,7 @@
 - name: Create the generator directory
   file:
-    path: "{{ datasets_dir }}/lubm/generator"
+    path: "{{ target_dir }}/datasets/lubm/generator"
     state: directory
-    mode: 0755
-    owner: dataset
-    group: dataset
 
 - name: Create temporary directory
   tempfile:
@@ -34,10 +31,7 @@
   copy:
     src: "{{ tempdir.path }}/lubm-uba-improved/target/lubm-uba.jar"
     remote_src: yes
-    dest: "{{ datasets_dir }}/lubm/generator/lubm-uba.jar"
-    mode: 0644
-    owner: dataset
-    group: dataset
+    dest: "{{ target_dir }}/datasets/lubm/generator/lubm-uba.jar"
 
 - name: Delete tempdir
   file:

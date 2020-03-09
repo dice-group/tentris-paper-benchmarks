@@ -1,10 +1,7 @@
 - name: Create the dataset directory
   file:
-    path: "{{ datasets_dir }}/swdf"
+    path: "{{ target_dir }}/datasets/swdf"
     state: directory
-    mode: 0755
-    owner: dataset
-    group: dataset
 
 - name: Create a tempory download directory
   tempfile:
@@ -22,10 +19,7 @@
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/swdf.zip"
-    dest: "{{ datasets_dir }}/swdf/"
-    mode: 0644
-    owner: dataset
-    group: dataset
+    dest: "{{ target_dir }}/datasets/swdf/"
 
 - name: Delete tempdir
   file:

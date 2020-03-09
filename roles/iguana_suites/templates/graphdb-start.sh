@@ -9,7 +9,7 @@ fi
 
 echo $(date --iso-8601) - Starting GraphDB
 
-/opt/graphdb/graphdb-free-{{ graphdb_version }}/bin/graphdb -X mx{{ item[1].max_ram }}K -X X:ActiveProcessorCount={{ item[2].number }} -p graphdb.pid -s -Dgraphdb.home=$(pwd)/databases/graphdb/{{ item[1].name }}
+{{ target_dir }}/triplestores/graphdb/graphdb-free-{{ graphdb_version }}/bin/graphdb -X mx{{ item[1].max_ram }}K -X X:ActiveProcessorCount={{ item[2].number }} -p graphdb.pid -s -Dgraphdb.home=$(pwd)/databases/graphdb/{{ item[1].name }}
 
 echo $(date --iso-8601) - Waiting for GraphDB to become available
 

@@ -1,7 +1,7 @@
 - name: Check for gStore
   stat:
-    path: /opt/gstore/
+    path: "{{ target_dir }}/triplestores/gstore/"
   register: gstore_dir
 
 - include: install.yaml
-  when: gstore_dir.stat.exists == false
+  when: not gstore_dir.stat.exists

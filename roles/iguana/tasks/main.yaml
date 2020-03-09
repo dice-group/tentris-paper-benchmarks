@@ -1,15 +1,12 @@
 - name: Check for Iguana
   stat:
-    path: /opt/iguana-{{ iguana_version }}
+    path: "{{ target_dir }}/iguana-{{ iguana_version }}"
   register: iguana_dir
 
 - include: install.yaml
-  when: iguana_dir.stat.exists == false
+  when: not iguana_dir.stat.exists
 
 - name: Template copy iguana run script
   template:
     src: iguana-run.sh
-    dest: /usr/local/bin/iguana-run.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/iguana-run.sh"

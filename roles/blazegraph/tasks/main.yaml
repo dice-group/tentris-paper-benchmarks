@@ -1,20 +1,20 @@
 - name: Create Blazegraph directory
   file:
-    path: /opt/blazegraph
+    path: "{{ target_dir }}/triplestores/blazegraph"
     state: directory
 
 - name: Check for Blazegraph
   stat:
-    path: /opt/blazegraph/blazegraph.jar
+    path: "{{ target_dir }}/triplestores/blazegraph/blazegraph.jar"
   register: blazegraph
 
 - name: Download Blazegraph JAR
   get_url:
     url: https://github.com/blazegraph/database/releases/download/BLAZEGRAPH_2_1_6_RC/blazegraph.jar
-    dest: /opt/blazegraph/blazegraph.jar
-  when: blazegraph.stat.exists == false
+    dest: "{{ target_dir }}/triplestores/blazegraph/blazegraph.jar"
+  when: not blazegraph.stat.exists
 
 - name: Template copy application properties
   template:
     src: application.properties
-    dest: /opt/blazegraph/application.properties
+    dest: "{{ target_dir }}/triplestores/blazegraph/application.properties"

@@ -1,11 +1,11 @@
 - name: Ensure Virtuoso directory is present
   file:
-    path: /opt/virtuoso
+    path: "{{ target_dir }}/triplestores/virtuoso"
     state: directory
 
 - name: Ensure Virtuoso version directory is present
   file:
-    path: /opt/virtuoso/{{ virtuoso_version }}
+    path: "{{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}"
     state: directory
 
 - name: Create temporary directory
@@ -23,7 +23,7 @@
   unarchive:
     remote_src: yes
     src: "{{ tempdir.path }}/virtuoso-{{ virtuoso_version }}.tar.gz"
-    dest: /opt/virtuoso/{{ virtuoso_version }}
+    dest: "{{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}"
 
 - name: Delete tempdir
   file:

@@ -1,11 +1,3 @@
-- name: Create the dataset directory
-  file:
-    path: "{{ datasets_dir }}/dbpedia"
-    state: directory
-    mode: 0755
-    owner: dataset
-    group: dataset
-
 - name: Create a tempory download directory
   tempfile:
     state: directory
@@ -19,6 +11,7 @@
     dest: "{{ tempdir.path }}/DBpedia351.nt.zst"
 
 - name: Install zstd
+  become: yes
   apt:
     package: zstd
 
@@ -29,7 +22,7 @@
       - -d
       - "{{ tempdir.path }}/DBpedia351.nt.zst"
       - -o
-      - "{{ datasets_dir }}/dbpedia/dbpedia351.nt"
+      - "{{ target_dir }}/datasets/dbpedia351/dbpedia351.nt"
 
 - name: Delete tempdir
   file:

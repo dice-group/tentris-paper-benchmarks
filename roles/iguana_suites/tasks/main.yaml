@@ -1,96 +1,83 @@
 - name: Create Iguana suite directory
   file:
-    path: /opt/iguana_suites/
+    path: "{{ target_dir }}/iguana_suites/"
     state: directory
 
 - name: Create HTTP suite directories
   file:
-    path: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}
+    path: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}"
     state: directory
   loop: "{{ triplestores_http | product(datasets) | list }}"
 
 - name: Create HTTP suite directories for tentris
   file:
-    path: /opt/iguana_suites/http/tentris-{{ item }}/{{ item[1].name }}
+    path: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}"
     state: directory
   loop: "{{ tentris_versions | product(datasets) | list }}"
 
 - name: Template copy virtuoso config
   template:
     src: virtuoso-run.ini
-    dest: /opt/virtuoso/virtuoso-run-{{ item[0].name }}.ini
+    dest: "{{ target_dir }}/triplestores/virtuoso/virtuoso-run-{{ item[0].name }}.ini"
   loop: "{{ datasets | product(iguana_http_connections) | list }}"
   when: "'virtuoso' in triplestores_http"
 
 - name: Template copy start scripts
   template:
     src: "{{ item[0].name }}-start.sh"
-    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh"
   loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy stop scripts
   template:
     src: "{{ item.name }}-stop.sh"
-    dest: /opt/iguana_suites/http/{{ item.name }}/stop.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/iguana_suites/http/{{ item.name }}/stop.sh"
   loop: "{{ triplestores_http }}"
 
 - name: Template copy Iguana HTTP suites
   template:
     src: http.suite
-    dest: /opt/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}.suite
+    dest: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}.suite"
   loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy tentris start scripts
   template:
     src: tentris-start.sh
-    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh"
   loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy tentris stop scripts
   template:
     src: tentris-stop.sh
-    dest: /opt/iguana_suites/http/tentris-{{ item }}/stop.sh
-    mode: 0755
-    owner: root
-    group: root
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item }}/stop.sh"
   loop: "{{ tentris_versions }}"
 
 - name: Template copy Tentris Iguana HTTP suites
   template:
     src: tentris-http.suite
-    dest: /opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}.suite
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}.suite"
   loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
 
 - name: Create CLI suite directories
   file:
-    path: /opt/iguana_suites/cli/{{ item.name }}
+    path: "{{ target_dir }}/iguana_suites/cli/{{ item.name }}"
     state: directory
   loop: "{{ triplestores_cli }}"
 
 - name: Create CLI suite directories for tentris
   file:
-    path: /opt/iguana_suites/cli/tentris-{{ item }}
+    path: "{{ target_dir }}/iguana_suites/cli/tentris-{{ item }}"
     state: directory
   loop: "{{ tentris_versions }}"
 
 - name: Template copy Iguana CLI suites
   template:
     src: cli.suite
-    dest: /opt/iguana_suites/cli/{{ item[0].name }}/{{ item[1].name }}.suite
+    dest: "{{ target_dir }}/iguana_suites/cli/{{ item[0].name }}/{{ item[1].name }}.suite"
   loop: "{{ triplestores_cli | product(datasets) | list }}"
 
 - name: Template copy Tentris Iguana CLI suites
   template:
     src: tentris-cli.suite
-    dest: /opt/iguana_suites/cli/tentris-{{ item[0] }}/{{ item[1].name }}.suite
+    dest: "{{ target_dir }}/iguana_suites/cli/tentris-{{ item[0] }}/{{ item[1].name }}.suite"
   loop: "{{ tentris_versions | product(datasets) | list }}"
-  

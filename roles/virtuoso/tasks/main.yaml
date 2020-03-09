@@ -1,6 +1,6 @@
 - name: Check for Virtuoso
   stat:
-    path: /opt/virtuoso/{{ virtuoso_version }}/
+    path: "{{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/"
   register: virtuoso_dir
 
 - include: install.yaml

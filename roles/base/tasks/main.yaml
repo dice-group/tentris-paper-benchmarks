@@ -1,0 +1,41 @@
+- name: Create target dir
+  file:
+    path: "{{ target_dir }}"
+    state: directory
+
+- name: Create triplestores dir
+  file:
+    path: "{{ target_dir }}/triplestores"
+    state: directory
+
+- name: Create datasets dir
+  file:
+    path: "{{ target_dir }}/datasets"
+    state: directory
+
+- name: Create iguana dir
+  file:
+    path: "{{ target_dir }}/iguana"
+    state: directory
+
+- name: Create iguana_suites dir
+  file:
+    path: "{{ target_dir }}/iguana_suites"
+    state: directory
+
+- name: Create loaders dir
+  file:
+    path: "{{ target_dir }}/loaders"
+    state: directory
+
+- name: Create databases dir
+  file:
+    path: "{{ target_dir }}/databases"
+    state: directory
+
+- name: Install archive packages
+  become: yes
+  apt:
+    package:
+      - zstd
+      - unzip

@@ -12,12 +12,13 @@
   when: not cgmemtime_bin.stat.exists
 
 - name: Setup cgroup
+  become: yes
   command:
     argv:
       - /usr/local/bin/cgmemtime
       - --setup
       - -g
-      - user # The user that will execute the loading benchmarks must be in this group
+      - "{{ cgmemtime_group }}"
       - --perm
       - "770"
   when: not cgmemtime_cgroup.stat.exists

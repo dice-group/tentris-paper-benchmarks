@@ -1,3 +1,0 @@
-dependencies:
-  - { role: datasets_common }
-  - { role: jena }

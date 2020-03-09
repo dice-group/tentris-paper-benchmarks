@@ -8,16 +8,21 @@ iguana.cc.connections = connection0
 dataset0.name = {{ item[1].name }}
 iguana.cc.datasets = dataset0
 
-task{{ item[2].number }}.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
-sparql{{ item[2].number }} = {{ item[2].number }},org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker,{{ iguana_query_timeout }},{{ item[1].queries_path }},0,0
+sparql{{ item[2].number }}.numberOfWorkers: {{ item[2].number }}
+sparql{{ item[2].number }}.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker
+sparql{{ item[2].number }}.timeout: {{ iguana_query_timeout }}
+sparql{{ item[2].number }}.queryFile: {{ item[1].queries_path }}
+sparql{{ item[2].number }}.fixedLatency: 0
+sparql{{ item[2].number }}.gaussianLatency: 0
+
+
+task0.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
 task0x.timeLimit = {{ iguana_time_limit }}
 task0x.queryHandler = org.aksw.iguana.tp.query.impl.InstancesQueryHandler
 task0x.workers = sparql{{ item[2].number }}
-task0x.warmupTime = 0
-task0x.warmupQueries = {{ item[1].queries_path }}
-task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers,task0x.warmupTime,task0x.warmupQueries,task0x.warmupUpdates
+task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers
 
 iguana.cc.tasks = task0
 
-script.hook.pre=/opt/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
-script.hook.post=/opt/iguana_suites/http/tentris-{{ item[0] }}/stop.sh
+script.hook.pre={{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
+script.hook.post={{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/stop.sh

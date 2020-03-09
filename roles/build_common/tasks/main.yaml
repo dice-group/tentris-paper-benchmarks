@@ -1,27 +1,33 @@
 - name: Install make & cmake
+  become: yes
   apt:
     package:
       - make
       - cmake
 
 - name: Install C++ Compiler
+  become: yes
   apt:
     package:
       - gcc
       - g++
 
 - name: Install git
+  become: yes
   apt:
     package: git
 
 - name: Install boost
+  become: yes
   apt:
     package: libboost-all-dev
 
 - name: Install readline
+  become: yes
   apt:
     package: libreadline-dev
 
 - name: Install libcurl
+  become: yes
   apt:
     package: libcurl4-openssl-dev
