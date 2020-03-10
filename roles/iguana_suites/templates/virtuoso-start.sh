@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -f virtuoso.pid ]]
+if [[ -f {{ target_dir }}/virtuoso.pid ]]
 then
     echo $(date --iso-8601) - Virtuoso seems to be already running
     echo If it is not running remove virtuoso.pid
@@ -9,10 +9,7 @@ fi
 
 echo $(date --iso-8601) - Starting Virtuoso
 
-{{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c {{ target_dir }}/triplestores/virtuoso/virtuoso-run-{{ item[1].name }}.ini +foreground & disown
-pid=$!
-
-echo $pid > virtuoso.pid
+{{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c {{ target_dir }}/triplestores/virtuoso/virtuoso-run-{{ item[1].name }}-{{ item[2].number }}.ini
 
 echo $(date --iso-8601) - Waiting for Virtuoso to become available
 
@@ -27,3 +24,5 @@ do
 done
 
 echo $(date --iso-8601) - Virtuoso started and accepting connections
+
+exit 0

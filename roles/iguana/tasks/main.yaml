@@ -10,3 +10,4 @@
   template:
     src: iguana-run.sh
     dest: "{{ target_dir }}/iguana-run.sh"
+    mode: 0755

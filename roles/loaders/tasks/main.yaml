@@ -12,6 +12,7 @@
   template:
     src: "{{ item[0] }}-load.sh"
     dest: "{{ target_dir }}/loaders/{{ item[0] }}-load-{{ item[1].name }}.sh"
+    mode: 0755
   loop: "{{ triplestores | product(datasets) | list }}"
 
 - name: Template copy virtuoso configurations
@@ -32,4 +33,5 @@
   template:
     src: "tentris-load.sh"
     dest: "{{ target_dir }}/loaders/tentris-{{ item[0] }}-load-{{ item[1].name }}.sh"
+    mode: 0755
   loop: "{{ tentris_versions | product(datasets) | list }}"

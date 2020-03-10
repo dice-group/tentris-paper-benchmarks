@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -f graphdb.pid ]]
+if [[ -f {{ target_dir }}/graphdb.pid ]]
 then
     echo $(date --iso-8601) - GraphDB seems to be already running
     echo If it is not running remove graphdb.pid
@@ -9,7 +9,9 @@ fi
 
 echo $(date --iso-8601) - Starting GraphDB
 
-{{ target_dir }}/triplestores/graphdb/graphdb-free-{{ graphdb_version }}/bin/graphdb -X mx{{ item[1].max_ram }}K -X X:ActiveProcessorCount={{ item[2].number }} -p graphdb.pid -s -Dgraphdb.home=$(pwd)/databases/graphdb/{{ item[1].name }}
+export GDB_HEAP_SIZE={{ item[1].max_ram }}K
+
+{{ target_dir }}/triplestores/graphdb/graphdb-free-{{ graphdb_version }}/bin/graphdb -XX:ActiveProcessorCount={{ item[2].number }} -d -p {{ target_dir }}/graphdb.pid -s -Dgraphdb.home={{ target_dir }}/databases/graphdb/{{ item[1].name }}
 
 echo $(date --iso-8601) - Waiting for GraphDB to become available
 
@@ -22,5 +24,7 @@ do
     fi
     sleep 2
 done
+
+sleep 10
 
 echo $(date --iso-8601) - GraphDB started and accepting connections

@@ -18,7 +18,7 @@ datasets:
   - name: swdf
     path: "{{ target_dir }}/datasets/swdf/swdf.nt"
     queries_path: "{{ target_dir }}/datasets/swdf/queries.txt"
-    max_ram: 226920
+    max_ram: 400000
   - name: watdiv10
     path: "{{ target_dir }}/datasets/watdiv/watdiv10/data.nt"
     queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"

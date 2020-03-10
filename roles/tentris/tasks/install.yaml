@@ -25,12 +25,14 @@
     remote_src: yes
     src: "{{ tempdir.path }}/tentris_terminal"
     dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_terminal"
+    mode: 0755
 
 - name: Install tentris_server
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/tentris_server"
     dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_server"
+    mode: 0755
 
 - name: Delete tempdir
   file:

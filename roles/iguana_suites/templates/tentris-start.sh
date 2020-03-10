@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [[ -f tentris.pid ]]
+if [[ -f {{ target_dir }}/tentris.pid ]]
 then
     echo $(date --iso-8601) - Tentris seems to be already running
     echo If it is not running remove tentris.pid
@@ -9,10 +9,10 @@ fi
 
 echo $(date --iso-8601) - Starting Tentris
 
-{{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_server -c {{ item[2].number }} -f {{ item[1].path }} & disown
+{{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_server -c {{ item[2].number }} -f {{ item[1].path }} --logfile false --logstdout </dev/null 2>&1 >{{ target_dir }}/logs/run/tentris-{{ item[0] }}-{{ item[1].name }}-{{ item[2].number }}.log & disown
 pid=$!
 
-echo $pid > tentris.pid
+echo $pid > {{ target_dir }}/tentris.pid
 
 echo $(date --iso-8601) - Waiting for Tentris to become available
 

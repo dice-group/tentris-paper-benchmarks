@@ -1,8 +1,8 @@
 #! /bin/bash
 
-mkdir -p databases/virtuoso/{{ item[1].name }}/database
-mkdir -p databases/virtuoso/{{ item[1].name }}/vad
-mkdir -p databases/virtuoso/{{ item[1].name }}/vsp
+mkdir -p {{ target_dir }}/databases/virtuoso/{{ item[1].name }}/database
+mkdir -p {{ target_dir }}/databases/virtuoso/{{ item[1].name }}/vad
+mkdir -p {{ target_dir }}/databases/virtuoso/{{ item[1].name }}/vsp
 
 cgmemtime  {{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/virtuoso-t -c {{ target_dir }}/triplestores/virtuoso/virtuoso-load-{{ item[1].name }}.ini +foreground &
 
@@ -16,7 +16,7 @@ do
     sleep 1
 done
 
-time {{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/isql << EOF 2>&1 | tee {{ target_dir }}/logs/virtuoso-load-{{ item[1].name }}.log
+time {{ target_dir }}/triplestores/virtuoso/{{ virtuoso_version }}/virtuoso-opensource/bin/isql << EOF 2>&1 | tee {{ target_dir }}/logs/load/virtuoso-{{ item[1].name }}.log
 ld_dir ('{{ item[1].path | regex_replace('^(.*)/.*\.nt$', '\\1') }}', '*.nt', 'http://example.com');
 rdf_loader_run();
 checkpoint;

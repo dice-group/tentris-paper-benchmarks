@@ -15,5 +15,5 @@
 
 - name: Download the query file
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/queries/watdiv.txt
+    url: https://hobbitdata.informatik.uni-leipzig.de/2020_Tentris/WatDiv/watdiv.txt
     dest: "{{ target_dir }}/datasets/watdiv/queries.txt"

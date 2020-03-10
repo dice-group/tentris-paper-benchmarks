@@ -1,9 +1,9 @@
 #! /bin/bash
 
-mkdir -p databases/triplebit/{{ item[1].name }}
+mkdir -p {{ target_dir }}/databases/triplebit/{{ item[1].name }}
 dir=$(pwd)
-cd databases/triplebit/{{ item[1].name }}
+cd {{ target_dir }}/databases/triplebit/{{ item[1].name }}
 
-cgmemtime {{ target_dir }}/triplestores/triplebit/buildTripleBitFromN3 {{ item[1].path }} {{ target_dir }}/databases/triplebit/{{ item[1].name }} 2>&1 | tee {{ target_dir }}/logs/triplebit-load-{{ item[1].name }}.log
+cgmemtime {{ target_dir }}/triplestores/triplebit/buildTripleBitFromN3 {{ item[1].path }} {{ target_dir }}/databases/triplebit/{{ item[1].name }} 2>&1 | tee {{ target_dir }}/logs/load/triplebit-{{ item[1].name }}.log
 
 cd $dir

@@ -33,9 +33,29 @@
     path: "{{ target_dir }}/databases"
     state: directory
 
+- name: Create logs dir
+  file:
+    path: "{{ target_dir }}/logs"
+    state: directory
+
+- name: Create load logs dir
+  file:
+    path: "{{ target_dir }}/logs/load"
+    state: directory
+
+- name: Create run logs dir
+  file:
+    path: "{{ target_dir }}/logs/run"
+    state: directory
+
 - name: Install archive packages
   become: yes
   apt:
     package:
       - zstd
       - unzip
+
+- name: Install psmisc
+  become: yes
+  apt:
+    package: psmisc

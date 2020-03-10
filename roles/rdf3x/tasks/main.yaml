@@ -8,6 +8,7 @@
     url: https://github.com/dice-group/rdf-3x/releases/download/0.3.8/{{ item.name }}
     dest: "{{ target_dir }}/triplestores/rdf3x/{{ item.name }}"
     checksum: "{{ item.checksum }}"
+    mode: 0755
   loop:
     - name: rdf3xdump
       checksum: sha1:ce230bd32c7f988aca83bfcb194d15b0e103a905
