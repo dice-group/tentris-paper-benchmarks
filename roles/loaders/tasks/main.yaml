@@ -15,6 +15,13 @@
     mode: 0755
   loop: "{{ triplestores | product(datasets) | list }}"
 
+- name: Template copy GraphDB Preloader scripts
+  template:
+    src: "graphdb-preload.sh"
+    dest: "{{ target_dir }}/loaders/graphdb-preload-{{ item.name }}.sh"
+    mode: 0755
+  loop: "{{ datasets }}"
+
 - name: Template copy virtuoso configurations
   template:
     src: virtuoso-load.ini
