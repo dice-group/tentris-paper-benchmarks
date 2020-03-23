@@ -1,0 +1,18 @@
+#  name of the triple store
+triplestore: {{ item[0].name }}
+# command to start the interactive terminal
+command: {{ item[0].command | replace('%p', item[1].path) | replace('%n', item[1].name) }}
+# line start that indicates that the triple store is ready to receive queries
+initFinished: {{ item[0].init_finished_string }}
+# line start that indicates a success
+queryFinished: {{ item[0].query_done_string }}
+# line starts that indicate a failure
+queryError: {{ item[0].error_string }}
+# name of the dataset
+dataset: {{ item[1].name }}
+# a file that contains a query in each line
+queryFile: {{ item[1].queries_path }}
+# maximum duration a query may be processed (ms)
+timeout: {{ iguana_query_timeout }}
+# total time the benchmark will be executed (ms)
+timelimit: {{ iguana_time_limit }}

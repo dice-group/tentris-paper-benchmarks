@@ -11,3 +11,9 @@
     src: iguana-run.sh
     dest: "{{ target_dir }}/iguana-run.sh"
     mode: 0755
+
+- name: Template copy CLI iguana run script
+  template:
+    src: iguana_cli-run.sh
+    dest: "{{ target_dir }}/iguana_cli-run.sh"
+    mode: 0755

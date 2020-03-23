@@ -79,14 +79,20 @@
     state: directory
   loop: "{{ tentris_versions }}"
 
-- name: Template copy Iguana CLI suites
+#- name: Template copy Iguana CLI suites
+#  template:
+#    src: cli.suite
+#    dest: "{{ target_dir }}/iguana_suites/cli/{{ item[0].name }}/{{ item[1].name }}.suite"
+#  loop: "{{ triplestores_cli | product(datasets) | list }}"
+
+- name: Template copy CLI Iguana CLI suites
   template:
-    src: cli.suite
-    dest: "{{ target_dir }}/iguana_suites/cli/{{ item[0].name }}/{{ item[1].name }}.suite"
+    src: cli.yaml
+    dest: "{{ target_dir }}/iguana_suites/cli/{{ item[0].name }}/{{ item[1].name }}.yaml"
   loop: "{{ triplestores_cli | product(datasets) | list }}"
 
 - name: Template copy Tentris Iguana CLI suites
   template:
-    src: tentris-cli.suite
-    dest: "{{ target_dir }}/iguana_suites/cli/tentris-{{ item[0] }}/{{ item[1].name }}.suite"
+    src: tentris-cli.yaml
+    dest: "{{ target_dir }}/iguana_suites/cli/tentris-{{ item[0] }}/{{ item[1].name }}.yaml"
   loop: "{{ tentris_versions | product(datasets) | list }}"
