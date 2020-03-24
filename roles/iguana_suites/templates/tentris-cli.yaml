@@ -1,0 +1,19 @@
+#  name of the triple store
+triplestore: tentris-{{ item[0] }}
+# command to start the interactive terminal
+command: {{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_terminal -f '{{ item[1].path }}' -s -t 178
+# line start that indicates that the triple store is ready to receive queries
+initFinished: "duration:"
+# line start that indicates a success
+queryFinished: ["SUCCESSFUL", "ERROR:"]
+# line starts that indicate a failure
+queryError: ["ERROR:"]
+# name of the dataset
+dataset: {{ item[1].name }}
+# a file that contains a query in each line
+queryFile: {{ item[1].queries_path }}
+# maximum duration a query may be processed (ms)
+timeout: {{ iguana_query_timeout }}
+# total time the benchmark will be executed (ms)
+timelimit: {{ iguana_time_limit }}
+
