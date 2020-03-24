@@ -39,8 +39,3 @@
   file:
     path: "{{ tempdir.path }}"
     state: absent
-
-- name: clone CLI Iguana Source
-  git:
-    repo: 'https://github.com/dice-group/ClassicLikeIguana.git'
-    dest: "{{ target_dir }}"
