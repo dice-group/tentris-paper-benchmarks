@@ -21,10 +21,10 @@ triplestores_cli:
   - name: rdf3x
     command: "{{ target_dir }}/triplestores/rdf3x/rdf3xembedded {{ target_dir }}/databases/rdf3x/%n/db"
     init_finished_string: RDF-3X protocol 1
-    query_done_string: [ "\\.", "failure", "parse error", "internal error" ]
-    error_string: [ "failure", "parse error", "internal error" ]
+    query_done_string: '[ "\\.", "failure", "parse error", "internal error" ]'
+    error_string: '[ "failure", "parse error", "internal error" ]'
   - name: triplebit
     command: "{{ target_dir }}/triplestores/triplebit/triplebitQuery {{ target_dir }}/databases/triplebit/%n"
     init_finished_string: load complete!
-    query_done_string: ["QUERY SUCCEEDED", "QUERY FAILED" ]
-    error_string: [ "QUERY FAILED", "unsupported operation" ]
+    query_done_string: '["QUERY SUCCEEDED", "QUERY FAILED" ]'
+    error_string: '[ "QUERY FAILED", "unsupported operation" ]'
