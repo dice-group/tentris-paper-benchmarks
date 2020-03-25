@@ -8,13 +8,8 @@
 
 - name: Install homebrew
   shell:
-    cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh); echo eval \$($HOMEBREW_PREFIX/.linuxbrew/bin/brew shellenv)"
     creates: "{{ ansible_user_dir }}/.linuxbrew/bin/brew"
-
-- name: Add homebrew profile string
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.profile"
-    line: "eval $({{ ansible_user_dir }}/.linuxbrew/bin/brew shellenv)"
 
 - name: Install pip for python 3
   become: yes
@@ -36,7 +31,7 @@
 
 - name: Install pypy3
   homebrew:
-    path: "{{ ansible_user_dir }}/.linuxbrew/bin/"
+    path: "{{ ansible_user_dir }}/.linuxbrew/bin/:/home/linuxbrew/.linuxbrew/bin"
     package: pypy3
 
 - name: clone CLI Iguana Source
