@@ -23,5 +23,6 @@ task0.constructorArgs = task0x.timeLimit,task0x.queryHandler,task0x.workers
 
 iguana.cc.tasks = task0
 
-script.hook.pre={{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
-script.hook.post={{ target_dir }}/iguana_suites/http/{{ item[0].name }}/stop.sh
+# temporarily disabled due to broken pipes in Java process execution
+# script.hook.pre={{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh
+# script.hook.post={{ target_dir }}/iguana_suites/http/{{ item[0].name }}/stop.sh

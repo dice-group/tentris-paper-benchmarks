@@ -8,12 +8,21 @@ iguana.cc.connections = connection0
 dataset0.name = {{ item[1].name }}
 iguana.cc.datasets = dataset0
 
+sparql1.numberOfWorkers: 1
+sparql1.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker
+sparql1.timeout: {{ iguana_query_timeout }}
+sparql1.queryFile: {{ item[1].queries_path }}
+sparql1.fixedLatency: 0
+sparql1.gaussianLatency: 0
+sparql1x.workers = sparql1
+
 sparql4.numberOfWorkers: 4
 sparql4.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker
 sparql4.timeout: {{ iguana_query_timeout }}
 sparql4.queryFile: {{ item[1].queries_path }}
 sparql4.fixedLatency: 0
 sparql4.gaussianLatency: 0
+sparql4x.workers = sparql4
 
 sparql8.numberOfWorkers: 8
 sparql8.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker
@@ -21,6 +30,7 @@ sparql8.timeout: {{ iguana_query_timeout }}
 sparql8.queryFile: {{ item[1].queries_path }}
 sparql8.fixedLatency: 0
 sparql8.gaussianLatency: 0
+sparql8x.workers = sparql8
 
 sparql16.numberOfWorkers: 16
 sparql16.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker
@@ -28,6 +38,7 @@ sparql16.timeout: {{ iguana_query_timeout }}
 sparql16.queryFile: {{ item[1].queries_path }}
 sparql16.fixedLatency: 0
 sparql16.gaussianLatency: 0
+sparql16x.workers = sparql16
 
 sparql32.numberOfWorkers: 32
 sparql32.workerClass: org.aksw.iguana.tp.tasks.impl.stresstest.worker.impl.SPARQLWorker
@@ -35,24 +46,28 @@ sparql32.timeout: {{ iguana_query_timeout }}
 sparql32.queryFile: {{ item[1].queries_path }}
 sparql32.fixedLatency: 0
 sparql32.gaussianLatency: 0
-
+sparql32x.workers = sparql32
 
 taskx.timeLimit = {{ iguana_time_limit }}
 taskx.queryHandler = org.aksw.iguana.tp.query.impl.InstancesQueryHandler
 
+task1.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
+task1.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql1x.workers
+
 task4.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
-task4.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql4
+task4.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql4x.workers
 
 task8.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
-task8.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql8
+task8.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql8x.workers
 
 task16.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
-task16.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql16
+task16.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql16x.workers
 
 task32.class = org.aksw.iguana.tp.tasks.impl.stresstest.Stresstest
-task32.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql32
+task32.constructorArgs = taskx.timeLimit,taskx.queryHandler,sparql32x.workers
 
-iguana.cc.tasks = task4,task8,task16,task32
+iguana.cc.tasks = task1,task4,task8,task16,task32
 
-script.hook.pre={{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/32-start.sh
-script.hook.post={{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/stop.sh
+# temporarily disabled due to broken pipes in Java process execution
+# script.hook.pre={{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/32-start.sh
+# script.hook.post={{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/stop.sh

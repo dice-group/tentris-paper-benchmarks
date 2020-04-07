@@ -1,20 +1,20 @@
 datasets:
-#  - name: lubm8
-#    path: "{{ target_dir }}/datasets/lubm/lubm8/Universities.nt"
-#    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
-#    max_ram: 629072
-#  - name: lubm80
-#    path: "{{ target_dir }}/datasets/lubm/lubm80/Universities.nt"
-#    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
-#    max_ram: 6675712
-#  - name: lubm800
-#    path: "{{ target_dir }}/datasets/lubm/lubm800/Universities.nt"
-#    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
-#    max_ram: 66496528
-#  - name: lubm8000
-#    path: "{{ target_dir }}/datasets/lubm/lubm8000/Universities.nt"
-#    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
-#    max_ram: 665141256
+  - name: lubm8
+    path: "{{ target_dir }}/datasets/lubm/lubm8/Universities.nt"
+    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
+    max_ram: 629072
+  - name: lubm80
+    path: "{{ target_dir }}/datasets/lubm/lubm80/Universities.nt"
+    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
+    max_ram: 6675712
+  - name: lubm800
+    path: "{{ target_dir }}/datasets/lubm/lubm800/Universities.nt"
+    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
+    max_ram: 66496528
+  - name: lubm8000
+    path: "{{ target_dir }}/datasets/lubm/lubm8000/Universities.nt"
+    queries_path: "{{ target_dir }}/datasets/lubm/queries-sparql.txt"
+    max_ram: 665141256
   - name: swdf
     path: "{{ target_dir }}/datasets/swdf/swdf.nt"
     queries_path: "{{ target_dir }}/datasets/swdf/queries.txt"
@@ -35,10 +35,10 @@ datasets:
     path: "{{ target_dir }}/datasets/watdiv/watdiv10000/data.nt"
     queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
     max_ram: 432727316
-#  - name: dbpedia351
-#    path: "{{ target_dir }}/datasets/dbpedia/dbpedia351.nt"
-#    queries_path: "{{ target_dir }}/datasets/dbpedia/queries.txt"
-#    max_ram: 144570240
+  - name: dbpedia351
+    path: "{{ target_dir }}/datasets/dbpedia/dbpedia351.nt"
+    queries_path: "{{ target_dir }}/datasets/dbpedia/queries.txt"
+    max_ram: 144570240
   - name: dbpedia2015
     path: "{{ target_dir }}/datasets/dbpedia2015/dbpedia_2015-10_en_wo-comments_c.nt"
     queries_path: "{{ target_dir }}/datasets/dbpedia2015/queries.txt"

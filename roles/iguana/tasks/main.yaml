@@ -6,48 +6,48 @@
 - include: install.yaml
   when: not iguana_dir.stat.exists
 
-- name: Install homebrew
-  shell:
-    cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    creates: "{{ ansible_user_dir }}/.linuxbrew/bin/brew"
+#- name: Install homebrew
+#  shell:
+#    cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+#    creates: "{{ ansible_user_dir }}/.linuxbrew/bin/brew"
+#
+#- name: Add homebrew profile string
+#  lineinfile:
+#    path: "{{ ansible_user_dir }}/.profile"
+#    line: "eval $({{ ansible_user_dir }}/.linuxbrew/bin/brew shellenv)"
+#
+#- name: Install pip for python 3
+#  become: yes
+#  apt:
+#    name:
+#      - python3-pip
+#      - python3-setuptools
+#    state: present
+#  when: ansible_python.version.major == 3
+#
+#- name: Install pip for python 2
+#  become: yes
+#  apt:
+#    name:
+#      - python-pip
+#      - python-setuptools
+#    state: present
+#  when: ansible_python.version.major == 2
+#
+#- name: Install pypy3
+#  homebrew:
+#    path: "{{ ansible_user_dir }}/.linuxbrew/bin/"
+#    package: pypy3
 
-- name: Add homebrew profile string
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.profile"
-    line: "eval $({{ ansible_user_dir }}/.linuxbrew/bin/brew shellenv)"
-
-- name: Install pip for python 3
-  become: yes
-  apt:
-    name: 
-      - python3-pip
-      - python3-setuptools
-    state: present
-  when: ansible_python.version.major == 3
-
-- name: Install pip for python 2
-  become: yes
-  apt:
-    name: 
-      - python-pip
-      - python-setuptools
-    state: present
-  when: ansible_python.version.major == 2
-
-- name: Install pypy3
-  homebrew:
-    path: "{{ ansible_user_dir }}/.linuxbrew/bin/"
-    package: pypy3
-
-- name: clone CLI Iguana Source
-  git:
-    repo: "https://github.com/dice-group/ClassicLikeIguana.git"
-    dest: "{{ target_dir }}/ClassicLikeIguana"
-
-- name: Install CLI Iguana requirements
-  pip:
-    executable: "{{ ansible_user_dir }}/.linuxbrew/bin/pip_pypy3"
-    requirements: "{{ target_dir }}/ClassicLikeIguana/reqirements.txt"
+#- name: clone CLI Iguana Source
+#  git:
+#    repo: "https://github.com/dice-group/ClassicLikeIguana.git"
+#    dest: "{{ target_dir }}/ClassicLikeIguana"
+#
+#- name: Install CLI Iguana requirements
+#  pip:
+#    executable: "{{ ansible_user_dir }}/.linuxbrew/bin/pip_pypy3"
+#    requirements: "{{ target_dir }}/ClassicLikeIguana/reqirements.txt"
 
 - name: Template copy iguana run script
   template:
