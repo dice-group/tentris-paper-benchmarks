@@ -6,28 +6,20 @@
 - include: install.yaml
   when: not iguana_dir.stat.exists
 
+- name: Search for brew in home
+  stat:
+    path: /home/linuxbrew/.linuxbrew/bin/brew
+  register: brew_home
+
+- name: Search for brew in user home
+  stat:
+    path: "{{ ansible_user_dir }}/.linuxbrew/bin/brew"
+  register: brew_user_home
+
 - name: Install homebrew
   shell:
     cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh); echo eval \$($HOMEBREW_PREFIX/.linuxbrew/bin/brew shellenv)"
-    creates: "{{ ansible_user_dir }}/.linuxbrew/bin/brew"
-
-- name: Install pip for python 3
-  become: yes
-  apt:
-    name:
-      - python3-pip
-      - python3-setuptools
-    state: present
-  when: ansible_python.version.major == 3
-
-- name: Install pip for python 2
-  become: yes
-  apt:
-    name:
-      - python-pip
-      - python-setuptools
-    state: present
-  when: ansible_python.version.major == 2
+  when: not brew_home.stat.exists and not brew_user_home.stat.exists
 
 - name: Install pypy3
   homebrew:
