@@ -52,3 +52,5 @@ triplestores:
   - blazegraph
   - triplebit
   - rdf3x
+
+load_max_ram: 512000000 # in KByte
