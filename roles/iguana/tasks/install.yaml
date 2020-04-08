@@ -20,9 +20,16 @@
     src: "{{ tempdir.path }}/src.zip"
     dest: "{{ tempdir.path }}"
 
+- name: Search for source folder
+  find:
+    path: "{{ tempdir.path }}"
+    recurse: no
+    file_type: directory
+  register: source_find
+
 - name: Build Iguana
   command:
-    chdir: "{{ tempdir.path }}/IGUANA-{{ iguana_version }}"
+    chdir: "source_find.find.files[0].path"
     argv:
       - mvn
       - -Dmaven.test.skip=true

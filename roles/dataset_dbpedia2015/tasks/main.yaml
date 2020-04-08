@@ -15,5 +15,5 @@
 - name: Download DBpedia queries
   get_url:
     url: https://hobbitdata.informatik.uni-leipzig.de/2020_Tentris/DBpedia_2015-10/DBedia-2015-10.txt
-    checksum: sha1:084739dd5ddab6a12630595fdfb158ea561dd168
+    checksum: sha1:a6a4bd1974a528f4a684b2d711b983d653541dac
     dest: "{{ target_dir }}/datasets/dbpedia2015/queries.txt"

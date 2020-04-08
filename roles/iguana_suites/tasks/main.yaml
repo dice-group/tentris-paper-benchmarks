@@ -63,8 +63,8 @@
 
 - name: Template copy Tentris Iguana HTTP suites 4-32 users
   template:
-    src: tentris-http4-32.suite
-    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/4-32.suite"
+    src: tentris-http1-32.suite
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/1-32.suite"
   loop: "{{ tentris_versions | product(datasets) | list }}"
 
 - name: Create CLI suite directories
