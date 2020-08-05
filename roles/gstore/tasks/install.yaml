@@ -6,25 +6,25 @@
 
 - name: Download gStore
   get_url:
-    url: https://github.com/pkumod/gStore/archive/master.zip
-    dest: "{{ tempdir.path }}/master.zip"
+    url: https://github.com/dice-group/gStore-1/archive/support_sparql_protocol.zip
+    dest: "{{ tempdir.path }}/support_sparql_protocol.zip"
 
 - name: Unzip gStore
   unarchive:
     remote_src: yes
-    src: "{{ tempdir.path }}/master.zip"
+    src: "{{ tempdir.path }}/support_sparql_protocol.zip"
     dest: "{{ tempdir.path }}"
 
 - name: Prepare gStore Build
   command:
-    chdir: "{{ tempdir.path }}/gStore-master"
+    chdir: "{{ tempdir.path }}/gStore-1-support_sparql_protocol"
     argv:
       - make
       - pre
 
 - name: Build gStore
   command:
-    chdir: "{{ tempdir.path }}/gStore-master"
+    chdir: "{{ tempdir.path }}/gStore-1-support_sparql_protocol"
     argv:
       - make
 
@@ -36,19 +36,19 @@
 - name: Copy gStore binaries
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-master/bin"
+    src: "{{ tempdir.path }}/gStore-1-support_sparql_protocol/bin"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore data
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-master/data"
+    src: "{{ tempdir.path }}/gStore-1-support_sparql_protocol/data"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore server files
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-master/Server"
+    src: "{{ tempdir.path }}/gStore-1-support_sparql_protocol/Server"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Delete tempdir
