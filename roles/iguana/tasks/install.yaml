@@ -29,7 +29,7 @@
 
 - name: Build Iguana
   command:
-    chdir: "source_find.find.files[0].path"
+    chdir: "{{ source_find.find.files[0].path }}"
     argv:
       - mvn
       - -Dmaven.test.skip=true
