@@ -29,7 +29,7 @@
 
 - name: Build Iguana
   command:
-    chdir: "{{ source_find.find.files[0].path }}"
+    chdir: "{{ source_find.files[0].path }}"
     argv:
       - mvn
       - -Dmaven.test.skip=true
@@ -38,7 +38,7 @@
 
 - name: Copy the Iguana Corecontroller JAR
   copy:
-    src: "{{ tempdir.path }}/IGUANA-{{ iguana_version }}/iguana.corecontroller/target/iguana.corecontroller-2.1.2.jar"
+    src: "{{ source_find.files[0].path }}/iguana.corecontroller/target/iguana.corecontroller-2.1.2.jar"
     remote_src: yes
     dest: "{{ target_dir }}/iguana-{{ iguana_version }}/corecontroller.jar"
 
