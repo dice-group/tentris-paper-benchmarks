@@ -6,25 +6,25 @@
 
 - name: Download gStore
   get_url:
-    url: https://github.com/dice-group/gStore-1/archive/support_sparql_protocol.zip
-    dest: "{{ tempdir.path }}/support_sparql_protocol.zip"
+    url: https://github.com/dice-group/gStore-1/archive/adopt_cache_and_timeout.zip
+    dest: "{{ tempdir.path }}/adopt_cache_and_timeout.zip"
 
 - name: Unzip gStore
   unarchive:
     remote_src: yes
-    src: "{{ tempdir.path }}/support_sparql_protocol.zip"
+    src: "{{ tempdir.path }}/adopt_cache_and_timeout.zip"
     dest: "{{ tempdir.path }}"
 
 - name: Prepare gStore Build
   command:
-    chdir: "{{ tempdir.path }}/gStore-1-support_sparql_protocol"
+    chdir: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout"
     argv:
       - make
       - pre
 
 - name: Build gStore
   command:
-    chdir: "{{ tempdir.path }}/gStore-1-support_sparql_protocol"
+    chdir: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout"
     argv:
       - make
 
@@ -36,19 +36,19 @@
 - name: Copy gStore binaries
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-1-support_sparql_protocol/bin"
+    src: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout/bin"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore data
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-1-support_sparql_protocol/data"
+    src: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout/data"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore server files
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-1-support_sparql_protocol/Server"
+    src: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout/Server"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Delete tempdir
