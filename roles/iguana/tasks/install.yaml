@@ -7,42 +7,9 @@
   tempfile:
     state: directory
     suffix: iguana
-  register: tempdir
+ # register: tempdir
 
-- name: Download Iguana Source
+- name: Download Iguana
   get_url:
-    url: https://github.com/dice-group/IGUANA/archive/{{ iguana_version }}.zip
-    dest: "{{ tempdir.path }}/src.zip"
-
-- name: Unzip Iguana Source
-  unarchive:
-    remote_src: yes
-    src: "{{ tempdir.path }}/src.zip"
-    dest: "{{ tempdir.path }}"
-
-- name: Search for source folder
-  find:
-    path: "{{ tempdir.path }}"
-    recurse: no
-    file_type: directory
-  register: source_find
-
-- name: Build Iguana
-  command:
-    chdir: "{{ source_find.files[0].path }}"
-    argv:
-      - mvn
-      - -Dmaven.test.skip=true
-      - clean
-      - package
-
-- name: Copy the Iguana Corecontroller JAR
-  copy:
-    src: "{{ source_find.files[0].path }}/iguana.corecontroller/target/iguana.corecontroller-2.1.2.jar"
-    remote_src: yes
+    url: https://github.com/dice-group/IGUANA/releases/download/{{ iguana_version }}/iguana.corecontroller-2.1.3.jar
     dest: "{{ target_dir }}/iguana-{{ iguana_version }}/corecontroller.jar"
-
-- name: Delete tempdir
-  file:
-    path: "{{ tempdir.path }}"
-    state: absent
