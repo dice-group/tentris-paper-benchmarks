@@ -31,9 +31,18 @@
     repo: "https://github.com/dice-group/ClassicLikeIguana.git"
     dest: "{{ target_dir }}/ClassicLikeIguana"
 
+- name: Find the pip executable
+  find:
+    paths:
+      - "{{ ansible_user_dir }}/.linuxbrew/bin/"
+      - /home/linuxbrew/.linuxbrew/bin
+    pattern: pip_pypy3
+    file_type: any
+  register: find_pip
+
 - name: Install CLI Iguana requirements
   pip:
-    executable: "{{ ansible_user_dir }}/.linuxbrew/bin/pip_pypy3"
+    executable: "{{ find_pip.files[0].path }}"
     requirements: "{{ target_dir }}/ClassicLikeIguana/reqirements.txt"
 
 - name: Template copy iguana run script
@@ -42,7 +51,7 @@
     dest: "{{ target_dir }}/iguana-run.sh"
     mode: 0755
 
-- name: Template copy CLI iguana run script
+    executable: "{{ find_pip.files[0].path }}"
   template:
     src: iguana_cli-run.sh
     dest: "{{ target_dir }}/iguana_cli-run.sh"
