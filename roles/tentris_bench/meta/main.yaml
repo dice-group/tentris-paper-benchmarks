@@ -1,7 +1,5 @@
 dependencies:
-  - role: dataset_dbpedia351
   - role: dataset_dbpedia2015
-  - role: dataset_lubm
   - role: dataset_swdf
   - role: dataset_watdiv
   - role: tentris
