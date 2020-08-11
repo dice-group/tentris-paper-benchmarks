@@ -6,25 +6,25 @@
 
 - name: Download gStore
   get_url:
-    url: https://github.com/dice-group/gStore-1/archive/adopt_cache_and_timeout.zip
-    dest: "{{ tempdir.path }}/adopt_cache_and_timeout.zip"
+    url: https://github.com/dice-group/gStore-1/archive/tentris_paper_benchmark_settings.zip
+    dest: "{{ tempdir.path }}/tentris_paper_benchmark_settings.zip"
 
 - name: Unzip gStore
   unarchive:
     remote_src: yes
-    src: "{{ tempdir.path }}/adopt_cache_and_timeout.zip"
+    src: "{{ tempdir.path }}/tentris_paper_benchmark_settings.zip"
     dest: "{{ tempdir.path }}"
 
 - name: Prepare gStore Build
   command:
-    chdir: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout"
+    chdir: "{{ tempdir.path }}/gStore-1-tentris_paper_benchmark_settings"
     argv:
       - make
       - pre
 
 - name: Build gStore
   command:
-    chdir: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout"
+    chdir: "{{ tempdir.path }}/gStore-1-tentris_paper_benchmark_settings"
     argv:
       - make
 
@@ -36,19 +36,19 @@
 - name: Copy gStore binaries
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout/bin"
+    src: "{{ tempdir.path }}/gStore-1-tentris_paper_benchmark_settings/bin"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore data
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout/data"
+    src: "{{ tempdir.path }}/gStore-1-tentris_paper_benchmark_settings/data"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Copy gStore server files
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/gStore-1-adopt_cache_and_timeout/Server"
+    src: "{{ tempdir.path }}/gStore-1-tentris_paper_benchmark_settings/Server"
     dest: "{{ target_dir }}/triplestores/gstore"
 
 - name: Delete tempdir

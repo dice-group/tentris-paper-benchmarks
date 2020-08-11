@@ -11,7 +11,7 @@
 
 - name: Download SWDF dataset
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/swdf.zip
+    url: https://hobbitdata.informatik.uni-leipzig.de/ISWC2020_Tentris/swdf.zip
     checksum: sha1:ec3cfe8e0315d077519001d610e46e99918745dc
     dest: "{{ tempdir.path }}/swdf.zip"
 

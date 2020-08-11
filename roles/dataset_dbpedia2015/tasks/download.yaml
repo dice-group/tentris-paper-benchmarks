@@ -6,7 +6,7 @@
 
 - name: Download DBpedia2015 dataset
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/datasets/dbpedia_2015-10_en_wo-comments_c.nt.zst
+    url: https://hobbitdata.informatik.uni-leipzig.de/ISWC2020_Tentris/dbpedia_2015-10_en_wo-comments_c.nt.zst
     checksum: sha1:5acb9f9aebdaeac7e5f30803949e1c37091771df
     dest: "{{ tempdir.path }}/dbpedia_2015-10_en_wo-comments_c.nt.zst"
 

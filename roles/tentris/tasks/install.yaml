@@ -6,7 +6,7 @@
 
 - name: Download tentris
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/VLDB2020_Tentris/releases/tentris_{{ tentris_version }}.zip
+    url: https://raw.githubusercontent.com/dice-group/iswc2020_tentris/master/binaries/tentris_{{ tentris_version }}.zip
     dest: "{{ tempdir.path }}/tentris_{{ tentris_version }}.zip"
 
 - name: Unzip tentris
