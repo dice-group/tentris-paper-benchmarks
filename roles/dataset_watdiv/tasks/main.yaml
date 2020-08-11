@@ -15,5 +15,6 @@
 
 - name: Download the query file
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/2020_Tentris/WatDiv/watdiv.txt
+    url: https://raw.githubusercontent.com/dice-group/iswc2020_tentris/master/queries/WatDiv-Queries.txt
+    checksum: sha1:ebeb589d32761ae0def51e290f52f730daa00e5d
     dest: "{{ target_dir }}/datasets/watdiv/queries.txt"

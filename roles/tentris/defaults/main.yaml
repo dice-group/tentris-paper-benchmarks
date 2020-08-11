@@ -1,5 +1,4 @@
 tentris_versions:
-  - 1.0.3
-  - 1.0.3_2way_join
-  - 1.0.3_random_label_order
-  - 1.0.3_sparse_set
+  - 1.0.4
+  - 1.0.4_2way_join
+  - 1.0.4_random_label_order

@@ -11,7 +11,7 @@
 
 - name: Download Jena Checksum
   get_url:
-    url: https://www.apache.org/dist/jena/binaries/apache-jena-{{ jena_version }}.tar.gz.sha512
+    url: https://archive.apache.org/dist/jena/binaries/apache-jena-{{ jena_version }}.tar.gz.sha512
     dest: "{{ tempdir.path }}/apache-jena-{{ jena_version }}.tar.gz.sha512"
 
 - name: Slurp Jena Checksum
@@ -21,7 +21,7 @@
 
 - name: Download Jena
   get_url:
-    url: http://www.apache.org/dist/jena/binaries/apache-jena-{{ jena_version }}.tar.gz
+    url: https://archive.apache.org/dist/jena/binaries/apache-jena-{{ jena_version }}.tar.gz
     checksum: "sha512:{{ (checksum.content | b64decode).split(' ')[0] }}"
     dest: "{{ tempdir.path }}/apache-jena-{{ jena_version }}.tar.gz"
 

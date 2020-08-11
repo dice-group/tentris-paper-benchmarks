@@ -8,6 +8,6 @@
 
 - name: Download SWDF queries
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/2020_Tentris/SWDF/swdf.txt
-    checksum: sha1:37114a91eb94dd8ad99078a05a6dfe3a8dd9b917
+    url: https://raw.githubusercontent.com/dice-group/iswc2020_tentris/master/queries/SWDF-Queries.txt
+    checksum: sha1:e8c4d295d29f36f11b0b77a1ea83e13ff7333488
     dest: "{{ target_dir }}/datasets/swdf/queries.txt"
