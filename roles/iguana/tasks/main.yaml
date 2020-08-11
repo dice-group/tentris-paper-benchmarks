@@ -11,24 +11,40 @@
   apt:
     name: rabbitmq-server
 
-- name: Search for brew in home
-  stat:
-    path: /home/linuxbrew/.linuxbrew/bin/brew
-  register: brew_home
+- name: Create linuxbrew directory
+  become: yes
+  file:
+    path: /home/linuxbrew/.linuxbrew
+    state: directory
+    mode: 0777
 
-- name: Search for brew in user home
-  stat:
-    path: "{{ ansible_user_dir }}/.linuxbrew/bin/brew"
-  register: brew_user_home
+- name: Install brew executable
+  git:
+    repo: https://github.com/Homebrew/brew
+    dest: /home/linuxbrew/.linuxbrew/Homebrew
 
-- name: Install homebrew
-  shell:
-    cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh); echo eval \$($HOMEBREW_PREFIX/.linuxbrew/bin/brew shellenv)"
-  when: not brew_home.stat.exists and not brew_user_home.stat.exists
+- name: Create linuxbrew bin directory
+  become: yes
+  file:
+    path: /home/linuxbrew/.linuxbrew/bin
+    state: directory
+    mode: 0777
+
+- name: Symlink brew executable
+  file:
+    src: /home/linuxbrew/.linuxbrew/Homebrew/bin/brew
+    dest: /home/linuxbrew/.linuxbrew/bin/brew
+    state: link
+    force: yes
+
+- name: Setup brewenv in profile
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.profile"
+    line: "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 - name: Install pypy3
   homebrew:
-    path: "{{ ansible_user_dir }}/.linuxbrew/bin/:/home/linuxbrew/.linuxbrew/bin"
+    path: /home/linuxbrew/.linuxbrew/bin
     package: pypy3
 
 - name: clone CLI Iguana Source
@@ -36,18 +52,9 @@
     repo: "https://github.com/dice-group/ClassicLikeIguana.git"
     dest: "{{ target_dir }}/ClassicLikeIguana"
 
-- name: Find the pip executable
-  find:
-    paths:
-      - "{{ ansible_user_dir }}/.linuxbrew/bin/"
-      - /home/linuxbrew/.linuxbrew/bin
-    pattern: pip_pypy3
-    file_type: any
-  register: find_pip
-
 - name: Install CLI Iguana requirements
   pip:
-    executable: "{{ find_pip.files[0].path }}"
+    executable: /home/linuxbrew/.linuxbrew/bin/pip_pypy3
     requirements: "{{ target_dir }}/ClassicLikeIguana/reqirements.txt"
 
 - name: Template copy iguana run script
@@ -56,7 +63,7 @@
     dest: "{{ target_dir }}/iguana-run.sh"
     mode: 0755
 
-    executable: "{{ find_pip.files[0].path }}"
+- name: Template copy CLI iguana run script
   template:
     src: iguana_cli-run.sh
     dest: "{{ target_dir }}/iguana_cli-run.sh"
