@@ -1,15 +1,39 @@
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: iguana
+  register: tempdir
+
+- name: Download Iguana
+  get_url:
+    url: https://github.com/dice-group/IGUANA/releases/download/{{ iguana_version }}/iguana-single-run.zip
+    dest: "{{ tempdir.path }}/iguana-single-run.zip"
+
+- name: Unzip Iguana
+  unarchive:
+    src: "{{ tempdir.path }}/iguana-single-run.zip"
+    remote_src: yes
+    dest: "{{ tempdir.path }}/"
+
+- name: Find Iguana jar
+  find:
+    path: "{{ tempdir.path }}"
+    recurse: yes
+    pattern: iguana-run.jar
+  register: find_jar
+
 - name: Create Iguana Directory
   file:
     path: "{{ target_dir }}/iguana-{{ iguana_version }}"
     state: directory
 
-- name: Create a tempory download directory
-  tempfile:
-    state: directory
-    suffix: iguana
- # register: tempdir
-
-- name: Download Iguana
-  get_url:
-    url: https://github.com/dice-group/IGUANA/releases/download/{{ iguana_version }}/iguana.corecontroller-2.1.3.jar
+- name: Copy Iguana jar
+  copy:
+    src: "{{ find_jar.files[0].path }}"
+    remote_src: yes
     dest: "{{ target_dir }}/iguana-{{ iguana_version }}/corecontroller.jar"
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
