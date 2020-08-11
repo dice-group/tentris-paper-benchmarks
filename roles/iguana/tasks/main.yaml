@@ -6,6 +6,11 @@
 - include: install.yaml
   when: not iguana_dir.stat.exists
 
+- name: Install RabbitMQ
+  become: yes
+  apt:
+    name: rabbitmq-server
+
 - name: Search for brew in home
   stat:
     path: /home/linuxbrew/.linuxbrew/bin/brew
