@@ -1,0 +1,12 @@
+all:
+  hosts:
+    <name>:
+    # A short name for your managed node, for example tentris-bench-vm
+
+      ansible_host: <hostname or IP of your managed node>
+      # This is the same as you would use to connect via ssh
+
+      # If you use a different user un the managed node, you can specify it here
+      # ansible_user: <user>
+
+      graphdb_download_uuid: <Your GraphDB download UUID (See README.md for instructions)>
