@@ -2,6 +2,7 @@ dependencies:
   - role: dataset_dbpedia2015
   - role: dataset_swdf
   - role: dataset_watdiv
+  - role: dataset_wikidata-20201111
   - role: tentris
   - role: fuseki
   - role: gstore
