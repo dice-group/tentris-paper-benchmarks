@@ -11,5 +11,4 @@
 - name: Download and unpack wikidata
   shell: wget -qO- https://dumps.wikimedia.org/wikidatawiki/entities/20201111/wikidata-20201111-truthy-BETA.nt.bz2 | lbzip2 -d -c > "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
   creates: "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
-  checksum: sha1:ec3cfe8e0315d077519001d610e46e99918745dc
   ignore_errors: True
