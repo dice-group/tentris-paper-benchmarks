@@ -1,10 +1,10 @@
 - name: Check for the wikidata dataset
   stat:
     path: "{{ target_dir }}/datasets/wikidata-2020-11-11"
-  register: dataset_dir
+  register: wikidata_dataset_dir
 
 - include: download.yaml
-  when: not dataset_dir.stat.exists
+  when: not wikidata_dataset_dir.stat.exists
 
 - name: Download wikidata queries
   get_url:
