@@ -38,7 +38,7 @@
 - name: Template copy Iguana HTTP suites
   template:
     src: http.suite
-    dest: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}.suite"
+    dest: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}.yml"
   loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy tentris start scripts
@@ -58,13 +58,13 @@
 - name: Template copy Tentris Iguana HTTP suites
   template:
     src: tentris-http.suite
-    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}.suite"
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}.yml"
   loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
 
 - name: Template copy Tentris Iguana HTTP suites 4-32 users
   template:
     src: tentris-http1-32.suite
-    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/1-32.suite"
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/1-32.yml"
   loop: "{{ tentris_versions | product(datasets) | list }}"
 
 - name: Create CLI suite directories

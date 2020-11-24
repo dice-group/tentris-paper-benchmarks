@@ -6,12 +6,12 @@
 
 - name: Download Iguana
   get_url:
-    url: https://github.com/dice-group/IGUANA/releases/download/{{ iguana_version }}/iguana-single-run.zip
-    dest: "{{ tempdir.path }}/iguana-single-run.zip"
+    url: https://github.com/dice-group/IGUANA/releases/download/v{{ iguana_version }}/iguana-{{ iguana_version }}.zip
+    dest: "{{ tempdir.path }}/iguana-{{ iguana_version }}.zip"
 
 - name: Unzip Iguana
   unarchive:
-    src: "{{ tempdir.path }}/iguana-single-run.zip"
+    src: "{{ tempdir.path }}/iguana-{{ iguana_version }}.zip"
     remote_src: yes
     dest: "{{ tempdir.path }}/"
 
@@ -19,7 +19,7 @@
   find:
     path: "{{ tempdir.path }}"
     recurse: yes
-    pattern: iguana-run.jar
+    pattern: iguana.corecontroller-{{ iguana_version }}.jar
   register: find_jar
 
 - name: Create Iguana Directory
