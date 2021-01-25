@@ -10,7 +10,7 @@
 
 - name: Download Blazegraph JAR
   get_url:
-    url: https://github.com/blazegraph/database/releases/download/BLAZEGRAPH_2_1_6_RC/blazegraph.jar
+    url: https://github.com/blazegraph/database/releases/download/{{ blazegraph_version }}/blazegraph.jar
     dest: "{{ target_dir }}/triplestores/blazegraph/blazegraph.jar"
   when: not blazegraph.stat.exists
 
