@@ -10,7 +10,7 @@
     dest: '{{ tempdir.path }}'
 
 - name: Build Tentris binaries
-  command: 'sh clone_and_build_tentris.sh {{ tentris_version }}'
+  command: 'bash clone_and_build_tentris.sh {{ tentris_version }}'
   args:
     chdir: '{{ tempdir.path }}'
 
@@ -19,11 +19,11 @@
     path: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}"
     state: directory
 
-- name: Install tentris binaries
+- name: Install tentris_server
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/tentris_{{ tentris_version }}"
-    dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}"
+    src: "{{ tempdir.path }}/tentris_{{ tentris_version }}/tentris_server"
+    dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_server"
     mode: 0755
 
 - name: Delete tempdir

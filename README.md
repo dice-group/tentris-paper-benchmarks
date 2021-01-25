@@ -27,6 +27,6 @@ The download link should look like this: `https://download.ontotext.com/owlim/<Y
 ### Playbook execution
 
 If you have prepared the inventory you can execute the playbook.  
-To do this use the `ansible-playbook -kKi inventroy.yaml playbook.yaml` command.  
+To do this use the `ansible-playbook -kKi inventory.yaml playbook.yaml` command.  
 It will ask you for your SSH password and your become (sudo) password.  
 After you have entered your password the execution will start.

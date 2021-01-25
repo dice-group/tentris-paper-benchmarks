@@ -17,9 +17,9 @@
 
 - name: Find Iguana jar
   find:
-    path: "{{ tempdir.path }}"
+    path: "{{ tempdir.path }}/iguana"
     recurse: yes
-    pattern: iguana.corecontroller-{{ iguana_version }}.jar
+    pattern: iguana-{{ iguana_version }}.jar
   register: find_jar
 
 - name: Create Iguana Directory
@@ -32,6 +32,12 @@
     src: "{{ find_jar.files[0].path }}"
     remote_src: yes
     dest: "{{ target_dir }}/iguana-{{ iguana_version }}/corecontroller.jar"
+
+- name: Template copy iguana run script
+  template:
+    src: iguana-run.sh
+    dest: "{{ target_dir }}/iguana-run.sh"
+    mode: 0755
 
 - name: Delete tempdir
   file:

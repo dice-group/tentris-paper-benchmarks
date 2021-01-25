@@ -1,7 +1,0 @@
-- name: Install OpenJDK 11
-  become: yes
-  apt:
-    package:
-      - openjdk-11-jdk
-      - maven
-    state: present
