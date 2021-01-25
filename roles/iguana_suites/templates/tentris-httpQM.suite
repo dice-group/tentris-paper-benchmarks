@@ -2,7 +2,7 @@ datasets:
   - name: "{{ item[1].name }}"
 
 connections:
-  - name: tentris-"{{ item[0] }}"
+  - name: "tentris-{{ item[0] }}"
     endpoint: "http://localhost:9080/stream"
 
 tasks:
@@ -35,5 +35,5 @@ metrics:
 storages:
   - className: "NTFileStorage"
     configuration:
-      fileName: results_{{ item[0].name }}-{{ item[1].name }}-{{ item[2].number }}.nt
+      fileName: results_tentris-{{ item[0] }}-{{ item[1].name }}-{{ item[2].number }}-QM.nt
 
