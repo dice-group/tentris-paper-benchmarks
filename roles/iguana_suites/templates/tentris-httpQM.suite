@@ -1,0 +1,39 @@
+datasets:
+  - name: "{{ item[1].name }}"
+
+connections:
+  - name: tentris-"{{ item[0] }}"
+    endpoint: "http://localhost:9080/stream"
+
+tasks:
+  - className: "Stresstest"
+    configuration:
+      # 1 hour (time Limit is in ms)
+      noOfQueryMixes: {{ iguana_query_mixes_limit }}
+      queryHandler:
+        className: "InstancesQueryHandler"
+      workers:
+        - threads: {{ item[2].number }}
+          language: "lang.SIMPLE"
+          className: "HttpGetWorker"
+          queriesFile: "{{ item[1].queries_path }}"
+          timeOut: {{ iguana_query_timeout }}
+
+preScriptHook: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh"
+postScriptHook: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/stop.sh"
+
+#optional otherwise the same metrics will be used as default
+metrics:
+  - className: "QMPH"
+  - className: "QPS"
+  - className: "NoQPH"
+  - className: "AvgQPS"
+  - className: "NoQ"
+  - className: "EachQuery"
+
+
+storages:
+  - className: "NTFileStorage"
+    configuration:
+      fileName: results_{{ item[0].name }}-{{ item[1].name }}-{{ item[2].number }}.nt
+

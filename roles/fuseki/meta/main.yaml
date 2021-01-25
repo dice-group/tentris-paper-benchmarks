@@ -1,4 +1,4 @@
 dependencies:
   - role: base
-  - role: openjdk
+  - role: build_common
   - role: jena

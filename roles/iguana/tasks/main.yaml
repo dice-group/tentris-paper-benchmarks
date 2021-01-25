@@ -6,65 +6,8 @@
 - include: install.yaml
   when: not iguana_dir.stat.exists
 
-- name: Install RabbitMQ
-  become: yes
-  apt:
-    name: rabbitmq-server
-
-- name: Create linuxbrew directory
-  become: yes
-  file:
-    path: /home/linuxbrew/.linuxbrew
-    state: directory
-    mode: 0777
-
-- name: Install brew executable
-  git:
-    repo: https://github.com/Homebrew/brew
-    dest: /home/linuxbrew/.linuxbrew/Homebrew
-
-- name: Create linuxbrew bin directory
-  become: yes
-  file:
-    path: /home/linuxbrew/.linuxbrew/bin
-    state: directory
-    mode: 0777
-
-- name: Symlink brew executable
-  file:
-    src: /home/linuxbrew/.linuxbrew/Homebrew/bin/brew
-    dest: /home/linuxbrew/.linuxbrew/bin/brew
-    state: link
-    force: yes
-
-- name: Setup brewenv in profile
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.profile"
-    line: "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-- name: Install pypy3
-  homebrew:
-    path: /home/linuxbrew/.linuxbrew/bin
-    package: pypy3
-
-- name: clone CLI Iguana Source
-  git:
-    repo: "https://github.com/dice-group/ClassicLikeIguana.git"
-    dest: "{{ target_dir }}/ClassicLikeIguana"
-
-- name: Install CLI Iguana requirements
-  pip:
-    executable: /home/linuxbrew/.linuxbrew/bin/pip_pypy3
-    requirements: "{{ target_dir }}/ClassicLikeIguana/reqirements.txt"
-
 - name: Template copy iguana run script
   template:
     src: iguana-run.sh
     dest: "{{ target_dir }}/iguana-run.sh"
-    mode: 0755
-
-- name: Template copy CLI iguana run script
-  template:
-    src: iguana_cli-run.sh
-    dest: "{{ target_dir }}/iguana_cli-run.sh"
     mode: 0755

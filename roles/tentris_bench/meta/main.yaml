@@ -9,8 +9,6 @@ dependencies:
   - role: virtuoso
   - role: graphdb
   - role: blazegraph
-  - role: triplebit
-  - role: rdf3x
   - role: loaders
   - role: iguana
   - role: iguana_suites
