@@ -1,3 +1,5 @@
+# deprecated: must be updated before use
+
 connection0.name = tentris-{{ item[0] }}
 connection0.service = {{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_terminal -f '{{ item[1].path }}' -s -t 178
 connection0.update.service = 

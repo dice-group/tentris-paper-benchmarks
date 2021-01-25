@@ -1,3 +1,5 @@
+# deprecated: must be updated before use
+
 datasets:
   - name: "{{ item[1].name }}"
     #optional, will just be set in the pre & post script hooks by using 
