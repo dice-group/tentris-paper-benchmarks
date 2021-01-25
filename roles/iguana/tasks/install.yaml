@@ -17,9 +17,9 @@
 
 - name: Find Iguana jar
   find:
-    path: "{{ tempdir.path }}"
+    path: "{{ tempdir.path }}/iguana"
     recurse: yes
-    pattern: iguana.corecontroller-{{ iguana_version }}.jar
+    pattern: iguana-{{ iguana_version }}.jar
   register: find_jar
 
 - name: Create Iguana Directory
