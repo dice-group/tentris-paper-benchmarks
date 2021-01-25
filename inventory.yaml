@@ -1,0 +1,12 @@
+all:
+  hosts:
+    raki:
+    # A short name for your managed node, for example tentris-bench-vm
+
+      ansible_host: raki.cs.upb.de
+      # This is the same as you would use to connect via ssh
+
+      # If you use a different user un the managed node, you can specify it here
+      ansible_user: dice-gr
+
+      graphdb_download_uuid: <Your GraphDB download UUID (See README.md for instructions)>

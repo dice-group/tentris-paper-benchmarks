@@ -65,7 +65,6 @@ function clone_and_build() {
     # change lsb-unused from true to false
     sed -i 's/true>;/false>;/g' ../src/lib/tentris/tensor/BoolHypertrie.hpp || exit
 
-    mkdir build-lsb_unused--false && cd "$_" || exit
     build_with_docker "${version}"
 
     # change lsb-unused back
