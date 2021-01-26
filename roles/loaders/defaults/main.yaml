@@ -24,8 +24,8 @@ datasets:
     queries_path: "{{ target_dir }}/datasets/dbpedia2015/queries.txt"
     max_ram: 398475132
   - name: dataset_wikidata-20201111
-    path: "{{ target_dir }}/datasets/wikidata-20201111/wikidata-20201111-truthy-BETA.nt"
-    queries_path: "{{ target_dir }}/datasets/wikidata-20201111/queries.txt"
+    path: "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
+    queries_path: "{{ target_dir }}/datasets/wikidata-2020-11-11/queries.txt"
     max_ram: 700000000
 
 triplestores:
