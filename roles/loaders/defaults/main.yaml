@@ -23,7 +23,7 @@ datasets:
     path: "{{ target_dir }}/datasets/dbpedia2015/dbpedia_2015-10_en_wo-comments_c.nt"
     queries_path: "{{ target_dir }}/datasets/dbpedia2015/queries.txt"
     max_ram: 398475132
-  - name: dataset_wikidata-20201111
+  - name: wikidata-2020-11-11
     path: "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
     queries_path: "{{ target_dir }}/datasets/wikidata-2020-11-11/queries.txt"
     max_ram: 700000000
