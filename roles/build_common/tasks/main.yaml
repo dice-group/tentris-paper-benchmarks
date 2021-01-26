@@ -39,3 +39,16 @@
       - openjdk-11-jdk
       - maven
     state: present
+
+- name: Install Docker
+  become: yes
+  apt:
+    name:
+      - docker.io
+      - docker-compose
+
+- name: Add user to Docker group
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
