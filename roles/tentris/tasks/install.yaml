@@ -10,7 +10,7 @@
     dest: '{{ tempdir.path }}'
 
 - name: Build Tentris binaries
-  command: 'bash clone_and_build_tentris.sh {{ tentris_version }}'
+  shell: 'bash clone_and_build_tentris.sh {{ tentris_version }}'
   args:
     chdir: '{{ tempdir.path }}'
 

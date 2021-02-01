@@ -8,6 +8,6 @@
 
 - name: Download wikidata queries
   get_url:
-    url: https://hobbitdata.informatik.uni-leipzig.de/tentris_compression/feasible-exmp-wikidata500-bgp-v4.txt
+    url: https://hobbitdata.informatik.uni-leipzig.de/tentris_compression/feasible-exmp-wikidata500-bgp-v3.txt
     checksum: sha1:096c951c6cb75b01142adcad97090de9da12313a
     dest: "{{ target_dir }}/datasets/wikidata-2020-11-11/queries.txt"

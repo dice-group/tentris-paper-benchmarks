@@ -52,3 +52,6 @@
   user:
     name: "{{ ansible_user }}"
     groups: docker
+
+- name: Reset connection so that user being added to docker group takes effect
+  meta: reset_connection

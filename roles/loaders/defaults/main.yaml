@@ -3,18 +3,18 @@ datasets:
     path: "{{ target_dir }}/datasets/swdf/swdf.nt"
     queries_path: "{{ target_dir }}/datasets/swdf/queries.txt"
     max_ram: 400000
-  - name: watdiv10
-    path: "{{ target_dir }}/datasets/watdiv/watdiv10/data.nt"
-    queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
-    max_ram: 448320
-  - name: watdiv100
-    path: "{{ target_dir }}/datasets/watdiv/watdiv100/data.nt"
-    queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
-    max_ram: 4396440
-  - name: watdiv1000
-    path: "{{ target_dir }}/datasets/watdiv/watdiv1000/data.nt"
-    queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
-    max_ram: 43721372
+#  - name: watdiv10
+#    path: "{{ target_dir }}/datasets/watdiv/watdiv10/data.nt"
+#    queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
+#    max_ram: 448320
+#  - name: watdiv100
+#    path: "{{ target_dir }}/datasets/watdiv/watdiv100/data.nt"
+#    queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
+#    max_ram: 4396440
+#  - name: watdiv1000
+#    path: "{{ target_dir }}/datasets/watdiv/watdiv1000/data.nt"
+#    queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
+#    max_ram: 43721372
   - name: watdiv10000
     path: "{{ target_dir }}/datasets/watdiv/watdiv10000/data.nt"
     queries_path: "{{ target_dir }}/datasets/watdiv/queries.txt"
