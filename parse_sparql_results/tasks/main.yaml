@@ -1,0 +1,27 @@
+- name: Create result_sizes dir
+  file:
+    path: "{{ target_dir }}/parse_sparql_results/"
+    state: directory
+
+- name: Create result_sizes dir
+  file:
+    path: "{{ target_dir }}/logs/parse_sparql_results/"
+    state: directory
+
+- pip:
+    name: sparql-query-tools==0.1.2
+    extra_args: --user
+
+# todo: fix loop
+- name: Template copy parse-sparql-results scripts
+  template:
+    src: parse-sparql-results.sh
+    dest: "{{ target_dir }}/parse_sparql_results/http/{{ triplestore_name }}-{{ dataset_name }}_parse_sparql_results.yml"
+  loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
+
+# todo: fix loop
+- name: Template copy parse-sparql-results scripts for tentris
+  template:
+    src: parse-sparql-results-tentris.sh
+    dest: "{{ target_dir }}/parse_sparql_results/http/tentris-{{ tentris_version }}-{{ dataset_name }}_parse_sparql_results.yml"
+  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
