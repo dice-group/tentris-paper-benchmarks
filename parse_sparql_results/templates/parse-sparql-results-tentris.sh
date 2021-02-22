@@ -4,6 +4,6 @@ bash "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name 
 
 cd "{{ target_dir }}" || exit
 
-sparql_result_analysis --url "{{ endpoint }}" --queries "{{ queries_path }}" --datasetname "{{ datasetname }}" --storename "tentris-{{ item[0] }}" --dont-save 2>&1 | tee {{ target_dir }}/logs/parse_sparql_results/tentris-{{ item[0] }}-{{ datasetname }}.log
+sparql_result_analysis --url "http://localhost:9080/stream" --queries "{{ item[1].queries_path }}" --datasetname "{{ item[1].name }}" --storename "tentris-{{ item[0] }}" --dont-save 2>&1 | tee {{ target_dir }}/logs/parse_sparql_results/tentris-{{ item[0] }}-{{ item[1].name }}.log
 
 bash "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/stop.sh"
