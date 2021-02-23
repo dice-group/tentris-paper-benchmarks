@@ -1,0 +1,36 @@
+- name: Create result_sizes dir
+  file:
+    path: "{{ target_dir }}/parse_sparql_results/"
+    state: directory
+
+- name: Create result_sizes dir
+  file:
+    path: "{{ target_dir }}/logs/parse_sparql_results/"
+    state: directory
+
+- name: Install dependencies
+  become: yes
+  apt:
+    name:
+      - python3-pip
+      - libssl-dev
+
+- name: Install sparql-query-tools
+  pip:
+    name: sparql-query-tools=={{ sparql_query_tool_version }}
+    extra_args: --user
+    executable: pip3
+
+- name: Template copy parse-sparql-results scripts
+  template:
+    src: parse-sparql-results.sh
+    dest: "{{ target_dir }}/parse_sparql_results/{{ item[0].name }}-{{ item[1].name }}_parse_sparql_results.sh"
+    mode: 0755
+  loop: "{{ triplestores_http | product(datasets) | list }}"
+
+- name: Template copy parse-sparql-results scripts for tentris
+  template:
+    src: parse-sparql-results-tentris.sh
+    dest: "{{ target_dir }}/parse_sparql_results/tentris-{{ item[0] }}-{{ item[1].name }}_parse_sparql_results.sh"
+    mode: 0755
+  loop: "{{ tentris_versions | product(datasets) | list }}"

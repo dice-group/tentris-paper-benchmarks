@@ -25,6 +25,6 @@ do
     sleep 2
 done
 
-sleep 10
+sleep 60s
 
 echo $(date --iso-8601) - GraphDB started and accepting connections
