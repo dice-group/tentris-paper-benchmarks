@@ -18,7 +18,7 @@
 - name: Install sparql-query-tools
   pip:
     name: sparql-query-tools=={{ sparql_query_tool_version }}
-    extra_args: --user
+    extra_args: --user --no-cache
     executable: pip3
 
 - name: Template copy parse-sparql-results scripts
