@@ -8,7 +8,6 @@ connections:
 tasks:
   - className: "Stresstest"
     configuration:
-      # 1 hour (time Limit is in ms)
       noOfQueryMixes: {{ iguana_query_mixes_limit }}
       queryHandler:
         className: "InstancesQueryHandler"
@@ -16,6 +15,7 @@ tasks:
         - threads: {{ item[2].number }}
           className: "HttpGetWorker"
           language: "lang.SIMPLE"
+          responseType: "application/sparql-results+json"
           queriesFile: "{{ item[1].queries_path }}"
           timeOut: {{ iguana_query_timeout }}
 
@@ -35,5 +35,5 @@ metrics:
 storages:
   - className: "NTFileStorage"
     configuration:
-      fileName: results_{{ item[0].name }}-{{ item[1].name }}-{{ item[2].number }}.nt
+      fileName: results_{{ item[0].name }}-{{ item[1].name }}-{{ item[2].number }}-QM.nt
 
