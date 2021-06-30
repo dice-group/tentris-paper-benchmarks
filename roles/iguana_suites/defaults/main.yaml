@@ -10,6 +10,8 @@ iguana_query_timeout: 180000
 triplestores_http:
   - name: fuseki
     connection_url: http://localhost:3030/%d/sparql
+  - name: fuseki-ltj
+    connection_url: http://localhost:3030/%d/sparql
   - name: gstore
     connection_url: http://localhost:9000/?db_name=%d
   - name: virtuoso
