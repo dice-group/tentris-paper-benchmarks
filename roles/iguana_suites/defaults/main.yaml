@@ -1,13 +1,16 @@
 iguana_http_connections:
   - number: 1
-  - number: 4
-  - number: 8
-  - number: 16
-  - number: 32
+#  - number: 4
+#  - number: 8
+#  - number: 16
+#  - number: 32
 iguana_time_limit: 3600000
+iguana_query_mixes_limit: 30
 iguana_query_timeout: 180000
 triplestores_http:
   - name: fuseki
+    connection_url: http://localhost:3030/%d/sparql
+  - name: fuseki-ltj
     connection_url: http://localhost:3030/%d/sparql
   - name: gstore
     connection_url: http://localhost:9000/?db_name=%d
@@ -17,14 +20,3 @@ triplestores_http:
     connection_url: http://localhost:7200/repositories/%d
   - name: blazegraph
     connection_url: http://localhost:9999/blazegraph/sparql
-triplestores_cli:
-  - name: rdf3x
-    command: "{{ target_dir }}/triplestores/rdf3x/rdf3xembedded {{ target_dir }}/databases/rdf3x/%n/db"
-    init_finished_string: RDF-3X protocol 1
-    query_done_string: '[ "\\.", "failure", "parse error", "internal error" ]'
-    error_string: '[ "failure", "parse error", "internal error" ]'
-  - name: triplebit
-    command: "{{ target_dir }}/triplestores/triplebit/triplebitQuery {{ target_dir }}/databases/triplebit/%n"
-    init_finished_string: load complete!
-    query_done_string: '["QUERY SUCCEEDED", "QUERY FAILED" ]'
-    error_string: '[ "QUERY FAILED", "unsupported operation" ]'

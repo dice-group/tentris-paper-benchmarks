@@ -4,33 +4,25 @@
     suffix: tentris
   register: tempdir
 
-- name: Download tentris
-  get_url:
-    url: https://raw.githubusercontent.com/dice-group/iswc2020_tentris/master/binaries/tentris_{{ tentris_version }}.zip
-    dest: "{{ tempdir.path }}/tentris_{{ tentris_version }}.zip"
+- name: copy script
+  copy:
+    src: clone_and_build_tentris.sh
+    dest: '{{ tempdir.path }}'
 
-- name: Unzip tentris
-  unarchive:
-    remote_src: yes
-    src: "{{ tempdir.path }}/tentris_{{ tentris_version }}.zip"
-    dest: "{{ tempdir.path }}"
+- name: Build Tentris binaries
+  shell: 'bash clone_and_build_tentris.sh {{ tentris_version }}'
+  args:
+    chdir: '{{ tempdir.path }}'
 
 - name: Create installation directory
   file:
     path: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}"
     state: directory
 
-- name: Install tentris_terminal
-  copy:
-    remote_src: yes
-    src: "{{ tempdir.path }}/tentris_terminal"
-    dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_terminal"
-    mode: 0755
-
 - name: Install tentris_server
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/tentris_server"
+    src: "{{ tempdir.path }}/tentris_{{ tentris_version }}/tentris_server"
     dest: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_server"
     mode: 0755
 

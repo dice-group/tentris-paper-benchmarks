@@ -3,9 +3,8 @@ dependencies:
   - role: cgmemtime
   - role: tentris
   - role: fuseki
+  - role: fuseki-ltj
   - role: gstore
   - role: virtuoso
   - role: graphdb
   - role: blazegraph
-  - role: triplebit
-  - role: rdf3x

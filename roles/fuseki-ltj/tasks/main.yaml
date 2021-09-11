@@ -1,0 +1,7 @@
+- name: Check for Fuseki
+  stat:
+    path: "{{ target_dir }}/triplestores/fuseki-ltj"
+  register: fuseki_ltj_dir
+
+- include: install.yaml
+  when: not fuseki_ltj_dir.stat.exists

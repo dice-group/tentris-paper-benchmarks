@@ -31,3 +31,27 @@
   become: yes
   apt:
     package: libcurl4-openssl-dev
+
+- name: Install OpenJDK 11
+  become: yes
+  apt:
+    package:
+      - openjdk-11-jdk
+      - maven
+    state: present
+
+- name: Install Docker
+  become: yes
+  apt:
+    name:
+      - docker.io
+      - docker-compose
+
+- name: Add user to Docker group
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+
+- name: Reset connection so that user being added to docker group takes effect
+  meta: reset_connection

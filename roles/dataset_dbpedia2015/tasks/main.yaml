@@ -14,6 +14,6 @@
 
 - name: Download DBpedia queries
   get_url:
-    url: https://raw.githubusercontent.com/dice-group/iswc2020_tentris/master/queries/DBpedia-Queries.txt
-    checksum: sha1:6c2730a0a4f6dfae6bdc278ffe7a3864ef736300
+    url: https://hobbitdata.informatik.uni-leipzig.de/tentris_compression/feasible-DBpedia-bgp-v2.txt
+    checksum: sha1:10c397a57f4a7d3844194c214cfb2c26ab132d01
     dest: "{{ target_dir }}/datasets/dbpedia2015/queries.txt"

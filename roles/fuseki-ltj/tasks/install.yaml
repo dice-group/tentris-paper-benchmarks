@@ -1,0 +1,52 @@
+- name: Ensure Fuseki Directory is present
+  file:
+    path: "{{ target_dir }}/triplestores/fuseki-ltj"
+    state: directory
+
+- name: Download Fuseki Checksum
+  get_url:
+    url: https://github.com/cirojas/leapfrog-benchmark/raw/453a2ca52a1380e4b12a6ae339a3fdf90eb761c7/benchmark/jena/jars/fuseki-leapfrog.jar
+    dest: "{{ target_dir }}/triplestores/fuseki-ltj/fuseki-leapfrog.jar"
+    checksum: "sha512:6590c82affbbb5b3b4d572f0efed3683eed6e9d9ba776a639b4477aea364a4d2a4cd1a6e7b795bdcb491c34a888ab2b4cb817dd050d879e3ddfe665902780c6c"
+
+- name: Download Fuseki Checksum
+  get_url:
+    url: https://github.com/cirojas/leapfrog-benchmark/raw/453a2ca52a1380e4b12a6ae339a3fdf90eb761c7/benchmark/jena/jars/log4j.properties
+    dest: "{{ target_dir }}/triplestores/fuseki-ltj/log4j.properties"
+    checksum: "sha512:f55e4ff2b445ef93aa6d9f143ed50a04de906c2b7a78b757f45a363b0640c1837b4e373f032658a16e3666b9d83f29f32313d18eb3c9a1f53daf5bcce0124f65"
+
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: jena-for-ltj
+  register: tempdir
+
+- name: Download Jena Checksum
+  get_url:
+    url: https://archive.apache.org/dist/jena/binaries/apache-jena-3.9.0.tar.gz.sha512
+    dest: "{{ tempdir.path }}/apache-jena-3.9.0.tar.gz.sha512"
+
+- name: Slurp Jena Checksum
+  slurp:
+    path: "{{ tempdir.path }}/apache-jena-3.9.0.tar.gz.sha512"
+  register: checksum
+
+- name: Download Jena
+  get_url:
+    url: https://archive.apache.org/dist/jena/binaries/apache-jena-3.9.0.tar.gz
+    checksum: "sha512:{{ (checksum.content | b64decode).split(' ')[0] }}"
+    dest: "{{ tempdir.path }}/apache-jena-3.9.0.tar.gz"
+
+- name: Unzip Jena
+  unarchive:
+    remote_src: yes
+    src: "{{ tempdir.path }}/apache-jena-3.9.0.tar.gz"
+    dest: "{{ target_dir }}/triplestores/fuseki-ltj/"
+
+- name: Change tdbloader2index for full indices
+  shell: sed -i 's/generate_index "$K3 $K1 $K2" "$DATA_TRIPLES" OSP/generate_index "$K3 $K1 $K2" "$DATA_TRIPLES" OSP \n\ngenerate_index "$K1 $K3 $K2" "$DATA_TRIPLES" SOP\n\ngenerate_index "$K2 $K1 $K3" "$DATA_TRIPLES" PSO\n\ngenerate_index "$K3 $K2 $K1" "$DATA_TRIPLES" OPS/g' {{ target_dir }}/triplestores/fuseki-ltj/apache-jena-3.9.0/bin/tdbloader2index
+
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
