@@ -9,17 +9,17 @@
     state: directory
   loop: "{{ triplestores_http | product(datasets) | list }}"
 
-#- name: Create HTTP suite directories for tentris
-#  file:
-#    path: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}"
-#    state: directory
-#  loop: "{{ tentris_versions | product(datasets) | list }}"
+- name: Create HTTP suite directories for tentris
+  file:
+    path: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}"
+    state: directory
+  loop: "{{ tentris_versions | product(datasets) | list }}"
 
-#- name: Template copy virtuoso config
-#  template:
-#    src: virtuoso-run.ini
-#    dest: "{{ target_dir }}/triplestores/virtuoso/virtuoso-run-{{ item[0].name }}-{{ item[1].number }}.ini"
-#  loop: "{{ datasets | product(iguana_http_connections) | list }}"
+- name: Template copy virtuoso config
+  template:
+    src: virtuoso-run.ini
+    dest: "{{ target_dir }}/triplestores/virtuoso/virtuoso-run-{{ item[0].name }}-{{ item[1].number }}.ini"
+  loop: "{{ datasets | product(iguana_http_connections) | list }}"
 
 - name: Template copy start scripts
   template:
@@ -47,28 +47,28 @@
     dest: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-QM.yml"
   loop: "{{ triplestores_http | product(datasets, iguana_http_connections) | list }}"
 
-#- name: Template copy tentris start scripts
-#  template:
-#    src: tentris-start.sh
-#    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh"
-#    mode: 0755
-#  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
-#
-#- name: Template copy tentris stop scripts
-#  template:
-#    src: tentris-stop.sh
-#    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item }}/stop.sh"
-#    mode: 0755
-#  loop: "{{ tentris_versions }}"
-#
-#- name: Template copy Tentris Iguana HTTP suites with time limit
-#  template:
-#    src: tentris-httpT.suite
-#    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-T.yml"
-#  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
-#
-#- name: Template copy Tentris Iguana HTTP suites with query mixes limit
-#  template:
-#    src: tentris-httpQM.suite
-#    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-QM.yml"
-#  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
+- name: Template copy tentris start scripts
+  template:
+    src: tentris-start.sh
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-start.sh"
+    mode: 0755
+  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
+
+- name: Template copy tentris stop scripts
+  template:
+    src: tentris-stop.sh
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item }}/stop.sh"
+    mode: 0755
+  loop: "{{ tentris_versions }}"
+
+- name: Template copy Tentris Iguana HTTP suites with time limit
+  template:
+    src: tentris-httpT.suite
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-T.yml"
+  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"
+
+- name: Template copy Tentris Iguana HTTP suites with query mixes limit
+  template:
+    src: tentris-httpQM.suite
+    dest: "{{ target_dir }}/iguana_suites/http/tentris-{{ item[0] }}/{{ item[1].name }}/{{ item[2].number }}-QM.yml"
+  loop: "{{ tentris_versions | product(datasets, iguana_http_connections) | list }}"

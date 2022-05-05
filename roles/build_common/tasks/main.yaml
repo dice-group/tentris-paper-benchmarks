@@ -44,8 +44,10 @@
   become: yes
   apt:
     name:
-      - docker.io
-      - docker-compose
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
 
 - name: Add user to Docker group
   become: yes

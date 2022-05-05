@@ -31,7 +31,7 @@ datasets:
 triplestores:
   - fuseki
   - fuseki-ltj
-  - gstore
+#  - gstore
   - virtuoso
   - graphdb
   - blazegraph

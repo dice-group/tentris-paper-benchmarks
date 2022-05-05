@@ -1,4 +1,5 @@
 tentris_versions:
-  - 1.0.7
-  - 1.1.0-rc15_lsb_unused_1
-  - 1.1.0-rc15_lsb_unused_0
+  - 1.0.7.1
+  - 1.1.2_lsb_unused_1
+  - 1.1.2_lsb_unused_0
+  - 1.1.2_hashing_only
