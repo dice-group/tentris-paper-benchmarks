@@ -27,6 +27,7 @@
     chdir: "{{ tempdir.path }}/gStore-1-tentris_paper_benchmark_settings"
     argv:
       - make
+  ignore_errors: yes
 
 - name: Ensure gStore Directory is present
   file:
