@@ -14,14 +14,6 @@
   args:
     creates: "{{ tempdir.path }}/graphdb-free-{{ graphdb_version }}-dist.zip"
 
-# # workaround above because the graphdb server doesn't fulfill SECLEVEL=2
-#- name: Download GraphDB
-#  get_url:
-#    url: https://download.ontotext.com/owlim/{{ graphdb_download_uuid }}/graphdb-free-{{ graphdb_version }}-dist.zip
-#    dest: "{{ tempdir.path }}/graphdb-free-{{ graphdb_version }}-dist.zip"
-#    validate_certs: no
-#    checksum: sha1:f287c78db6c68db1fcf8746d017766c06e383b16
-
 - name: Unzip GraphDB
   unarchive:
     remote_src: yes

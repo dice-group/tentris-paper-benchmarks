@@ -20,6 +20,10 @@ main() {
     is_baseline=0
     version=$(echo $1 | grep -oP '(?<=^).+(?=_lsb_unused_)')
     lsb_unused=$(echo $1 | grep -oP '(?<=_lsb_unused_).+(?=$)')
+  elif echo "$1" | grep -q "hashing_only"; then
+    is_baseline=0
+    version=$(echo $1 | grep -oP '(?<=^).+(?=_hashing_only)')
+    lsb_unused="h"
   else
     is_baseline=1
     version=$1
@@ -69,6 +73,16 @@ function clone_and_build() {
 
     # change lsb-unused back
     sed -i 's/false>;/true>;/g' ../src/lib/tentris/tensor/BoolHypertrie.hpp
+  elif [ "${is_baseline}" -eq 0 ] && [ "${lsb_unused}" = "h" ]; then
+    echo "Building node-based Tentris version ${version} with hashing only."
+
+    # change lsb-unused from true to false and compressed_nodes to false
+    sed -i 's/true>;/false, false>;/g' ../src/lib/tentris/tensor/BoolHypertrie.hpp || exit
+
+    build_with_docker "${version}"
+
+    # change lsb-unused and compressed_nodes back
+    sed -i 's/false, false>;/true>;/g' ../src/lib/tentris/tensor/BoolHypertrie.hpp
   else
 
     echo "Building baseline Tentris version ${version}."
