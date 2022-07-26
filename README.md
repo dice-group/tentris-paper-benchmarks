@@ -38,5 +38,5 @@ After you have entered your password the execution will start.
 Links to the datasets and queries can be found in:
 - [roles/dataset_swdf](./roles/dataset_swdf)
 - [roles/dataset_dbpedia2015](./roles/dataset_dbpedia2015)
-- [roles/dataset_dbpedia2015](./roles/dataset_dbpedia2015)
+- [roles/dataset_watdiv](./roles/dataset_watdiv)
 - [roles/dataset_wikidata-20201111](./roles/dataset_wikidata-20201111) 
