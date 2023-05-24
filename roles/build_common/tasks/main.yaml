@@ -40,6 +40,20 @@
       - maven
     state: present
 
+- name: Download Docker apt key
+  become: yes
+  get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Add Docker apt repository
+  become: yes
+  apt_repository:
+    repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+
 - name: Install Docker
   become: yes
   apt:
