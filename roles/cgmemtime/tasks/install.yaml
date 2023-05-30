@@ -15,6 +15,13 @@
     src: "{{ tempdir.path }}/master.zip"
     dest: "{{ tempdir.path }}"
 
+- name: Patch cgmemtime to be compatible with glibc version used in debian 11
+  become: true
+  lineinfile:
+    path: "{{ tempdir.path }}/cgmemtime-master/cgmemtime.c"
+    line: "#define strerrorname_np(x) strerror(x)"
+    insertafter: "^#include <unistd.h>.*"
+
 - name: Build cgmemtime
   command:
     chdir: "{{ tempdir.path }}/cgmemtime-master"
@@ -22,7 +29,7 @@
       - make
 
 - name: Copy cgmemtime binary
-  become: yes
+  become: true
   copy:
     remote_src: yes
     src: "{{ tempdir.path }}/cgmemtime-master/cgmemtime"

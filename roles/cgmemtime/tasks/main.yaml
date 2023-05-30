@@ -10,15 +10,3 @@
 
 - include: install.yaml
   when: not cgmemtime_bin.stat.exists
-
-- name: Setup cgroup
-  become: yes
-  command:
-    argv:
-      - /usr/local/bin/cgmemtime
-      - --setup
-      - -g
-      - "{{ cgmemtime_group }}"
-      - --perm
-      - "770"
-  when: not cgmemtime_cgroup.stat.exists
