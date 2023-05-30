@@ -1,14 +1,25 @@
+- name: Create a tempory download directory
+  tempfile:
+    state: directory
+    suffix: wikidata
+  register: tempdir
+
+- name: Download wikidata dataset
+  get_url:
+    url: https://hobbitdata.informatik.uni-leipzig.de/wikidata-20201111-truthy-BETA.nt.bz2
+    checksum: sha256:c688b0acc9ccc9b19184bfd9b2a43d4f3b86ad152c940a1e2d4e8107562d5842
+    dest: "{{ tempdir.path }}/wikidata-20201111-truthy-BETA.nt.bz2"
+
 - name: Install lbzip2
   become: yes
   apt:
     package: lbzip2
 
-- name: Install wget
-  become: yes
-  apt:
-    package: wget
+- name: Decompress wikidata dataset
+  shell:
+    cmd: lbzip2 -d -c {{ tempdir.path }}/wikidata-20201111-truthy-BETA.nt.bz2 >{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt
 
-- name: Download and unpack wikidata
-  shell: wget -qO- https://dumps.wikimedia.org/wikidatawiki/entities/20201111/wikidata-20201111-truthy-BETA.nt.bz2 | lbzip2 -d -c > "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
-  args:
-    creates: "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
+- name: Delete tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent

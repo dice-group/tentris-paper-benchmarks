@@ -1,10 +1,16 @@
 - name: Check for the wikidata dataset
   stat:
+    path: "{{ target_dir }}/datasets/wikidata-2020-11-11/wikidata-20201111-truthy-BETA.nt"
+    get_checksum: no
+  register: wikidata_dataset
+
+- name: Create dataset directory
+  file:
     path: "{{ target_dir }}/datasets/wikidata-2020-11-11"
-  register: wikidata_dataset_dir
+    state: directory
 
 - include: download.yaml
-  when: not wikidata_dataset_dir.stat.exists
+  when: not wikidata_dataset.stat.exists
 
 - name: Download wikidata queries
   get_url:
