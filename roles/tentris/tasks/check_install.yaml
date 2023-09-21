@@ -1,6 +1,6 @@
 - name: Check for tentris
   stat:
-    path: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris_server"
+    path: "{{ target_dir }}/triplestores/tentris/{{ tentris_version }}/tentris"
   register: tentris
 
 - include: install.yaml
