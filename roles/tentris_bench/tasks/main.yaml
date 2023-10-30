@@ -1,0 +1,5 @@
+- name: Copy benchmarking script
+  copy: 
+    src: run-bench.sh
+    dest: "{{ target_dir }}"
+    mode: 0755

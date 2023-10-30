@@ -6,6 +6,20 @@ connections:
     endpoint: "{{ item[0].connection_url | replace('%d', item[1].name) }}"
 
 tasks:
+  # this stresstest is used to warmup the benchmarked system
+  - className: "Stresstest"
+    configuration:
+      noOfQueryMixes: 1
+      queryHandler:
+        className: "InstancesQueryHandler"
+      workers:
+        - threads: {{ item[2].number }}
+          className: "HttpGetWorker"
+          language: "lang.SIMPLE"
+          responseType: "application/sparql-results+json"
+          queriesFile: "{{ item[1].queries_path }}"
+          timeOut: {{ iguana_query_timeout }}
+  
   - className: "Stresstest"
     configuration:
       noOfQueryMixes: {{ iguana_query_mixes_limit }}
@@ -19,8 +33,7 @@ tasks:
           queriesFile: "{{ item[1].queries_path }}"
           timeOut: {{ iguana_query_timeout }}
 
-preScriptHook: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/{{ item[1].name }}/{{ item[2].number }}-start.sh"
-postScriptHook: "{{ target_dir }}/iguana_suites/http/{{ item[0].name }}/stop.sh"
+# for the warmup to take effect, we need to run the start and stop scripts outside of iguana
 
 #optional otherwise the same metrics will be used as default
 metrics:
