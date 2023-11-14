@@ -9,7 +9,7 @@ fi
 
 echo $(date --iso-8601) - Starting Tentris
 
-{{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris_server -l 1000 -f {{ item[1].path }} --logfile false --logstdout </dev/null 2>&1 >{{ target_dir }}/logs/run/tentris-{{ item[0] }}-{{ item[1].name }}-{{ item[2].number }}.log & disown
+{{ target_dir }}/triplestores/tentris/{{ item[0] }}/tentris -s {{ target_dir }}/databases/tentris/{{ item[0] }}/{{ item[1].name }} serve --request-timeout-ms 180000 > {{ target_dir }}/logs/run/tentris-{{ item[0] }}-{{ item[1].name }}-{{ item[2].number }}.log 2>&1 & disown
 pid=$!
 
 echo $pid > {{ target_dir }}/tentris.pid
@@ -23,7 +23,7 @@ do
     then
         break
     fi
-    sleep 2
+    sleep 1
 done
 
 echo $(date --iso-8601) - Tentris started and accepting connections
